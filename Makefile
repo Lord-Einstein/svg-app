@@ -16,7 +16,7 @@ OBJS = $(patsubst ./%.c, $(BIN_DIR)/%.o, $(SRCS))
 
 # Création du dossier bin si nécessaire
 $(BIN_DIR):
-	mkdir -p $(BIN_DIR)
+	@mkdir -p $(BIN_DIR)
 
 # Règle par défaut
 all: $(BIN_DIR) $(TARGET)
@@ -26,7 +26,7 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Compiler chaque fichier .c en .o dans bin/ en recréant les sous-dossiers
-$(BIN_DIR)/%.o: ./%.c | $(BIN_DIR)
+$(BIN_DIR)/%.o: %.c | $(BIN_DIR)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
