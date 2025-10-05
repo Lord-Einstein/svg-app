@@ -3,7 +3,7 @@
 #include <fcntl.h>
 
 //Et voilà que je dois me coller les configs du terminal Linux juste pour lire dans le buffer !
-//Heureusement qu'y un chat juste là ... LOL
+//Heureusement qu'y un chat juste là ... MDR
 int kbhit(void) {
     struct termios oldt, newt;
     int ch;
@@ -23,7 +23,7 @@ int kbhit(void) {
     fcntl(STDIN_FILENO, F_SETFL, oldf);
 
     if (ch != EOF) {
-        ungetc(ch, stdin); //Faut retourner le caractère dans le buffer pour pouvoir le tester ensuite.
+        ungetc(ch, stdin); //Faut retourner le caractère dans le buffer pour l'utiliser même en dehors de la boucle.
         return 1;
     }
     return 0;

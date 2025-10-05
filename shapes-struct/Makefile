@@ -38,11 +38,9 @@ clean:
 run: all
 	./$(TARGET)
 
-
 #Voir les fuites de mémoire et les mallocs non free.
 vg:
 	valgrind --leak-check=full --show-reachable=no ./bin/app
-
-
+	
 # Pour ne pas confondre avec des fichiers
 .PHONY: all clean run vg
