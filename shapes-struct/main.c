@@ -61,7 +61,7 @@ void Drain_buffer() {
     while((c = getchar()) != '\n' && c != EOF);
 }
 
-int Int_recup_verify(const char* prompt){ //Juste pour être sûr que mon prompmt ne sera pas modifié
+int Int_recup_verify(const char* prompt){ //Juste pour être sûr que mon prompt ne sera pas modifié
     int scanf_return = 0;
     int a_int = 0;
 
@@ -82,10 +82,30 @@ int Int_recup_verify(const char* prompt){ //Juste pour être sûr que mon prompm
 
 }
 
+unsigned int Unsigned_int_recup_verify(const char* prompt){ //Juste pour être sûr que mon prompt ne sera pas modifié
+    int scanf_return = 0, a_int = 0;
+    unsigned int a_unsigned_int = 0;
+
+    do{
+
+        printf("%s", prompt);
+        scanf_return = scanf("%d", &a_int);
+
+        if((scanf_return != 1)  || (a_int < 0)){
+            Drain_buffer();
+            printf("Entrée invalide !\n\n");
+        }
+
+    }while((scanf_return != 1) || (a_int < 0));
+    a_unsigned_int = (unsigned int)a_int;
+    Drain_buffer();
+
+    return a_unsigned_int;   
+
+}
+
 
 void Recup_circle_data(Circle* circle) {
-
-    int scanf_return = 0;
 
     printf("Souhaitez vous lire la documentation pour concevoir un cercle ?\n");
     printf("Tapez une touche avant la fin du chrono pour skip :  ");
@@ -97,31 +117,8 @@ void Recup_circle_data(Circle* circle) {
     else Infos_cercle();
 
     circle->cx = Int_recup_verify("Entrez la position X du centre : ");
-
-    do{
-        printf("Entrez la position Y du centre : ");
-        scanf_return = scanf("%d", &circle->cy);
-
-        if(scanf_return != 1){
-            Drain_buffer();
-            printf("Entrée invalide !\n\n");
-        }
-
-    }while(scanf_return != 1);
-    Drain_buffer();
-
-    do{
-        printf("Entrez le rayon de votre cercle(px) :  ");
-        scanf_return = scanf("%u", &circle->rx);
-
-        if(scanf_return != 1){
-            Drain_buffer();
-            printf("Entrée invalide !\n\n");
-        }
-
-    }while(scanf_return != 1);
-    Drain_buffer();
-
+    circle->cy = Int_recup_verify("Entrez la position Y du centre : ");
+    circle->rx = Unsigned_int_recup_verify("Entrez le rayon de votre cercle(px) : ");
 
 }
 
