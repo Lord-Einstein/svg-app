@@ -1,9 +1,7 @@
-#include "../shapes-struct/main.h"
-#include <termios.h>
-#include <fcntl.h>
+#include "./kbhit.h"
 
 //Et voilà que je dois me coller les configs du terminal Linux juste pour lire dans le buffer !
-//Heureusement qu'y un chat juste là ... MDR
+//Heureusement qu'y a un chat juste là ... MDR
 int kbhit(void) {
     struct termios oldt, newt;
     int ch;
@@ -24,6 +22,7 @@ int kbhit(void) {
 
     if (ch != EOF) {
         ungetc(ch, stdin); //Faut retourner le caractère dans le buffer pour l'utiliser même en dehors de la boucle.
+        //çà le chat l'a oublié....
         return 1;
     }
     return 0;
