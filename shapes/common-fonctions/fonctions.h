@@ -3,9 +3,31 @@
 
 #include "../../other/kbhit.h"
 
+
+//DEFINE DE MISE EN FORME
+
+//Petite explication : Pour les formats de style en console, on utilise la notation ASCII \033[code_style(gras);code_couleur(bleu...);code_bg_color(white..)ET un 'm' après lesconfigurations puis le texte....
+
+#define REMOUNT_ON_LAST_LINE "\033[1A"
+#define DELETE_CURRRENT_LINE "\033[2K"
+
+#define BOLD_WHITE_TEXT  "\033[1;37m"
+#define UNDERLINE_WHITE_TEXT  "\033[4;37m"
+
+
+#define RESET_STYLE  "\033[0m"
+
+#define RED_COLOR  "\033[31m"
+#define GREEN_COLOR  "\033[32m"
+
+
+
 // PROCEDURES -----------------------
+
+
 /**
  * Cette procédure supprime une ligne en console en manipulant le caractère spécial retour de chariot (\r) et des espaces qui écrasent l'ancien contenu de la ligne.
+ * @deprecated Cette procédure est peu optimale -- Utiliser plutôt 'Delete_two_lines'
 */
 void Delete_a_consol_line();
 

@@ -3,9 +3,27 @@
 
 // PROCEDURES -------------------
 
+
+
+//PROCEDURES DE MISE EN FORME
+void Print_in_red(const char* prompt) {
+    printf(RED_COLOR"%s"RESET_STYLE, prompt);
+};
+
+void Delete_two_lines(){
+    printf("\r" DELETE_CURRRENT_LINE); // efface la ligne courante
+    printf("\r" REMOUNT_ON_LAST_LINE); // remonte d’une ligne
+    printf("\r" DELETE_CURRRENT_LINE); // puis efface cette ligne
+}
+
 void Delete_a_consol_line(){
     printf("\r                                                                                            \r");
 }
+
+
+// FIN DES PROCEDURES DE MISE EN FORME
+
+
 
 void Chrono(int chrono) {
     if(chrono > 9) chrono = 9;
@@ -40,7 +58,10 @@ int Int_recup_verify(const char* prompt){ //Juste pour être sûr que mon prompt
 
         if(scanf_return != 1){
             Drain_buffer();
-            printf("Entrée invalide !\n\n");
+            Print_in_red("Entrée invalide !");
+            fflush(stdout);
+            sleep(2);
+            Delete_two_lines();
         }
 
     }while(scanf_return != 1);
@@ -61,7 +82,10 @@ unsigned int Unsigned_int_recup_verify(const char* prompt) { //Juste pour être 
 
         if((scanf_return != 1)  || (a_int < 0)){
             Drain_buffer();
-            printf("Entrée invalide !\n\n");
+            Print_in_red("Entrée invalide !");
+            fflush(stdout);
+            sleep(2);
+            Delete_two_lines();
         }
 
     }while((scanf_return != 1) || (a_int < 0));
