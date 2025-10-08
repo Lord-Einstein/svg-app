@@ -70,12 +70,12 @@ void Display_line(Line* line) {
     }
 }
 
-int main(void) {
+// int main(void) {
 
-    Line* line = Create_line(0,0,0,0);
-    Recup_line_data(line);
-    Display_line(line);
-    Destroy_line(line);
+//     Line* line = Create_line(0,0,0,0);
+//     Recup_line_data(line);
+//     Display_line(line);
+//     Destroy_line(line);
 
-    return EXIT_SUCCESS;
-}
+//     return EXIT_SUCCESS;
+// }

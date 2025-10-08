@@ -16,6 +16,20 @@ void Delete_two_lines(){
     printf("\r" DELETE_CURRRENT_LINE); // puis efface cette ligne
 }
 
+void Delete_six_lines(){
+    printf("\r" DELETE_CURRRENT_LINE); // efface la ligne courante
+    printf("\r" REMOUNT_ON_LAST_LINE); // remonte d’une ligne
+    printf("\r" DELETE_CURRRENT_LINE); // efface cette ligne
+    printf("\r" REMOUNT_ON_LAST_LINE); // remonte d’une ligne
+    printf("\r" DELETE_CURRRENT_LINE); // efface cette ligne
+    printf("\r" REMOUNT_ON_LAST_LINE); // remonte d’une ligne
+    printf("\r" DELETE_CURRRENT_LINE); // efface cette ligne
+    printf("\r" REMOUNT_ON_LAST_LINE); // remonte d’une ligne
+    printf("\r" DELETE_CURRRENT_LINE); // efface cette ligne
+    printf("\r" REMOUNT_ON_LAST_LINE); // remonte d’une ligne
+    printf("\r" DELETE_CURRRENT_LINE); // efface cette ligne
+}
+
 void Delete_a_consol_line(){
     printf("\r                                                                                            \r");
 }
@@ -27,7 +41,7 @@ void Delete_a_consol_line(){
 
 void Chrono(int chrono) {
     if(chrono > 9) chrono = 9;
-    while(chrono > 0 && !kbhit()){
+    while(chrono >= 0 && !kbhit()){
 
         printf("\b%d", chrono); //À noter que %2d oblige un aff sur deux car avec un space devant sinon %02d le fait rn remplaçant space par 0
         chrono--;
@@ -39,7 +53,7 @@ void Chrono(int chrono) {
 }
 
 void Chrono_without_clear(int chrono) {
-    if(chrono > 9) chrono = 9;
+    if(chrono >= 9) chrono = 9;
     while(chrono > 0 && !kbhit()){
 
         printf("\b%d", chrono); //À noter que %2d oblige un aff sur deux car avec un space devant sinon %02d le fait rn remplaçant space par 0
@@ -47,6 +61,19 @@ void Chrono_without_clear(int chrono) {
         sleep(1);
 
     }
+}
+
+int Chrono_assassin(int chrono) {
+    if(chrono > 9) chrono = 9;
+    while(chrono >= 0 && !kbhit()){
+
+        printf("\b%d", chrono); //À noter que %2d oblige un aff sur deux car avec un space devant sinon %02d le fait rn remplaçant space par 0
+        chrono--;
+        sleep(1);
+
+    }
+    if(chrono < 0) return 1;
+    return 0;
 }
 
 void Drain_buffer() {

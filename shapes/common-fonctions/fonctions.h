@@ -38,6 +38,13 @@ void Print_in_red(const char* prompt);
 void Delete_two_lines();
 
 /**
+ * Cette procédure supprime cinq lignes en console à partir de la ligne courante en manipulant les caractères spéciaux et l'ASCII.
+ 
+ *Très pratique pour garder la console libre et agréable. Par exemple pour demander en boucle une valeur jusqu'a ce qu'une de correcte soit entrée.
+*/
+void Delete_six_lines();
+
+/**
  * Cette procédure supprime une ligne en console en manipulant le caractère spécial retour de chariot (\r) et des espaces qui écrasent l'ancien contenu de la ligne.
  * @deprecated Cette procédure est peu optimale -- Utiliser plutôt 'Delete_two_lines'
 */
@@ -84,5 +91,17 @@ int Int_recup_verify(const char* prompt);
  * @since 1.0
 */
 unsigned int Unsigned_int_recup_verify(const char* prompt);
+
+
+/**
+ * Cette fonction lance un chrono visuel (en secondes) en CLI à partir d'une valeur bien spécifié jusqu'à 0.
+ * @param chrono Elle prend en paramètre un entier qui doit être en dessous de 10. Si la valeur passée est supérieure ou égale à 10, elle est automatiquement modifée à la valeur 9.
+ * 
+ * Différente de la procédure 'Chrono' car à la fin du temps imparti, elle ne nettoie pas la console.
+ * Différente de la procédure 'Chrono_without_clear' car elle renvoie un entier qui permet de savoir si le chrono s'est arrêté tout seul ou s'il a été skip.
+ * @since 3.0
+*/
+int Chrono_assassin(int chrono);
+
 
 #endif
