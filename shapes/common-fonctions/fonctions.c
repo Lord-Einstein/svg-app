@@ -38,6 +38,17 @@ void Chrono(int chrono) {
     printf("\n");
 }
 
+void Chrono_without_clear(int chrono) {
+    if(chrono > 9) chrono = 9;
+    while(chrono > 0 && !kbhit()){
+
+        printf("\b%d", chrono); //À noter que %2d oblige un aff sur deux car avec un space devant sinon %02d le fait rn remplaçant space par 0
+        chrono--;
+        sleep(1);
+
+    }
+}
+
 void Drain_buffer() {
     int c; //C'est mieux qu'un char, d'toutes façons getchar renvoie un int !!
     while((c = getchar()) != '\n' && c != EOF);

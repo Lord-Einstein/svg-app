@@ -4,8 +4,8 @@
 #include "../common-fonctions/fonctions.h"
 
 //Noms de structures, d'enums, d'unions :: PascalCase
-//Noms de varaibles :: snake_case
-//Noms de fontions ou de procédures :: Big_snake_case
+//Noms de variables :: snake_case
+//Noms de fonctions ou de procédures :: Big_snake_case
 
 // STRUCTURE -------------------
 
@@ -13,8 +13,7 @@
  * @brief Structure représentant un Cercle SVG.
 */
 typedef struct {
-    int cx;
-    int cy;
+    int cx, cy;
     unsigned int rx;
 } Circle;
 
@@ -52,10 +51,17 @@ void Display_circle(Circle* circle);
  * @param cx Valeur entière de la position du centre sur l'axe des abscisses (X).
  * @param cy Valeur entière de la position du centre sur l'axe des ordonnées(Y).
  * @param rx Valeur entière non signée de la taille du rayon en pixels.
- * @return Retourne un pointeur sur la stucture cercle
+ * @return Retourne un pointeur sur la stucture 'Cercle'
  en manipulant l'allocation mémoire. Il faut donc garder à l'esprit que le cercle qui reçoit le retour de cette fonction doit être obligatoirement 'free' à la fin.
 */
 Circle* Create_circle(int cx, int cy, unsigned int rx);
 
+
+/**
+ * Cette fonction vérifie si le pointeur qui contient l'allocation sur un Cercle existe (!=NULL)
+ * @param circle Prend un pointeur sur 'Circle' et vérifie si il existe bien.
+ * @return Retourne un True si le pointeur a bien reçu l'allocation et un False dans le cas contraire.
+*/
+int Does_circle_exist(Circle* circle);
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef OTHER__KBHIT_H
 #define OTHER__KBHIT_H
 
-#include "../common-h.h"
+#include <stdio.h>
 #include <termios.h>
 #include <fcntl.h>
 #include <unistd.h>
