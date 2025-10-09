@@ -147,12 +147,12 @@ void Push_point(Head* head, LinkPoint* new_point) {
 
 }
 
-int main(void) {
+// int main(void) {
 
-    Head* head = Create_new_polyline();
-    Recup_polyline_data(head);
-    Display_polyline(head);
-    Destroy_polyline(head);
+//     Head* head = Create_new_polyline();
+//     Recup_polyline_data(head);
+//     Display_polyline(head);
+//     Destroy_polyline(head);
 
-    return EXIT_SUCCESS;
-}
+//     return EXIT_SUCCESS;
+// }

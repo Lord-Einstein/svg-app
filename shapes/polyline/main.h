@@ -59,7 +59,7 @@ void Display_point(LinkPoint* point);
 
 /**
  * Cette procédure affiche les informations contenues dans une instance 'Head' passée en paramètre.
- * @param head Prends en paramètre un pointeur sur l'instance de Line dont on souhaite afficher les informations.
+ * @param head Prends en paramètre un pointeur sur l'instance de LinkPoint dont on souhaite afficher les informations.
 */
 void Display_polyline(Head* head);
 
