@@ -84,6 +84,15 @@ void Drain_buffer();
 int Int_recup_verify(const char* prompt);
 
 /**
+ * Cette fonction demande en boucle une entrée et vérifie qu'elle est bien de type entier (int) et qu'elle est dans la marge de valeur passée en paramètre. Elle retourne la valeur dès que ces conditions sont remplies.
+ * @param prompt Prend en paramètre le prompt à afficher et à la suite duquel on récupère la valeur à tester.
+ * @return Retourne l'entier dont la valeur à déjà été vérifiée
+ * @see <a href="http://www.link_to_jira/HERO-402"> \n Rien de concret.</a>
+ * @since 1.0
+*/
+int Int_recup_verify_with_padding(const char* prompt, int max_value, int min_value);
+
+/**
  * Cette fonction demande en boucle une entrée et vérifie qu'elle est bien de type entier (unsigned int). Elle retourne la valeur dès qu'elle est bien de type 'unsigned int'.
  * @param prompt Prend en paramètre le prompt à afficher et à la suite duquel on récupère la valeur à tester.
  * @return Retourne l'entier non signé dont la valeur à déjà été vérifiée

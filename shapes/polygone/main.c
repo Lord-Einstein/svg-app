@@ -64,12 +64,12 @@ void Display_polygone(Head* head) {
 }
 
 
-int main(void) {
+// int main(void) {
 
-    Head* head = Create_new_polyline();
-    Recup_polygone_data(head);
-    Display_polygone(head);
-    Destroy_polyline(head);
+//     Head* head = Create_new_polyline();
+//     Recup_polygone_data(head);
+//     Display_polygone(head);
+//     Destroy_polyline(head);
 
-    return EXIT_SUCCESS;
-}
+//     return EXIT_SUCCESS;
+// }
