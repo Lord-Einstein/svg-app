@@ -6,9 +6,37 @@
 
 
 //PROCEDURES DE MISE EN FORME
-void Print_in_red(const char* prompt) {
-    printf(RED_COLOR"%s"RESET_STYLE, prompt);
-};
+
+// Couleurs normales
+void Print_in_black(const char* prompt)   { printf(BLACK"%s"RESET_STYLE, prompt); }
+void Print_in_red(const char* prompt)     { printf(RED"%s"RESET_STYLE, prompt); }
+void Print_in_green(const char* prompt)   { printf(GREEN"%s"RESET_STYLE, prompt); }
+void Print_in_yellow(const char* prompt)  { printf(YELLOW"%s"RESET_STYLE, prompt); }
+void Print_in_blue(const char* prompt)    { printf(BLUE"%s"RESET_STYLE, prompt); }
+void Print_in_magenta(const char* prompt) { printf(MAGENTA"%s"RESET_STYLE, prompt); }
+void Print_in_cyan(const char* prompt)    { printf(CYAN"%s"RESET_STYLE, prompt); }
+void Print_in_white(const char* prompt)   { printf(WHITE"%s"RESET_STYLE, prompt); }
+
+// Couleurs vives
+void Print_in_bright_black(const char* prompt)   { printf(BRIGHT_BLACK"%s"RESET_STYLE, prompt); }
+void Print_in_bright_red(const char* prompt)     { printf(BRIGHT_RED"%s"RESET_STYLE, prompt); }
+void Print_in_bright_green(const char* prompt)   { printf(BRIGHT_GREEN"%s"RESET_STYLE, prompt); }
+void Print_in_bright_yellow(const char* prompt)  { printf(BRIGHT_YELLOW"%s"RESET_STYLE, prompt); }
+void Print_in_bright_blue(const char* prompt)    { printf(BRIGHT_BLUE"%s"RESET_STYLE, prompt); }
+void Print_in_bright_magenta(const char* prompt) { printf(BRIGHT_MAGENTA"%s"RESET_STYLE, prompt); }
+void Print_in_bright_cyan(const char* prompt)    { printf(BRIGHT_CYAN"%s"RESET_STYLE, prompt); }
+void Print_in_bright_white(const char* prompt)   { printf(BRIGHT_WHITE"%s"RESET_STYLE, prompt); }
+
+
+
+
+
+
+
+
+
+
+
 
 void Delete_two_lines(){
     printf("\r" DELETE_CURRRENT_LINE); // efface la ligne courante

@@ -576,7 +576,7 @@ void Add_path_element(Head* head, Node* new_node){
 int Menu_commands() {
 
     printf("\r"BOLD_WHITE_TEXT""UNDERLINE_WHITE_TEXT" MENU DE COMMANDES "RESET_STYLE BOLD_WHITE_TEXT"\n\n"RESET_STYLE);
-    printf("1) Déplacer le curseur (MOVE TO)\n2) Tracer une ligne depuis le point courant\n3) Tracer une ligne horizontale\n4) Tracer une ligne verticale\n5) Tracer une courbe de Bézier\n6) Tracer la variante de la courbe de Bézier\n7) Tracer la Quadratique de Bézier\n8) Tracer la variante de la Quadratique de Bézier\n9) Refermez une forme\n\n");
+    printf("1) Déplacer le curseur \n2) Tracer une ligne depuis le point courant\n3) Tracer une ligne horizontale\n4) Tracer une ligne verticale\n5) Tracer une courbe de Bézier\n6) Tracer la variante de la courbe de Bézier\n7) Tracer la Quadratique de Bézier\n8) Tracer la variante de la Quadratique de Bézier\n9) Refermez une forme\n\n");
 
     return Int_recup_verify("Choisissez la commande à ajouter à votre 'Path' : ");
 }
@@ -765,12 +765,12 @@ void Recup_path_data(Head* head) {
 }
 
 
-int main() {
+// int main() {
 
-    Head* head = Create_new_path();
-    Recup_path_data(head);
-    Display_path(head);
-    Destroy_path(head);
+//     Head* head = Create_new_path();
+//     Recup_path_data(head);
+//     Display_path(head);
+//     Destroy_path(head);
 
-    return EXIT_SUCCESS;
-}
+//     return EXIT_SUCCESS;
+// }

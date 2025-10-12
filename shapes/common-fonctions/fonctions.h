@@ -8,27 +8,149 @@
 
 //Petite explication : Pour les formats de style en console, on utilise la notation ASCII \033[code_style(gras);code_couleur(bleu...);code_bg_color(white..)ET un 'm' après lesconfigurations puis le texte....
 
+//Cractères spéciaux pour la gestion des lignes en console
 #define REMOUNT_ON_LAST_LINE "\033[1A"
 #define DELETE_CURRRENT_LINE "\033[2K"
 
+//Caractères spéciaux pour la gestion des décorations de texte
 #define BOLD_WHITE_TEXT  "\033[1;37m"
 #define UNDERLINE_WHITE_TEXT  "\033[4;37m"
 
-
+//Caractères de RESET des modifications de style en console
 #define RESET_STYLE  "\033[0m"
 
-#define RED_COLOR  "\033[31m"
-#define GREEN_COLOR  "\033[32m"
+
+// --- Couleurs de texte (avant-plan) ---
+#define BLACK        "\033[30m"
+#define RED          "\033[31m"
+#define GREEN        "\033[32m"
+#define YELLOW       "\033[33m"
+#define BLUE         "\033[34m"
+#define MAGENTA      "\033[35m"
+#define CYAN         "\033[36m"
+#define WHITE        "\033[37m"
+
+// --- Couleurs vives (texte clair) ---
+#define BRIGHT_BLACK   "\033[90m"
+#define BRIGHT_RED     "\033[91m"
+#define BRIGHT_GREEN   "\033[92m"
+#define BRIGHT_YELLOW  "\033[93m"
+#define BRIGHT_BLUE    "\033[94m"
+#define BRIGHT_MAGENTA "\033[95m"
+#define BRIGHT_CYAN    "\033[96m"
+#define BRIGHT_WHITE   "\033[97m"
 
 
 
 // PROCEDURES -----------------------
 
+
 /**
- * Cette procédure affiche du texte en couleur rouge dans la console. Très utile pour affciher des messages d'erreurs.
- * @param prompt Texte à afficher en rouge dans la console.
-*/
+ * @brief Affiche du texte en noir dans la console.
+ * @param prompt Texte à afficher en noir.
+ */
+void Print_in_black(const char* prompt);
+
+/**
+ * @brief Affiche du texte en rouge dans la console. 
+ * @param prompt Texte à afficher en rouge (souvent utilisé pour les erreurs).
+ */
 void Print_in_red(const char* prompt);
+
+/**
+ * @brief Affiche du texte en vert dans la console. 
+ * @param prompt Texte à afficher en vert (souvent utilisé pour les validations).
+ */
+void Print_in_green(const char* prompt);
+
+/**
+ * @brief Affiche du texte en jaune dans la console. 
+ * @param prompt Texte à afficher en jaune (utile pour les avertissements).
+ */
+void Print_in_yellow(const char* prompt);
+
+/**
+ * @brief Affiche du texte en bleu dans la console.
+ * @param prompt Texte à afficher en bleu.
+ */
+void Print_in_blue(const char* prompt);
+
+/**
+ * @brief Affiche du texte en magenta dans la console.
+ * @param prompt Texte à afficher en magenta.
+ */
+void Print_in_magenta(const char* prompt);
+
+/**
+ * @brief Affiche du texte en cyan dans la console.
+ * @param prompt Texte à afficher en cyan.
+ */
+void Print_in_cyan(const char* prompt);
+
+/**
+ * @brief Affiche du texte en blanc dans la console.
+ * @param prompt Texte à afficher en blanc.
+ */
+void Print_in_white(const char* prompt);
+
+
+// COULEURS VIVES
+
+
+/**
+ * @brief Affiche du texte en noir clair (gris foncé) dans la console.
+ * @param prompt Texte à afficher.
+ */
+void Print_in_bright_black(const char* prompt);
+
+/**
+ * @brief Affiche du texte en rouge vif dans la console.
+ * @param prompt Texte à afficher.
+ */
+void Print_in_bright_red(const char* prompt);
+
+/**
+ * @brief Affiche du texte en vert vif dans la console.
+ * @param prompt Texte à afficher.
+ */
+void Print_in_bright_green(const char* prompt);
+
+/**
+ * @brief Affiche du texte en jaune vif dans la console.
+ * @param prompt Texte à afficher.
+ */
+void Print_in_bright_yellow(const char* prompt);
+
+/**
+ * @brief Affiche du texte en bleu vif dans la console.
+ * @param prompt Texte à afficher.
+ */
+void Print_in_bright_blue(const char* prompt);
+
+/**
+ * @brief Affiche du texte en magenta vif dans la console.
+ * @param prompt Texte à afficher.
+ */
+void Print_in_bright_magenta(const char* prompt);
+
+/**
+ * @brief Affiche du texte en cyan vif dans la console.
+ * @param prompt Texte à afficher.
+ */
+void Print_in_bright_cyan(const char* prompt);
+
+/**
+ * @brief Affiche du texte en blanc vif dans la console.
+ * @param prompt Texte à afficher.
+ */
+void Print_in_bright_white(const char* prompt);
+
+
+
+
+
+
+
 
 /**
  * Cette procédure supprime deux lignes en console à partir de la ligne courante en manipulant les caractères spéciaux et l'ASCII.
