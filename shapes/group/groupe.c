@@ -1,6 +1,6 @@
 #include "./groupe.h"
 
-
+// /HOLALA
 
 void Infos_group() {
     system("clear");
