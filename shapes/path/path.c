@@ -190,8 +190,8 @@ void Infos_Z() {
 // Je peux faire un free(du pointeur malloc principal) si les suivants ont échoués Exemple correct : Ligne 344 ou dans Create_new_path_element
 
 
-Head* Create_new_path() {
-    Head* head = malloc(sizeof(Head));
+HeadPath* Create_new_path() {
+    HeadPath* head = malloc(sizeof(HeadPath));
     if(!head) return NULL;
 
     head->start = NULL;
@@ -217,7 +217,6 @@ MoveTo* Create_new_move_to(Point* point) {
     move_to->p = point;
 
     return move_to;
-
 }
 
 LineTo* Create_new_line_to(Point* point) {
@@ -388,7 +387,7 @@ Node* Create_new_path_element(int commands){
     
 }
 
-int Does_path_exist(Head* head){
+int Does_path_exist(HeadPath* head){
     if(!head) return 0;
     return 1;
 }
@@ -467,7 +466,7 @@ void Destroy_path_element(Node* node){
     }
 }
 
-void Destroy_path(Head* head){
+void Destroy_path(HeadPath* head){
     if(!Does_path_exist(head)){
         Print_in_red("\nShape not found !\n");
         return;
@@ -533,14 +532,15 @@ void Display_path_element(Node* node){
 }
 
 
-void Display_path(Head* head){
+void Display_path(HeadPath* head){
     if(!Does_path_exist(head)){
         Print_in_red("\nShape not found\n");
         return;
     }
 
     Node* node = head->start;
-    system("clear");
+    printf("\n");
+    // system("clear");
     printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" PATH "RESET_STYLE BOLD_WHITE_TEXT" ========\n\n"RESET_STYLE);
     printf("D >>> ");
 
@@ -549,10 +549,10 @@ void Display_path(Head* head){
         node = node->next;
     }
 
-    printf("\n\n");
+    printf("\n");
 }
 
-void Add_path_element(Head* head, Node* new_node){
+void Add_path_element(HeadPath* head, Node* new_node){
 
     if(!Does_path_exist(head)) return;
     if(!Does_path_element_exist(new_node)) return;
@@ -581,7 +581,7 @@ int Menu_commands() {
     return Int_recup_verify("Choisissez la commande à ajouter à votre 'Path' : ");
 }
 
-void Recup_path_data(Head* head) {
+void Recup_path_data(HeadPath* head) {
     
     if(!Does_path_exist(head)) return;
 
@@ -767,7 +767,7 @@ void Recup_path_data(Head* head) {
 
 // int main() {
 
-//     Head* head = Create_new_path();
+//     HeadPath* head = Create_new_path();
 //     Recup_path_data(head);
 //     Display_path(head);
 //     Destroy_path(head);

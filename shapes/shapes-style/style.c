@@ -237,12 +237,12 @@ void Display_style(Style* style ) {
 
 }
 
-int main() {
+// int main() {
 
-    Style* style = Create_style();
-    Recup_style_data(style);
-    Display_style(style);
-    Destroy_style(style);
+//     Style* style = Create_style();
+//     Recup_style_data(style);
+//     Display_style(style);
+//     Destroy_style(style);
 
-    return EXIT_SUCCESS;
-}
+//     return EXIT_SUCCESS;
+// }

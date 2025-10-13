@@ -32,12 +32,6 @@ void Print_in_bright_white(const char* prompt)   { printf(BRIGHT_WHITE"%s"RESET_
 
 
 
-
-
-
-
-
-
 void Delete_two_lines(){
     printf("\r" DELETE_CURRRENT_LINE); // efface la ligne courante
     printf("\r" REMOUNT_ON_LAST_LINE); // remonte d’une ligne
@@ -91,17 +85,37 @@ void Chrono_without_clear(int chrono) {
     }
 }
 
+// int Chrono_assassin(int chrono) {
+//     if(chrono > 9) chrono = 9;
+//     while(chrono >= 0 && !kbhit()){
+
+//         printf("\b%d", chrono);
+//         chrono--;
+//         sleep(1);
+
+//     }
+//     if(chrono < 0) return 1;
+//     return 0;
+// }
+
 int Chrono_assassin(int chrono) {
-    if(chrono > 9) chrono = 9;
-    while(chrono >= 0 && !kbhit()){
+    if (chrono > 9) chrono = 9;
+
+    while (chrono >= 0) {
 
         printf("\b%d", chrono);
+
         chrono--;
         sleep(1);
 
+        if (kbhit()) {
+            getchar(); // vide le reste du buffer si nécessaire
+            return 0; 
+        }
+
     }
-    if(chrono < 0) return 1;
-    return 0;
+
+    return 1;
 }
 
 void Drain_buffer() {

@@ -74,13 +74,16 @@ void Display_square(Rect* square) {
     
     if(!Does_square_exist(square)) return;
     else{
-        system("clear");
+        printf("\n");
+        // system("clear");
         printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" CARRE "RESET_STYLE BOLD_WHITE_TEXT" ========\n"RESET_STYLE);
 
         printf("\nPosition sur l'axe X : %d", square->x);
         printf("\nPosition sur l'axe Y : %d", square->y);
         printf("\nLongueur d'un côté (px) : %u", square->height);
         printf("\nRayon d'arrondi (px) : %u\n\n", square->round);
+        
+        printf("\n");
     }
 }
 

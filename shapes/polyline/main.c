@@ -117,7 +117,8 @@ void Display_polyline(Head* head) {
     int point_counter = 0;
     LinkPoint* point = head->start;
     
-    system("clear");
+    printf("\n");
+    // system("clear");
     printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" POLY-LIGNES "RESET_STYLE BOLD_WHITE_TEXT" ========\n"RESET_STYLE);
 
     while(point != NULL){
@@ -126,6 +127,7 @@ void Display_polyline(Head* head) {
         Display_point(point);
         point = point->next;
     }
+    printf("\n");
 
 }
 

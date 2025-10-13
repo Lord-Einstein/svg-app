@@ -59,11 +59,13 @@ void Destroy_circle(Circle* circle) {
 void Display_circle(Circle* circle) {
     if(!Does_circle_exist(circle)) return;
     else{
-        system("clear");
+        // system("clear");
+        printf("\n");
         printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" CERCLE "RESET_STYLE BOLD_WHITE_TEXT" ========\n"RESET_STYLE);
         printf("\nPosition sur l'axe X : %d", circle->cx);
         printf("\nPosition sur l'axe Y : %d", circle->cy);
         printf("\nRayon(px) : %u\n\n", circle->rx);
+        printf("\n");
     }
 }
 

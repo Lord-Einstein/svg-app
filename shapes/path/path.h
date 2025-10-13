@@ -134,9 +134,9 @@ struct Node_s
 /**
  * @brief Structure propre aux listes (en tête d'une liste et donc référence première vers les autres cases), représentant ainsi le 'Path' en lui même.
 */
-typedef struct Head{
+typedef struct {
     Node* start;
-}Head;
+}HeadPath;
 
 
 //PROCEDURES ---------------
@@ -207,7 +207,7 @@ void Destroy_path_element(Node* node);
  * 
  * Ici, il faut libérer toutes les autres instances de 'Path' qui font parties de la chaîne de liste pointée par 'head'.
 */
-void Destroy_path(Head* head);
+void Destroy_path(HeadPath* head);
 
 /**
  * Cette procédure affiche les informations contenues dans l'élément passé en paramètre en fonction de son type et étant donné qu'il y'a plusieurs commandes possibles.
@@ -219,28 +219,28 @@ void Display_path_element(Node* node);
  * Cette procédure affiche les informations contenues dans tous les éléments contenus dans la liste 'Path' passée en passé en paramètre.
  * @param head Prend en paramètre la liste Path courante.
  */
-void Display_path(Head* head);
+void Display_path(HeadPath* head);
 
 /**
  * Procédure complète de récupération des informations permettant de créer un 'Path' complet.
  * Elle inclut une fonction de filtrage des entrées de l'utilisateur, de tri pour identifier la commande à créer ..... ainsi qu'une boucle de répétition afin de permettre la reprise de tout le processus de création.
  * @param head Prend en paramètre la liste 'Path' qu'on souhaite remplir.
  */
-void Recup_path_data(Head* head);
+void Recup_path_data(HeadPath* head);
 
 /** 
  * Cette procédure permet d'ajouter un noeud ou une commande à la lite 'Path'.
  * @param head La référence d'en tête de la liste 'Path' à compléter.
  * @param new_node Le nouveau noeud ou sous commande à ajouter à la liste 'Path' courante.
 */
-void Add_path_element(Head* head, Node* new_node);
+void Add_path_element(HeadPath* head, Node* new_node);
 
 
 //FONCTIONS ----- Description JavaDoc à Faire !!!!
 
 int Menu_commands();
 int Does_path_element_exist(Node* node);
-int Does_path_exist(Head* head);
+int Does_path_exist(HeadPath* head);
 
 Node* Create_new_path_element(int commands);
 Close* Create_new_close();
@@ -253,7 +253,7 @@ HLineTo* Create_new_h_line_to(int x);
 LineTo* Create_new_line_to(Point* point);
 MoveTo* Create_new_move_to(Point* point);
 Point* Create_new_couple(int x, int y);
-Head* Create_new_path();
+HeadPath* Create_new_path();
 
 
 #endif

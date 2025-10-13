@@ -74,7 +74,8 @@ void Display_rect(Rect* rect) {
     
     if(!Does_rect_exist(rect)) return;
     else{
-        system("clear");
+        printf("\n");
+        // system("clear");
         printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" RECTANGLE "RESET_STYLE BOLD_WHITE_TEXT" ========\n"RESET_STYLE);
 
         printf("\nPosition sur l'axe X : %d", rect->x);
@@ -82,6 +83,7 @@ void Display_rect(Rect* rect) {
         printf("\nLongueur (px) : %u", rect->height);
         printf("\nLargeur (px) : %u", rect->width);
         printf("\nRayon d'arrondi (px) : %u\n\n", rect->round);
+        printf("\n");
     }
 }
 

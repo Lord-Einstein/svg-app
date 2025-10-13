@@ -75,12 +75,14 @@ void Display_ellipse(Ellipse* ellipse) {
         return;
     }
     else{
-        system("clear");
+        // system("clear");
+        printf("\n");
         printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" ELLIPSE "RESET_STYLE BOLD_WHITE_TEXT" ========\n"RESET_STYLE);
         printf("\nPosition sur l'axe X : %d", ellipse->circle->cx);
         printf("\nPosition sur l'axe Y : %d", ellipse->circle->cy);
         printf("\nRayon sur l'axe X (px) : %u", ellipse->circle->rx);
         printf("\nRayon sur l'axe Y (px) : %u\n\n", ellipse->ry);
+        printf("\n");
     }
 }
 

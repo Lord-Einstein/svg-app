@@ -59,7 +59,8 @@ void Display_line(Line* line) {
     
     if(!Does_line_exist(line)) return;
     else{
-        system("clear");
+        printf("\n");
+        // system("clear");
         printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" LIGNE "RESET_STYLE BOLD_WHITE_TEXT" ========\n"RESET_STYLE);
 
         printf("\nPosition sur l'axe X du premier point : %d", line->x1);
@@ -67,6 +68,7 @@ void Display_line(Line* line) {
         printf("\nPosition sur l'axe X du second point : %d", line->x2);
         printf("\nPosition sur l'axe Y du second point : %d\n\n", line->y2);
 
+        printf("\n");
     }
 }
 

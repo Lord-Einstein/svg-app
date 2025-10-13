@@ -234,5 +234,7 @@ unsigned int Unsigned_int_recup_verify(const char* prompt);
 */
 int Chrono_assassin(int chrono);
 
+int Chrono_assassine(int chrono);
+
 
 #endif
