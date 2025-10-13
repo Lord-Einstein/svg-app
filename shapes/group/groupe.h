@@ -52,6 +52,7 @@ struct GroupNodeStruct {
 };
 
 typedef struct GroupStruct {
+    char name[64];
     GroupNode* start;
 } Group;
 

@@ -1,6 +1,5 @@
 #include "./groupe.h"
 
-// /HOLALA
 
 void Infos_group() {
     system("clear");
@@ -149,34 +148,75 @@ void Display_group_element(GroupElement* element) {
 
 void Display_group(Group* group) {
     if(!Does_group_exist(group)) {
-        Print_in_red("\nGroup not found\n");
+        Print_in_red("\nErreur : groupe inexistant.\n");
         return;
     }
 
-    // system("clear");
-    printf("\n\n");
-    printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT CYAN" GROUP "RESET_STYLE BOLD_WHITE_TEXT" ========\n\n"RESET_STYLE);
+    printf("\n");
+    printf(CYAN BOLD_WHITE_TEXT"╭────────────────────────────────────────────╮\n"RESET_STYLE);
+    printf(BOLD_WHITE_TEXT CYAN"   Affichage du groupe : "RESET_STYLE BOLD_WHITE_TEXT"%s\n"RESET_STYLE, group->name);
+    printf(CYAN BOLD_WHITE_TEXT"╰────────────────────────────────────────────╯\n"RESET_STYLE);
 
     GroupNode* node = group->start;
     int index = 1;
+
+    if (!node) {
+        printf(RED"\nLe groupe \"%s\" est vide.\n\n"RESET_STYLE, group->name);
+        return;
+    }
+
     while(node != NULL) {
-        printf(GREEN"\nForme n°%d :\n"RESET_STYLE, index++);
+        printf(GREEN"\n--- Forme n°%d ---\n"RESET_STYLE, index++);
         Display_group_element(node->node);
         node = node->next;
     }
 
-    printf(CYAN"\n======================================\n\n"RESET_STYLE);
+    printf(CYAN"\n╰────────────────────────────────────────────╯ END [ %s ]\n\n"RESET_STYLE, group->name);
 }
 
+
 int Menu_group_shapes() {
+    system("clear");
     printf("\n\r"BOLD_WHITE_TEXT""UNDERLINE_WHITE_TEXT" MENU DE TOUTES LES FORMES DU GROUPE "RESET_STYLE BOLD_WHITE_TEXT"\n\n"RESET_STYLE);
     printf("1) Cercle\n2) Ellipse\n3) Rectangle\n4) Carré\n5) Ligne\n6) Polygone\n7) Polyligne\n8) Path\n9) Groupe imbriqué\n\n");
 
     return Int_recup_verify("Choisissez la forme à ajouter dans le groupe : ");
 }
 
+void Recup_group_name(Group* group) {
+    if(!Does_group_exist(group)) return;
+
+    system("clear");
+    printf(BOLD_WHITE_TEXT CYAN"\n=== Création d’un nouveau groupe ===\n"RESET_STYLE);
+    printf(BOLD_WHITE_TEXT"\nEntrez le nom de votre groupe : "RESET_STYLE);
+
+    int i = 0;
+    char c;
+    while(i < 63 && (c = getchar()) != '\n' && c != EOF) {
+        group->name[i++] = c;
+    }
+    group->name[i] = '\0';
+
+    if (group->name[0] == '\0') {
+        // Nom par défaut si vide
+        group->name[0] = 'G';
+        group->name[1] = 'r';
+        group->name[2] = 'o';
+        group->name[3] = 'u';
+        group->name[4] = 'p';
+        group->name[5] = '\0';
+    }
+
+    system("clear");
+    printf(GREEN"\n→ Groupe \"%s\" créé avec succès !\n\n"RESET_STYLE, group->name);
+}
+
+
 void Recup_group_data(Group* group) {
     if(!Does_group_exist(group)) return;
+
+    // 🔹 Demander le nom du groupe
+    Recup_group_name(group);
 
     int choice = 0;
     int continuer = 1;
@@ -201,7 +241,6 @@ void Recup_group_data(Group* group) {
             return;
         }
 
-        
         switch(choice) {
             case CIRCLE:    Recup_circle_data(element->current_shapes.circle); break;
             case ELLIPSE:   Recup_ellipse_data(element->current_shapes.ellipse); break;
@@ -222,11 +261,12 @@ void Recup_group_data(Group* group) {
         printf("\nSouhaitez-vous ajouter une autre forme au groupe ?\n");
         printf("Tapez une touche avant la fin du chrono pour skip :  ");
         continuer = Chrono_assassin(5);
-        // system("clear");
+
+        system("clear");
 
     } while(continuer);
-
 }
+
 
 int main(void) {
 
