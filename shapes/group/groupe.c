@@ -1,6 +1,6 @@
 #include "./groupe.h"
 
-//ABDC
+
 
 void Infos_group() {
     system("clear");
