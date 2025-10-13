@@ -1,5 +1,7 @@
 #include "./groupe.h"
 
+//ABDC
+
 void Infos_group() {
     system("clear");
     printf("\nL'élément 'Group' permet de regrouper plusieurs formes SVG en une seule entité logique.\n");
