@@ -339,7 +339,6 @@ unsigned int Unsigned_int_recup_verify(const char *prompt) {
 void Auto_write(const char *text, unsigned int delay_microseconds) {
     if (!text) return;
 
-    // Empêche la saisie utilisateur pendant l’animation
     system("stty -echo -icanon");
 
     for (int i = 0; text[i] != '\0'; i++) {

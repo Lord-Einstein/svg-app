@@ -66,5 +66,6 @@ int Does_circle_exist(Circle* circle);
 
 void Modify_circle(Circle* circle);
 int Modify_circle_menu();
+void Export_circle(Circle* circle);
 
 #endif

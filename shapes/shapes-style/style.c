@@ -69,68 +69,16 @@ int Style_menu() {
     printf(BRIGHT_CYAN"│        MENU DE STYLES        │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
-    printf("  1) Couleur de fond\n");
-    printf("  2) Couleur de contour\n");
-    printf("  3) Épaisseur du contour\n");
-    printf("  4) Rotation\n");
-    printf("  5) Mise à l’échelle\n");
-    printf("  6) Déplacement\n\n");
+    printf(BRIGHT_CYAN"  1)"RESET_STYLE" Couleur de fond\n");
+    printf(BRIGHT_CYAN"  2)"RESET_STYLE" Couleur de contour\n");
+    printf(BRIGHT_CYAN"  3)"RESET_STYLE" Épaisseur du contour\n");
+    printf(BRIGHT_CYAN"  4)"RESET_STYLE" Rotation\n");
+    printf(BRIGHT_CYAN"  5)"RESET_STYLE" Mise à l’échelle\n");
+    printf(BRIGHT_CYAN"  6)"RESET_STYLE" Déplacement\n\n");
 
     return Int_recup_verify_with_padding("Choisissez un paramètre à modifier : ",1,6);
 }
 
-char* Color_menu() {
-    int choice = 0;
-    char* color;
-
-    system("clear");
-    printf("\n");
-    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-    printf(BRIGHT_CYAN"│        PANNEL DE COULEURS    │\n"RESET_STYLE);
-    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
-
-    Print_in_black(" 1) "BLACK"NOIR"RESET_STYLE"\n");
-    Print_in_red(" 2) "RED"ROUGE"RESET_STYLE"\n");
-    Print_in_green(" 3) "GREEN"VERT"RESET_STYLE"\n");
-    Print_in_yellow(" 4) "YELLOW"JAUNE"RESET_STYLE"\n");
-    Print_in_blue(" 5) "BLUE"BLEU"RESET_STYLE"\n");
-    Print_in_magenta(" 6) "MAGENTA"MAGENTA"RESET_STYLE"\n");
-    Print_in_cyan(" 7) "CYAN"CYAN"RESET_STYLE"\n");
-    Print_in_white(" 8) "WHITE"BLANC"RESET_STYLE"\n");
-
-    Print_in_bright_black(" 9) "BRIGHT_BLACK"NOIR CLAIR"RESET_STYLE"\n");
-    Print_in_bright_red("10) "BRIGHT_RED"ROUGE VIF"RESET_STYLE"\n");
-    Print_in_bright_green("11) "BRIGHT_GREEN"VERT VIF"RESET_STYLE"\n");
-    Print_in_bright_yellow("12) "BRIGHT_YELLOW"JAUNE VIF"RESET_STYLE"\n");
-    Print_in_bright_blue("13) "BRIGHT_BLUE"BLEU VIF"RESET_STYLE"\n");
-    Print_in_bright_magenta("14) "BRIGHT_MAGENTA"MAGENTA VIF"RESET_STYLE"\n");
-    Print_in_bright_cyan("15) "BRIGHT_CYAN"CYAN VIF"RESET_STYLE"\n");
-    Print_in_bright_white("16) "BRIGHT_WHITE"BLANC VIF"RESET_STYLE"\n\n");
-
-    choice = Int_recup_verify("Choisissez la couleur souhaitée : ");
-
-    switch (choice) {
-        case 1: color = "black"; break;
-        case 2: color = "red"; break;
-        case 3: color = "green"; break;
-        case 4: color = "yellow"; break;
-        case 5: color = "blue"; break;
-        case 6: color = "magenta"; break;
-        case 7: color = "cyan"; break;
-        case 8: color = "white"; break;
-        case 9: color = "gray"; break;
-        case 10: color = "brightred"; break;
-        case 11: color = "lime"; break;
-        case 12: color = "gold"; break;
-        case 13: color = "deepskyblue"; break;
-        case 14: color = "fuchsia"; break;
-        case 15: color = "aqua"; break;
-        case 16: color = "whitesmoke"; break;
-        default: color = "black"; break;
-    }
-
-    return color;
-}
 
 void Recup_style_data(Style* style){
     if(!Does_style_exist(style)) return; 
@@ -181,32 +129,32 @@ void Recup_style_data(Style* style){
                 printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
                 printf(BRIGHT_CYAN"│   MODIFICATION DU CONTOUR    │\n"RESET_STYLE);
                 printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
-                style->stroke_width = Int_recup_verify("Entrez l'épaisseur du contour : ");
+                style->stroke_width = Int_recup_verify(BRIGHT_GREEN"Entrez l'épaisseur du contour : "RESET_STYLE);
                 break;
             case ROTATE:
                 system("clear");
                 printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
                 printf(BRIGHT_CYAN"│         ROTATION SVG         │\n"RESET_STYLE);
                 printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
-                style->rotation = Int_recup_verify("Entrez l’angle de rotation : ");
-                style->rotation_cx = Int_recup_verify("Coordonnée X du centre de rotation : ");
-                style->rotation_cy = Int_recup_verify("Coordonnée Y du centre de rotation : ");
+                style->rotation = Int_recup_verify("Entrez l’angle de rotation : "RESET_STYLE);
+                style->rotation_cx = Int_recup_verify("Coordonnée X du centre de rotation : "RESET_STYLE);
+                style->rotation_cy = Int_recup_verify("Coordonnée Y du centre de rotation : "RESET_STYLE);
                 break;
             case SCALE:
                 system("clear");
                 printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
                 printf(BRIGHT_CYAN"│      MISE À L’ÉCHELLE SVG    │\n"RESET_STYLE);
                 printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
-                style->scale_x = Int_recup_verify("Valeur d’échelle sur X : ");
-                style->scale_y = Int_recup_verify("Valeur d’échelle sur Y : ");
+                style->scale_x = Int_recup_verify("Valeur d’échelle sur X : "RESET_STYLE);
+                style->scale_y = Int_recup_verify("Valeur d’échelle sur Y : "RESET_STYLE);
                 break;
             case TRANSLATE:
                 system("clear");
                 printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
                 printf(BRIGHT_CYAN"│        DÉPLACEMENT SVG       │\n"RESET_STYLE);
                 printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
-                style->translate_x = Int_recup_verify("Déplacement sur X : ");
-                style->translate_y = Int_recup_verify("Déplacement sur Y : ");
+                style->translate_x = Int_recup_verify("Déplacement sur X : "RESET_STYLE);
+                style->translate_y = Int_recup_verify("Déplacement sur Y : "RESET_STYLE);
                 break;
             default:
                 Print_in_bright_red("Invalide !");
@@ -234,17 +182,17 @@ void Display_style(Style* style) {
     printf(BRIGHT_CYAN"│         STYLE ACTUEL         │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
-    printf("  Couleur de fond : RGBA (%d, %d, %d, %.2f) \n", style->Rf, style->Gf, style->Bf, style->Af);
-    printf("  Couleur de contour : RGBA (%d, %d, %d, %.2f) \n", style->Rs, style->Gs, style->Bs, style->As);
-    printf("  Épaisseur du contour : %d\n\n", style->stroke_width);
+    printf("  Couleur de fond : "BOLD_WHITE_TEXT"RGBA (%d, %d, %d, %.2f)"RESET_STYLE"\n", style->Rf, style->Gf, style->Bf, style->Af);
+    printf("  Couleur de contour : "BOLD_WHITE_TEXT"RGBA (%d, %d, %d, %.2f)"RESET_STYLE"\n", style->Rs, style->Gs, style->Bs, style->As);
+    printf("  Épaisseur du contour : "BOLD_WHITE_TEXT"%d"RESET_STYLE"\n\n", style->stroke_width);
 
-    printf("  Angle de rotation : %d°\n", style->rotation);
-    printf("  Centre de rotation X : %d\n", style->rotation_cx);
-    printf("  Centre de rotation Y : %d\n\n", style->rotation_cy);
+    printf("  Angle de rotation : "BOLD_WHITE_TEXT"%d ° "RESET_STYLE"\n", style->rotation);
+    printf("  Centre de rotation X : "BOLD_WHITE_TEXT"%d "RESET_STYLE"\n", style->rotation_cx);
+    printf("  Centre de rotation Y : "BOLD_WHITE_TEXT"%d "RESET_STYLE"\n\n", style->rotation_cy);
 
-    printf("  Échelle sur X : %d\n", style->scale_x);
-    printf("  Échelle sur Y : %d\n\n", style->scale_y);
+    printf("  Échelle sur X : "BOLD_WHITE_TEXT"%d"RESET_STYLE"\n", style->scale_x);
+    printf("  Échelle sur Y : "BOLD_WHITE_TEXT"%d"RESET_STYLE"\n\n", style->scale_y);
 
-    printf("  Déplacement sur X : %d\n", style->translate_x);
-    printf("  Déplacement sur Y : %d\n", style->translate_y);
+    printf("  Déplacement sur X : "BOLD_WHITE_TEXT"%d"RESET_STYLE"\n", style->translate_x);
+    printf("  Déplacement sur Y : "BOLD_WHITE_TEXT"%d"RESET_STYLE"\n", style->translate_y);
 }

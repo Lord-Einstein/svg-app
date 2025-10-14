@@ -18,43 +18,37 @@ void Infos_cercle() {
 }
 
 void Recup_circle_data(Circle* circle) {
-    if (!Does_circle_exist(circle)) {
-        return;
-    } else {
-        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-        printf(BRIGHT_CYAN"│    INITIALISATION CERCLE     │\n"RESET_STYLE);
-        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+    if (!Does_circle_exist(circle)) return;
 
-        printf("Souhaitez-vous afficher la documentation pour créer un cercle ?\n");
-        printf("Appuyez sur une touche avant la fin du chrono pour passer :  ");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│    INITIALISATION CERCLE     │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
-        Chrono(5);
+    printf("Souhaitez-vous afficher la documentation pour créer un cercle ?\n");
+    printf("Appuyez sur une touche avant la fin du chrono pour passer :  ");
 
-        if (kbhit()) getchar();
-        else Infos_cercle();
+    Chrono(5);
 
-        
-        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-        printf(BRIGHT_CYAN"│     CRÉATION DU CERCLE       │\n"RESET_STYLE);
-        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+    if (kbhit()) getchar();
+    else Infos_cercle();
 
-        circle->cx = Int_recup_verify("Entrez la position X du centre : ");
-        circle->cy = Int_recup_verify("Entrez la position Y du centre : ");
-        circle->rx = Unsigned_int_recup_verify("Entrez le rayon de votre cercle (px) : ");
-    }
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│     CRÉATION DU CERCLE       │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    circle->cx = Int_recup_verify("Entrez la position X du centre : ");
+    circle->cy = Int_recup_verify("Entrez la position Y du centre : ");
+    circle->rx = Unsigned_int_recup_verify("Entrez le rayon de votre cercle (px) : ");
 
     system("clear");
 }
 
 Circle* Create_circle(int cx, int cy, unsigned int rx) {
     Circle* circle = malloc(sizeof(Circle));
-
     if (!circle) return NULL;
-
     circle->cx = cx;
     circle->cy = cy;
     circle->rx = rx;
-
     return circle;
 }
 
@@ -62,9 +56,8 @@ int Does_circle_exist(Circle* circle) {
     if (!circle) {
         Print_in_red("\nShape Not Found !\n");
         return 0;
-    } else {
-        return 1;
     }
+    return 1;
 }
 
 void Destroy_circle(Circle* circle) {
@@ -74,18 +67,16 @@ void Destroy_circle(Circle* circle) {
 
 void Display_circle(Circle* circle) {
     if (!Does_circle_exist(circle)) return;
-    else {
-        // printf("\n");
-        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-        printf(BRIGHT_CYAN"│        DONNÉES CERCLE        │\n"RESET_STYLE);
-        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
 
-        printf("\n");
-        printf("•  "BOLD_WHITE_TEXT"Position X du centre : "RESET_STYLE"%d\n", circle->cx);
-        printf("•  "BOLD_WHITE_TEXT"Position Y du centre : "RESET_STYLE"%d\n", circle->cy);
-        printf("•  "BOLD_WHITE_TEXT"Rayon (px) : "RESET_STYLE"%u\n", circle->rx);
-        printf("\n");
-    }
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│        DONNÉES CERCLE        │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
+
+    printf("\n");
+    printf("•  Position X du centre : "BOLD_WHITE_TEXT"%d"RESET_STYLE"\n", circle->cx);
+    printf("•  Position Y du centre : "BOLD_WHITE_TEXT"%d"RESET_STYLE"\n", circle->cy);
+    printf("•  Rayon (px)  : "BOLD_WHITE_TEXT"%d"RESET_STYLE"\n", circle->rx);
+    printf("\n");
 }
 
 int Modify_circle_menu() {
@@ -95,11 +86,11 @@ int Modify_circle_menu() {
     printf(BRIGHT_CYAN"│      MODIFIER LE CERCLE      │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
-    printf("  1) Modifier la position sur X\n");
-    printf("  2) Modifier la position sur Y\n");
-    printf("  3) Modifier la taille du rayon\n\n");
+    printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier la position sur X\n");
+    printf(BRIGHT_CYAN"  2)"RESET_STYLE" Modifier la position sur Y\n");
+    printf(BRIGHT_CYAN"  3)"RESET_STYLE" Modifier la taille du rayon\n\n");
 
-    choice = Int_recup_verify_with_padding("Choisissez la valeur à modifier : ",1,3);
+    choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Choisissez la valeur à modifier : "RESET_STYLE,1,3);
     Delete_two_lines();
     return choice;
 }
@@ -109,21 +100,19 @@ void Modify_circle(Circle* circle) {
     int value = 0, breaker = 0;
 
     do {
-      
-
         system("clear");
         Display_circle(circle);
         value = Modify_circle_menu();
 
         switch (value) {
             case 1:
-                circle->cx = Int_recup_verify("Nouvelle position X du centre : ");
+                circle->cx = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X du centre : "RESET_STYLE);
                 break;
             case 2:
-                circle->cy = Int_recup_verify("Nouvelle position Y du centre : ");
+                circle->cy = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y du centre : "RESET_STYLE);
                 break;
             case 3:
-                circle->rx = Unsigned_int_recup_verify("Nouveau rayon du cercle (px) : ");
+                circle->rx = Unsigned_int_recup_verify(BRIGHT_GREEN"Nouveau rayon du cercle (px) : "RESET_STYLE);
                 break;
             default:
                 Print_in_red("Entrée invalide !");
@@ -137,11 +126,17 @@ void Modify_circle(Circle* circle) {
         printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
         printf(BRIGHT_CYAN"│   CONTINUER LES MODIFS ?     │\n"RESET_STYLE);
         printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
-        printf("Appuyez sur une touche avant la fin du chrono pour continuer :  ");
+        printf(BRIGHT_GREEN"Appuyez sur une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
 
         breaker = Chrono_assassin(5);
-        // Delete_six_lines();
         system("clear");
 
     } while (!breaker);
 }
+
+// void Export_circle(Circle* circle) {
+//     if (!Does_circle_exist(circle)) return;
+
+
+
+// }
