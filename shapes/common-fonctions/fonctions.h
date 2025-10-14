@@ -240,5 +240,7 @@ void Ignore_extra_enters(void);
 
 void Auto_write(const char *text, unsigned int delay_microseconds);
 
+float Float_recup_verify_with_padding(const char *prompt, float min_value, float max_value);
+
 
 #endif

@@ -2,35 +2,49 @@
 
 void Infos_cercle() {
     system("clear");
-    printf("\nLe saviez-vous ?\n");
-    printf("Le 'circle' en SVG est un élément de la catégorie des Formes simples, utilisé pour créer des cercles, en se basant sur un centre et un rayon.\nPour le créer, il faut passer trois paramètres de base esentiels :\n\nLa position sur X du centre = cx (entier);\nLa position sur Y du centre = cy (entier);\nLa taille du rayon(entier non signé) = rx\n\n");
+    printf("\n");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│         INFOS CERCLE         │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    printf("Le saviez-vous ?\n");
+    printf("L’élément "BOLD_WHITE_TEXT"<circle>"RESET_STYLE" en SVG appartient à la famille des formes simples.\n");
+    printf("Il sert à tracer un cercle à partir d’un "BOLD_WHITE_TEXT"centre (cx, cy)"RESET_STYLE" et d’un "BOLD_WHITE_TEXT"rayon (r)"RESET_STYLE".\n\n");
+
+    printf(BRIGHT_CYAN"Paramètres nécessaires :\n"RESET_STYLE);
+    printf("  • "BOLD_WHITE_TEXT"cx"RESET_STYLE" : Position X du centre (entier)\n");
+    printf("  • "BOLD_WHITE_TEXT"cy"RESET_STYLE" : Position Y du centre (entier)\n");
+    printf("  • "BOLD_WHITE_TEXT"r"RESET_STYLE"  : Taille du rayon (entier non signé)\n\n");
 }
 
 void Recup_circle_data(Circle* circle) {
-
-    if(!Does_circle_exist(circle)){
+    if (!Does_circle_exist(circle)) {
         return;
-    } 
-    else{
-        printf("Souhaitez vous lire la documentation pour concevoir un cercle ?\n");
-        printf("Tapez une touche avant la fin du chrono pour skip :  ");
+    } else {
+        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"│    INITIALISATION CERCLE     │\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+        printf("Souhaitez-vous afficher la documentation pour créer un cercle ?\n");
+        printf("Appuyez sur une touche avant la fin du chrono pour passer :  ");
 
         Chrono(5);
 
-        
-        if (kbhit()) getchar();//je vide le buffer, juste au cas où.
+        if (kbhit()) getchar();
         else Infos_cercle();
 
-        printf(BRIGHT_CYAN"CREATION DE CERCLE.\n\n"RESET_STYLE);
+        
+        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"│     CRÉATION DU CERCLE       │\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
         circle->cx = Int_recup_verify("Entrez la position X du centre : ");
         circle->cy = Int_recup_verify("Entrez la position Y du centre : ");
-        circle->rx = Unsigned_int_recup_verify("Entrez le rayon de votre cercle(px) : ");
+        circle->rx = Unsigned_int_recup_verify("Entrez le rayon de votre cercle (px) : ");
     }
 
     system("clear");
-
 }
-
 
 Circle* Create_circle(int cx, int cy, unsigned int rx) {
     Circle* circle = malloc(sizeof(Circle));
@@ -45,96 +59,89 @@ Circle* Create_circle(int cx, int cy, unsigned int rx) {
 }
 
 int Does_circle_exist(Circle* circle) {
-    if(!circle) {
+    if (!circle) {
         Print_in_red("\nShape Not Found !\n");
         return 0;
-    }
-    else{
+    } else {
         return 1;
     }
 }
 
 void Destroy_circle(Circle* circle) {
-    if(!Does_circle_exist(circle)) return; // Je vérifie toujours que le pointeur existe pour éviter le Segfault de mes deux !!!
+    if (!Does_circle_exist(circle)) return;
     free(circle);
 }
 
 void Display_circle(Circle* circle) {
-    if(!Does_circle_exist(circle)) return;
-    else{
-        // system("clear");
+    if (!Does_circle_exist(circle)) return;
+    else {
+        // printf("\n");
+        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"│        DONNÉES CERCLE        │\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
+
         printf("\n");
-        printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" CERCLE "RESET_STYLE BOLD_WHITE_TEXT" ========\n"RESET_STYLE);
-        printf("\nPosition sur l'axe X : %d", circle->cx);
-        printf("\nPosition sur l'axe Y : %d", circle->cy);
-        printf("\nRayon(px) : %u\n\n", circle->rx);
-        printf("\n\n");
+        printf("•  "BOLD_WHITE_TEXT"Position X du centre : "RESET_STYLE"%d\n", circle->cx);
+        printf("•  "BOLD_WHITE_TEXT"Position Y du centre : "RESET_STYLE"%d\n", circle->cy);
+        printf("•  "BOLD_WHITE_TEXT"Rayon (px) : "RESET_STYLE"%u\n", circle->rx);
+        printf("\n");
     }
 }
 
-unsigned int Modify_circle_menu() {
-    unsigned int choice = 0;
-    printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" MODIFIER CERCLE "RESET_STYLE BOLD_WHITE_TEXT" ========\n"RESET_STYLE);
-    printf("\n1) Modifier la position sur X.\n2) Modifier la position sur Y.\n3) Modifier la taille du rayon\n\n");
+int Modify_circle_menu() {
+    int choice = 0;
 
-    choice = Unsigned_int_recup_verify("Choisissez la valeur à modifier : ");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│      MODIFIER LE CERCLE      │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    printf("  1) Modifier la position sur X\n");
+    printf("  2) Modifier la position sur Y\n");
+    printf("  3) Modifier la taille du rayon\n\n");
+
+    choice = Int_recup_verify_with_padding("Choisissez la valeur à modifier : ",1,3);
     Delete_two_lines();
     return choice;
 }
 
 void Modify_circle(Circle* circle) {
-    
     if (!Does_circle_exist(circle)) return;
     int value = 0, breaker = 0;
 
-    do
-    {
+    do {
+      
+
+        system("clear");
+        Display_circle(circle);
+        value = Modify_circle_menu();
+
+        switch (value) {
+            case 1:
+                circle->cx = Int_recup_verify("Nouvelle position X du centre : ");
+                break;
+            case 2:
+                circle->cy = Int_recup_verify("Nouvelle position Y du centre : ");
+                break;
+            case 3:
+                circle->rx = Unsigned_int_recup_verify("Nouveau rayon du cercle (px) : ");
+                break;
+            default:
+                Print_in_red("Entrée invalide !");
+                break;
+        }
+
         system("clear");
         Display_circle(circle);
 
-        value = Modify_circle_menu();
-        if(value < 1) value = 1;
-        if(value > 3) value = 3;
+        printf("\n");
+        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"│   CONTINUER LES MODIFS ?     │\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
+        printf("Appuyez sur une touche avant la fin du chrono pour continuer :  ");
 
-        switch (value)
-        {
-            case 1:
-                circle->cx = Int_recup_verify("Entrez la position X du centre : ");
-            break;
-            case 2:
-                circle->cy = Int_recup_verify("Entrez la position Y du centre : ");
-            break;
-            case 3:
-                circle->rx = Unsigned_int_recup_verify("Entrez le rayon de votre cercle(px) : ");
-            break;
-            
-            default:
-                Print_in_bright_red("Entrée invalide");
-            break;
-        }
-        
-        printf("\n\nSouhaitez vous continuer les modifications ?\n");
-        printf("Tapez une touche avant la fin du chrono pour skip :  ");
         breaker = Chrono_assassin(5);
-        Delete_six_lines();
-
+        // Delete_six_lines();
         system("clear");
 
     } while (!breaker);
-    
-
 }
-
-
-
-//  int main(void) {
-
-//     Circle* circle = Create_circle(0,0,0);
-//     Recup_circle_data(circle);
-//     Display_circle(circle);
-//     Modify_circle(circle);
-//     Destroy_circle(circle);
-
-//     return EXIT_SUCCESS;
-// }
-

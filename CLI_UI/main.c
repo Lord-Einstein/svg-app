@@ -16,7 +16,7 @@ int First_menu() {
     printf("  2) Charger une forme\n");
     printf("  3) Quitter\n\n");
 
-    return Int_recup_verify("Votre choix : ");
+    return Int_recup_verify_with_padding("Votre choix : ", 1, 3);
 }
 
 int Second_menu() {
@@ -28,11 +28,9 @@ int Second_menu() {
     printf("  1) Modifier la forme\n");
     printf("  2) Styliser la forme\n");
     printf("  3) Exporter la forme\n");
-    printf("  4) Supprimer la forme\n");
-    printf("  5) Fermer la session\n");
-    printf("  6) Quitter\n\n");
+    printf("  4) Supprimer la forme\n\n");
 
-    return Int_recup_verify("Votre choix : ");
+    return Int_recup_verify_with_padding("Votre choix : ", 1, 4);
 }
 
 int Menu_shapes() {
@@ -51,6 +49,7 @@ int Menu_shapes() {
     printf("  7) Polyligne\n");
     printf("  8) Path\n");
     printf("  9) Groupe\n");
+    printf("  10) Retour\n");
 
     return Int_recup_verify(BRIGHT_GREEN"\nChoisissez la forme à créer : "RESET_STYLE);
 }
@@ -67,7 +66,8 @@ typedef enum AllShapesEnum_E {
     SHAPE_POLYGON,
     SHAPE_POLYLINE,
     SHAPE_PATH,
-    SHAPE_GROUP
+    SHAPE_GROUP,
+    OUT
 } AllShapesEnum;
 
 typedef enum FirstMenu_E {
@@ -80,9 +80,7 @@ typedef enum SecondMenu_E {
     MODIFIER = 1,
     STYLISER,
     EXPORTER,
-    SUPPRIMER,
-    FERMER_SESSION,
-    QUITTER_SECOND
+    SUPPRIMER
 } SecondMenu;
 
 // ==========================================================
@@ -110,9 +108,6 @@ void Circle_edit_universe() {
 
             case STYLISER: {
                 Recup_style_data(style);
-                // Display_circle(circle);
-                // Display_style(style);
-                // sleep(10);
                 break;
             }
 
@@ -125,33 +120,56 @@ void Circle_edit_universe() {
                 Destroy_circle(circle);
                 Destroy_style(style);
                 Auto_write(RED"\nForme supprimée.\n"RESET_STYLE, 30000);
+                Auto_write(YELLOW"\nRetour au menu principal...\n"RESET_STYLE, 30000);
                 sleep(1);
-                break;
-
-            case FERMER_SESSION: //C'est lui qui dead tout normalement
-                Destroy_circle(circle);
-                Destroy_style(style);
-                Auto_write(YELLOW"\nSession fermée. Retour au menu principal...\n"RESET_STYLE, 30000);
-                sleep(1);
-                break;
-
-            case QUITTER_SECOND:
-                Destroy_circle(circle);
-                Destroy_style(style);
-                Auto_write(BRIGHT_RED"\nFermeture du programme d'édition de cercle...\n"RESET_STYLE, 50000);
                 return;
 
+            // case FERMER_SESSION: //C'est lui qui dead tout normalement
+            //     Destroy_circle(circle);
+            //     Destroy_style(style);
+            //     Auto_write(YELLOW"\nSession fermée. Retour au menu principal...\n"RESET_STYLE, 30000);
+            //     sleep(1);
+            //     break;
+
+            // case QUITTER_SECOND:
+            //     Destroy_circle(circle);
+            //     Destroy_style(style);
+            //     Auto_write(BRIGHT_RED"\nFermeture du programme d'édition de cercle...\n"RESET_STYLE, 50000);
+            //     return;
+
             default:
-                Print_in_bright_red("Choix invalide");
             break;
 
 
         }
     }
+
+}
+
+void Create_bloc() {
+    int shape_choice = 0;
+    while (1)
+    {
+        shape_choice = Menu_shapes();
+        system("clear");
+        switch (shape_choice) {
+            case SHAPE_CIRCLE: {
+                Circle_edit_universe();
+                break;
+            }//FIN CERCLE
+
+            case OUT: {
+                return;
+            }//SORTIE
+
+            default:
+                Auto_write(BRIGHT_RED"\nCette forme n’est pas encore disponible.\n", 25000);
+                sleep(1);
+            break;
+        }
+    }
     
-    
-    // Destroy_circle(circle);
-    // Destroy_style(style);
+   
 }
 
 int main(void) {
@@ -162,9 +180,6 @@ int main(void) {
     system("clear");
 
     int first_menu_choice = 0;
-    int shape_choice = 0;
-    
-
     while (1) {
         first_menu_choice = First_menu();
 
@@ -173,20 +188,7 @@ int main(void) {
             // CREATION DE FORMES
             // -----------------------------------------------
             case CREER: {
-                shape_choice = Menu_shapes();
-                system("clear");
-                switch (shape_choice) {
-                    case SHAPE_CIRCLE: {
-                       
-                        Circle_edit_universe();
-                        break;
-                    }//FIN CERCLE
-
-                    default:
-                        Auto_write(BRIGHT_RED"\nCette forme n’est pas encore disponible.\n", 25000);
-                        sleep(1);
-                        break;
-                }
+                Create_bloc();
             break;
             }
 

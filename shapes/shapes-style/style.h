@@ -5,13 +5,12 @@
 #include "../common-fonctions/fonctions.h"
 
 typedef struct StyleStruct {
-    int stroke_width, translate_x, translate_y, rotation, rotation_cx, rotation_cy, scale_x, scale_y;
-    char* stroke;
-    char* fill;
+    int stroke_width, translate_x, translate_y, rotation, rotation_cx, rotation_cy, scale_x, scale_y, Rs, Gs, Bs, Rf, Gf, Bf;
+    float As, Af;
 }Style;
 
 typedef enum BlocStyleUnion{
-    FILL,
+    FILL = 1,
     STROKE,
     S_WIDTH,
     ROTATE,

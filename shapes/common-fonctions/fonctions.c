@@ -129,30 +129,128 @@ void Drain_buffer() {
 
 
 
-int Int_recup_verify_with_padding(const char* prompt, int max_value, int min_value) { //Juste pour être sûr que mon prompt ne sera pas modifié
+// int Int_recup_verify_with_padding(const char* prompt, int max_value, int min_value) { //Juste pour être sûr que mon prompt ne sera pas modifié
+//     int scanf_return = 0;
+//     int a_int = 0;
+
+//     do{
+
+//         printf("%s", prompt);
+//         Ignore_enter_until_other_key();
+//         scanf_return = scanf("%d", &a_int);
+
+//         if(scanf_return != 1){
+//             Drain_buffer();
+//             Print_in_red("Entrée invalide !");
+//             fflush(stdout);
+//             sleep(2);
+//             Delete_two_lines();
+//         }
+
+//     }while((scanf_return != 1) && ((a_int < min_value) || (a_int > max_value)));
+//     Drain_buffer();
+
+//     return a_int;   
+
+// }
+
+float Float_recup_verify_with_padding(const char *prompt, float min_value, float max_value) {
+    float a_float = 0.0f;
     int scanf_return = 0;
-    int a_int = 0;
+    char buffer[64]; // Lecture maximale de 63 caractères + '\0'
 
-    do{
-
+    do {
         printf("%s", prompt);
-        Ignore_enter_until_other_key();
-        scanf_return = scanf("%d", &a_int);
+        fflush(stdout);
 
-        if(scanf_return != 1){
-            Drain_buffer();
+        if (!fgets(buffer, sizeof(buffer), stdin)) {
+            Print_in_red("Erreur de lecture !");
+            fflush(stdout);
+            sleep(2);
+            Delete_two_lines();
+            continue;
+        }
+
+        // Si entrée vide (juste ENTER)
+        if (buffer[0] == '\n' || buffer[0] == '\r') {
+            Delete_two_lines();
+            fflush(stdout);
+            continue;
+        }
+
+        // Conversion vers float
+        scanf_return = sscanf(buffer, "%f", &a_float);
+
+        // Vérifie la validité et la plage
+        if (scanf_return != 1) {
             Print_in_red("Entrée invalide !");
             fflush(stdout);
             sleep(2);
             Delete_two_lines();
+            continue;
         }
 
-    }while((scanf_return != 1) && ((a_int < min_value) || (a_int > max_value)));
-    Drain_buffer();
+        if (a_float < min_value || a_float > max_value) {
+            Print_in_red("Valeur hors limites !");
+            fflush(stdout);
+            sleep(2);
+            Delete_two_lines();
+            scanf_return = 0; // force la boucle à recommencer
+        }
 
-    return a_int;   
+    } while (scanf_return != 1);
 
+    return a_float;
 }
+
+
+int Int_recup_verify_with_padding(const char *prompt, int min_value, int max_value) {
+    int a_int = 0;
+    int scanf_return = 0;
+    char buffer[64]; // Lecture maximale de 63 caractères + '\0'
+
+    do {
+        printf("%s", prompt);
+        fflush(stdout);
+
+        if (!fgets(buffer, sizeof(buffer), stdin)) {
+            Print_in_red("Erreur de lecture !");
+            fflush(stdout);
+            sleep(1);
+            Delete_two_lines();
+            continue;
+        }
+
+        // Si l’utilisateur appuie juste sur "Entrée"
+        if (buffer[0] == '\n' || buffer[0] == '\r') {
+            Delete_two_lines();
+            continue;
+        }
+
+        scanf_return = sscanf(buffer, "%d", &a_int);
+
+        if (scanf_return != 1) {
+            Print_in_red("Entrée invalide !");
+            fflush(stdout);
+            sleep(1);
+            Delete_two_lines();
+            continue;
+        }
+
+        // Vérification de la plage
+        if (a_int < min_value || a_int > max_value) {
+            Print_in_red("Entrée Invalide !");
+            fflush(stdout);
+            sleep(1);
+            Delete_two_lines();
+            scanf_return = 0; // force la répétition
+        }
+
+    } while (scanf_return != 1);
+
+    return a_int;
+}
+
 
 int Int_recup_verify(const char *prompt) {
     int a_int = 0;
