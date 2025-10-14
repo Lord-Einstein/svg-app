@@ -64,4 +64,6 @@ Circle* Create_circle(int cx, int cy, unsigned int rx);
 */
 int Does_circle_exist(Circle* circle);
 
+void Modify_circle(Circle* circle);
+
 #endif

@@ -63,7 +63,7 @@ void Destroy_style(Style* style){
 }
 
 int Style_menu() {
-    printf("\r"BOLD_WHITE_TEXT""UNDERLINE_WHITE_TEXT" MENU DE STYLES "RESET_STYLE BOLD_WHITE_TEXT"\n\n"RESET_STYLE);
+    printf("\r\n"BOLD_WHITE_TEXT""UNDERLINE_WHITE_TEXT" MENU DE STYLES "RESET_STYLE BOLD_WHITE_TEXT"\n\n"RESET_STYLE);
     printf("1) Préciser une couleur de fond \n2) Préciser une couleur de contour\n3) Définir l'épaisseur du contour \n4) Appliquer une rotation\n5) Appliquer une mise à échelle\n6) Définir un déplacement \n\n"); 
 
     return Int_recup_verify("Choisissez le paramètre de style à ajouter : ");
@@ -159,6 +159,7 @@ char* Color_menu() {
 void Recup_style_data(Style* style){
     if(!Does_style_exist(style)) return; 
 
+    system("clear");
     printf("Souhaitez vous lire la documentation sur le 'Style' des formes SVG ? \n");
     printf("Tapez une touche avant la fin du chrono pour skip :  ");
     Chrono(5);
@@ -171,6 +172,8 @@ void Recup_style_data(Style* style){
 
     do
     {
+        system("clear");
+        Display_style(style);
         choice = Style_menu() - 1;
 
         switch (choice)
@@ -183,18 +186,26 @@ void Recup_style_data(Style* style){
         break;
 
         case S_WIDTH:
+            system("clear");
+            printf(CYAN"EDITION DE STYLE\n\n"RESET_STYLE);
             style->stroke_width = Int_recup_verify("Entrez la valeur souhaitée pour l'épaisseur des contours : ");
         break;
         case ROTATE:
+            system("clear");
+            printf(CYAN"EDITION DE STYLE\n\n"RESET_STYLE);
             style->rotation = Int_recup_verify("Entrez l'angle de rotation : ");
             style->rotation_cx = Int_recup_verify("Entrez la référence de rotation sur X : ");
             style->rotation_cy = Int_recup_verify("Entrez la référence de rotation sur Y : ");
         break;
         case SCALE:
+            system("clear");
+            printf(CYAN"EDITION DE STYLE\n\n"RESET_STYLE);
             style->scale_x = Int_recup_verify("Entrez les paramètres d'échelle sur X : ");
             style->scale_y = Int_recup_verify("Entrez les paramètres d'échelle sur Y : ");
         break;
         case TRANSLATE:
+            system("clear");
+            printf(CYAN"EDITION DE STYLE\n\n"RESET_STYLE);
             style->translate_x = Int_recup_verify("Entrez les paramètres de déplacement sur X : ");
             style->translate_y = Int_recup_verify("Entrez les paramètres de déplacement sur Y : ");
         break;
@@ -205,20 +216,21 @@ void Recup_style_data(Style* style){
         
         }
 
-        // system("clear");
-        printf("\n\nSouhaitez vous continuer de styliser votre forme ?");
-        printf("\nTapez une touche avant la fin du chrono pour skip :  ");
-        breaker = Chrono_assassin(5);
         system("clear");
+        printf("\n\nSouhaitez vous continuer de styliser votre forme ?");
+        printf("\nTapez une touche avant la fin du chrono pour continuer :  ");
+        breaker = Chrono_assassin(5);
 
-    } while (breaker);
+    } while (!breaker);
+
+    system("clear");
     
 }
 
 void Display_style(Style* style ) {
     if(!Does_style_exist(style)) return;
 
-    system("clear");
+    printf("\n");
     printf("\r"BOLD_WHITE_TEXT""UNDERLINE_WHITE_TEXT" STYLE "RESET_STYLE BOLD_WHITE_TEXT"\n\n"RESET_STYLE);
     printf("Couleur de fond : %s\n\n", style->fill);
 

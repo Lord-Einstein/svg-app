@@ -154,7 +154,7 @@ void Display_group(Group* group) {
 
     printf("\n");
     printf(CYAN BOLD_WHITE_TEXT"╭────────────────────────────────────────────╮\n"RESET_STYLE);
-    printf(BOLD_WHITE_TEXT CYAN"   Affichage du groupe : "RESET_STYLE BOLD_WHITE_TEXT"%s\n"RESET_STYLE, group->name);
+    printf("   Affichage du groupe : "RESET_STYLE BOLD_WHITE_TEXT CYAN"%s\n"RESET_STYLE, group->name);
     printf(CYAN BOLD_WHITE_TEXT"╰────────────────────────────────────────────╯\n"RESET_STYLE);
 
     GroupNode* node = group->start;
@@ -171,7 +171,7 @@ void Display_group(Group* group) {
         node = node->next;
     }
 
-    printf(CYAN"\n╰────────────────────────────────────────────╯ END [ %s ]\n\n"RESET_STYLE, group->name);
+    printf("\n────────────────"BOLD_WHITE_TEXT CYAN" END [ %s ] "RESET_STYLE"───────────────\n\n", group->name);
 }
 
 
@@ -198,7 +198,7 @@ void Recup_group_name(Group* group) {
     group->name[i] = '\0';
 
     if (group->name[0] == '\0') {
-        // Nom par défaut si vide
+        // Nom par défau
         group->name[0] = 'G';
         group->name[1] = 'r';
         group->name[2] = 'o';
@@ -268,12 +268,12 @@ void Recup_group_data(Group* group) {
 }
 
 
-int main(void) {
+// int main(void) {
 
-    Group* group = Create_new_group();
-    Recup_group_data(group);
-    Display_group(group);
-    Destroy_group(group);
+//     Group* group = Create_new_group();
+//     Recup_group_data(group);
+//     Display_group(group);
+//     Destroy_group(group);
 
-    return EXIT_SUCCESS;
- }
+//     return EXIT_SUCCESS;
+//  }

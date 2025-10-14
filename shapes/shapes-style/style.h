@@ -32,4 +32,6 @@ void Recup_style_data(Style* style);
 
 void Display_style(Style* style );
 
+void Destroy_style(Style* style);
+
 #endif

@@ -15,5 +15,6 @@
 */
 int kbhit(void);
 
+void Ignore_enter_until_other_key(void);
 
 #endif

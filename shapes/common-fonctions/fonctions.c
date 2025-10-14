@@ -127,29 +127,7 @@ void Drain_buffer() {
 
 // FONCTIONS ---------------------
 
-int Int_recup_verify(const char* prompt){ //Juste pour être sûr que mon prompt ne sera pas modifié
-    int scanf_return = 0;
-    int a_int = 0;
 
-    do{
-
-        printf("%s", prompt);
-        scanf_return = scanf("%d", &a_int);
-
-        if(scanf_return != 1){
-            Drain_buffer();
-            Print_in_red("Entrée invalide !");
-            fflush(stdout);
-            sleep(2);
-            Delete_two_lines();
-        }
-
-    }while(scanf_return != 1);
-    Drain_buffer();
-
-    return a_int;   
-
-}
 
 int Int_recup_verify_with_padding(const char* prompt, int max_value, int min_value) { //Juste pour être sûr que mon prompt ne sera pas modifié
     int scanf_return = 0;
@@ -158,6 +136,7 @@ int Int_recup_verify_with_padding(const char* prompt, int max_value, int min_val
     do{
 
         printf("%s", prompt);
+        Ignore_enter_until_other_key();
         scanf_return = scanf("%d", &a_int);
 
         if(scanf_return != 1){
@@ -175,27 +154,113 @@ int Int_recup_verify_with_padding(const char* prompt, int max_value, int min_val
 
 }
 
-unsigned int Unsigned_int_recup_verify(const char* prompt) { //Juste pour être sûr que mon prompt ne sera pas modifié
-    int scanf_return = 0, a_int = 0;
-    unsigned int a_unsigned_int = 0;
+int Int_recup_verify(const char *prompt) {
+    int a_int = 0;
+    int scanf_return = 0;
+    char buffer[64]; // Lecture maximale de 63 caractères + celui ci '\0'
 
-    do{
-
+    do {
         printf("%s", prompt);
-        scanf_return = scanf("%d", &a_int);
+        fflush(stdout);
 
-        if((scanf_return != 1)  || (a_int < 0)){
-            Drain_buffer();
+        if (!fgets(buffer, sizeof(buffer), stdin)) {
+            Print_in_red("Erreur de lecture !");
+            fflush(stdout);
+            sleep(2);
+            Delete_two_lines();
+            continue;
+        }
+
+        
+        if (buffer[0] == '\n' || buffer[0] == '\r') {
+            Delete_two_lines();
+            fflush(stdout);
+            continue;
+        }
+
+        
+        scanf_return = sscanf(buffer, "%d", &a_int);
+
+        
+        if (scanf_return != 1) {
             Print_in_red("Entrée invalide !");
             fflush(stdout);
             sleep(2);
             Delete_two_lines();
         }
 
-    }while((scanf_return != 1) || (a_int < 0));
+    } while (scanf_return != 1);
+
+    return a_int;
+}
+
+
+unsigned int Unsigned_int_recup_verify(const char *prompt) {
+    int a_int = -1;
+    unsigned int a_unsigned_int = 0;
+    int scanf_return = 0;
+    char buffer[64];
+
+    do {
+        printf("%s", prompt);
+        fflush(stdout);
+
+        // Lecture complète de la ligne
+        if (!fgets(buffer, sizeof(buffer), stdin)) {
+            Print_in_red("Erreur de lecture !");
+            fflush(stdout);
+            sleep(2);
+            Delete_two_lines();
+            continue;
+        }
+
+        
+        if (buffer[0] == '\n' || buffer[0] == '\r') {
+            Delete_two_lines();
+            fflush(stdout);
+            continue;
+        }
+
+        
+        scanf_return = sscanf(buffer, "%d", &a_int);
+
+        if ((scanf_return != 1) || (a_int < 0)) {
+            Print_in_red("Entrée invalide !");
+            fflush(stdout);
+            sleep(2);
+            Delete_two_lines();
+        }
+
+    } while ((scanf_return != 1) || (a_int < 0));
+
     a_unsigned_int = (unsigned int)a_int;
-    Drain_buffer();
+    return a_unsigned_int;
+}
 
-    return a_unsigned_int;   
 
+void Auto_write(const char *text, unsigned int delay_microseconds) {
+    if (!text) return;
+
+    // Empêche la saisie utilisateur pendant l’animation
+    system("stty -echo -icanon");
+
+    for (int i = 0; text[i] != '\0'; i++) {
+        putchar(text[i]);
+        fflush(stdout);
+        usleep(delay_microseconds);
+    }
+
+    // Réactive la saisie clavier
+    system("stty echo icanon");
+}
+
+
+void Ignore_extra_enters(void) {
+    int c;
+
+    // Tant qu'il y a des '\n' ou '\r' dans le buffer, on les consomme
+    while ((c = getchar()) == '\n' || c == '\r');
+    
+    // Si on a lu un autre caractère (ex: 'D'), on le remet dans le flux
+    if (c != EOF) ungetc(c, stdin);
 }

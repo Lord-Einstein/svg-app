@@ -28,3 +28,24 @@ int kbhit(void) {
     return 0;
 }
 
+
+void Ignore_enter_until_other_key(void) {
+    struct termios oldt, newt;
+    char c = 0;
+
+    // Sauvegarde des paramètres du terminal
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+
+    // Passage en mode non-canonique (lecture immédiate, sans écho)
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
+    // Boucle jusqu’à une touche autre que Enter
+    do {
+        read(STDIN_FILENO, &c, 1);
+    } while (c == '\n' || c == '\r');
+
+    // Restauration du mode normal
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+}

@@ -234,7 +234,11 @@ unsigned int Unsigned_int_recup_verify(const char* prompt);
 */
 int Chrono_assassin(int chrono);
 
-int Chrono_assassine(int chrono);
+// int Chrono_assassine(int chrono);
+
+void Ignore_extra_enters(void);
+
+void Auto_write(const char *text, unsigned int delay_microseconds);
 
 
 #endif
