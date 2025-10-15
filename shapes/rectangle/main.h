@@ -2,6 +2,8 @@
 #define RECTANGLE__MAIN_H
 
 #include "../common-fonctions/fonctions.h"
+#include "../shapes-style/style.h"
+#include "../../svg/main.h"
 
 //Noms de structures, d'enums, d'unions :: PascalCase
 //Noms de varaibles :: snake_case
@@ -65,5 +67,11 @@ int Does_rect_exist(Rect* rect);
  en manipulant l'allocation mémoire. Il faut donc garder à l'esprit que le rectangle qui reçoit le retour de cette fonction doit être obligatoirement 'free' à la fin.
 */
 Rect* Create_rect(int x, int y, unsigned int height, unsigned int width, unsigned int round);
+
+int Modify_rect_menu();
+
+void Modify_rect(Rect* rect);
+
+void Export_rect(Rect* rect, Style* style);
 
 #endif

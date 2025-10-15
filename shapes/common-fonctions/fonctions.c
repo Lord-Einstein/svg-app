@@ -391,7 +391,7 @@ void Progress_bar_animation(int duration_sec) {
     fflush(stdout);
 
     for (i = 0; i <= total_steps; i++) {
-        printf("\r  [");
+        printf("\r[");
         for (j = 0; j < total_steps; j++) {
             if (j < i)
                 printf(BRIGHT_GREEN"█"RESET_STYLE);
