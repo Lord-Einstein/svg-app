@@ -385,7 +385,7 @@ void Progress_bar_animation(int duration_sec) {
     int delay = total_ms / total_steps;
     int i, j;
 
-    printf("  [");
+    printf("[");
     for (i = 0; i < total_steps; i++) printf(" ");
     printf("]");
     fflush(stdout);

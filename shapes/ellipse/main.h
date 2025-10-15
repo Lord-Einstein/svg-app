@@ -68,4 +68,10 @@ Ellipse* Create_ellipse(int cx, int cy, unsigned int rx, unsigned int ry);
 */
 int Does_ellipse_exist(Ellipse* ellipse);
 
+int Modify_ellipse_menu();
+
+void Modify_ellipse(Ellipse* ellipse);
+
+void Export_ellipse(Ellipse* ellipse, Style* style);
+
 #endif

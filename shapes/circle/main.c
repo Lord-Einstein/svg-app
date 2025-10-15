@@ -88,9 +88,10 @@ int Modify_circle_menu() {
 
     printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier la position sur X\n");
     printf(BRIGHT_CYAN"  2)"RESET_STYLE" Modifier la position sur Y\n");
-    printf(BRIGHT_CYAN"  3)"RESET_STYLE" Modifier la taille du rayon\n\n");
+    printf(BRIGHT_CYAN"  3)"RESET_STYLE" Modifier la taille du rayon\n");
+    printf(BRIGHT_CYAN"  4)"RESET_STYLE" Annuler\n\n");
 
-    choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Choisissez la valeur à modifier : "RESET_STYLE,1,3);
+    choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Choisissez la valeur à modifier : "RESET_STYLE,1,4);
     Delete_two_lines();
     return choice;
 }
@@ -114,6 +115,8 @@ void Modify_circle(Circle* circle) {
             case 3:
                 circle->rx = Unsigned_int_recup_verify(BRIGHT_GREEN"Nouveau rayon du cercle (px) : "RESET_STYLE);
                 break;
+            case 4:
+                return;
             default:
                 Print_in_red("Entrée invalide !");
                 break;
@@ -133,29 +136,6 @@ void Modify_circle(Circle* circle) {
 
     } while (!breaker);
 }
-
-// void Export_circle(Circle* circle) {
-//     if (!Does_circle_exist(circle)) return;
-
-//     char* name;
-//     char* file_name;
-
-//     system("clear");
-
-//     printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-//     printf(BRIGHT_CYAN"│     EXPORTATION EN SVG       │\n"RESET_STYLE);
-//     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
-
-
-//     printf("Entrez le nom du fichier à exporter : ");
-//     scanf("%s", name);
-//     snprintf(file_name, "%s.svg" , name);
-
-//     FILE* write_file = fopen(file_name, "w");
-
-//     if(fprintf(write_file, ""));
-
-// }
 
 
 void Export_circle(Circle* circle, Style* style) { 
@@ -241,14 +221,6 @@ void Export_circle(Circle* circle, Style* style) {
     sleep(3);
     system("clear");
 
-    // printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-    // printf(BRIGHT_CYAN"│      EXPORTATION TERMINÉE    │\n"RESET_STYLE);
-    // printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
-    
-    // printf(BRIGHT_GREEN"Le fichier '%s' a été exporté avec succès.\n"RESET_STYLE, name);
-    // sleep(3);
-
-    // system("clear");
 
     printf(BRIGHT_CYAN"\n╭────────────────────────────────╮\n"RESET_STYLE);
     printf(BRIGHT_CYAN"│      OUVRIR LE FICHIER ?       │\n"RESET_STYLE);
@@ -262,8 +234,9 @@ void Export_circle(Circle* circle, Style* style) {
         system(command);
     }
 
-    system("clear");
     
-    Auto_write("\n\n"BRIGHT_GREEN" Retour au menu précédent...\n\n"RESET_STYLE, 25000);
+    Auto_write("\n\n"BRIGHT_YELLOW"Retour au menu précédent...\n\n"RESET_STYLE, 25000);
+    
+    system("clear");
     Destroy_svg(svg);
 }

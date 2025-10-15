@@ -86,10 +86,10 @@ void Modify_svg(Svg* svg) {
 
         switch (value) {
             case 1:
-                svg->width = Unsigned_int_recup_verify(BRIGHT_GREEN"Nouvelle largeur (en %%): "RESET_STYLE);
+                svg->width = Unsigned_int_recup_verify(BRIGHT_GREEN"Nouvelle largeur (en %): "RESET_STYLE);
                 break;
             case 2:
-                svg->height = Unsigned_int_recup_verify(BRIGHT_GREEN"Nouvelle hauteur (en %%): "RESET_STYLE);
+                svg->height = Unsigned_int_recup_verify(BRIGHT_GREEN"Nouvelle hauteur (en %): "RESET_STYLE);
                 break;
             case 3:
                 svg->view_box->minx = Int_recup_verify(BRIGHT_GREEN"Nouvelle valeur minX : "RESET_STYLE);
