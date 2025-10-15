@@ -81,6 +81,7 @@ void Circle_edit_universe() {
     Style* style = Create_style();
 
     int second_choice = 0;
+    system("clear");
     Recup_circle_data(circle);
    
     while (1)
@@ -99,15 +100,16 @@ void Circle_edit_universe() {
                 break;
 
             case EXPORTER:
-                Auto_write(BRIGHT_GREEN"\nExport de la forme en cours...\n"RESET_STYLE, 30000);
+                Auto_write(BRIGHT_GREEN"\nLancement de l'exportation...\n"RESET_STYLE, 30000);
                 sleep(1);
+                Export_circle(circle, style);
                 break;
 
             case SUPPRIMER:
                 Destroy_circle(circle);
                 Destroy_style(style);
                 Auto_write(BRIGHT_RED"\nForme supprimée."RESET_STYLE, 30000);
-                Auto_write(BRIGHT_YELLOW"\nRetour au menu principal...\n"RESET_STYLE, 30000);
+                Auto_write(BRIGHT_YELLOW"\n\nRetour au menu principal...\n"RESET_STYLE, 30000);
                 sleep(1);
                 return;
 
@@ -122,7 +124,7 @@ void Create_bloc() {
     while (1)
     {
         shape_choice = Menu_shapes();
-        system("clear");
+        // system("clear");
         switch (shape_choice) {
             case SHAPE_CIRCLE:
                 Circle_edit_universe();
@@ -143,7 +145,7 @@ void Create_bloc() {
 
 int main(void) {
     system("clear");
-    Auto_write(BRIGHT_CYAN"\nBienvenue dans l'éditeur en CLI NOAH-SVG.\n"RESET_STYLE, 10000);
+    Auto_write(BRIGHT_CYAN"\nBienvenue dans l'éditeur en CLI NOAH-SVG.\n"RESET_STYLE, 35000);
     Auto_write("Chargement de l’environnement...", 40000);
     sleep(1);
     system("clear");
@@ -163,7 +165,7 @@ int main(void) {
                 break;
 
             case QUITTER_FIRST:
-                Auto_write(BRIGHT_RED"\nFermeture du programme...\n"RESET_STYLE, 30000);
+                Auto_write(BRIGHT_RED"\nFermeture du programme...\n\n"RESET_STYLE, 30000);
                 sleep(1);
                 return 0;
 

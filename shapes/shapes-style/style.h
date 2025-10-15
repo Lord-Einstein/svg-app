@@ -15,7 +15,8 @@ typedef enum BlocStyleUnion{
     S_WIDTH,
     ROTATE,
     SCALE,
-    TRANSLATE
+    TRANSLATE, //ADD EXIT ?
+    EXIT
 }BlocStyle;
 
 

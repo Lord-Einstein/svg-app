@@ -109,7 +109,7 @@ int Chrono_assassin(int chrono) {
         sleep(1);
 
         if (kbhit()) {
-            getchar(); // vide le reste du buffer si nécessaire
+            getchar(); // vide le reste du buffer juste au cas où....
             return 0; 
         }
 
@@ -360,4 +360,50 @@ void Ignore_extra_enters(void) {
     
     // Si on a lu un autre caractère (ex: 'D'), on le remet dans le flux
     if (c != EOF) ungetc(c, stdin);
+}
+
+
+
+// Petite pause (millisecondes)
+void msleep(int ms) {
+    struct timespec ts;
+    ts.tv_sec = ms / 1000;
+    ts.tv_nsec = (ms % 1000) * 1000000;
+    nanosleep(&ts, NULL);
+}
+
+
+void Progress_bar_animation(int duration_sec) {
+    system("clear");
+    printf("\n");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│      EXPORTATION EN COURS    │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    int total_steps = 30;            // largeur de la barre
+    int total_ms = duration_sec * 1000;
+    int delay = total_ms / total_steps;
+    int i, j;
+
+    printf("  [");
+    for (i = 0; i < total_steps; i++) printf(" ");
+    printf("]");
+    fflush(stdout);
+
+    for (i = 0; i <= total_steps; i++) {
+        printf("\r  [");
+        for (j = 0; j < total_steps; j++) {
+            if (j < i)
+                printf(BRIGHT_GREEN"█"RESET_STYLE);
+            else
+                printf(" ");
+        }
+        printf("]");
+        int percent = (i * 100) / total_steps;
+        printf(" %3d%%", percent);
+        fflush(stdout);
+        msleep(delay);
+    }
+
+    Auto_write("\n\n"BRIGHT_GREEN" Exportation terminée avec succès !\n\n"RESET_STYLE, 35000);
 }

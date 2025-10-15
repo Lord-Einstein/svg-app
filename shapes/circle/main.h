@@ -2,6 +2,8 @@
 #define CIRCLE__MAIN_H
 
 #include "../common-fonctions/fonctions.h"
+#include "../shapes-style/style.h"
+#include "../../svg/main.h"
 
 //Noms de structures, d'enums, d'unions :: PascalCase
 //Noms de variables :: snake_case
@@ -66,6 +68,8 @@ int Does_circle_exist(Circle* circle);
 
 void Modify_circle(Circle* circle);
 int Modify_circle_menu();
-void Export_circle(Circle* circle);
+
+
+void Export_circle(Circle* circle, Style* style);
 
 #endif

@@ -1,9 +1,13 @@
 #ifndef COMMON_FONCTIONS__FONCTIONS_H
 #define COMMON_FONCTIONS__FONCTIONS_H
 
+#define _XOPEN_SOURCE 700
+#define _POSIX_C_SOURCE 199309L
+#include <time.h>
+#include <unistd.h>
+
 #include "../../other/kbhit.h"
 #include "../../common-h.h"
-
 //DEFINE DE MISE EN FORME
 
 //Petite explication : Pour les formats de style en console, on utilise la notation ASCII \033[code_style(gras);code_couleur(bleu...);code_bg_color(white..)ET un 'm' après lesconfigurations puis le texte....
@@ -241,6 +245,10 @@ void Ignore_extra_enters(void);
 void Auto_write(const char *text, unsigned int delay_microseconds);
 
 float Float_recup_verify_with_padding(const char *prompt, float min_value, float max_value);
+
+void Progress_bar_animation(int duration_sec);
+
+void msleep(int ms);
 
 
 #endif

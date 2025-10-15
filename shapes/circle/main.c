@@ -137,6 +137,133 @@ void Modify_circle(Circle* circle) {
 // void Export_circle(Circle* circle) {
 //     if (!Does_circle_exist(circle)) return;
 
+//     char* name;
+//     char* file_name;
 
+//     system("clear");
+
+//     printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+//     printf(BRIGHT_CYAN"│     EXPORTATION EN SVG       │\n"RESET_STYLE);
+//     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+
+//     printf("Entrez le nom du fichier à exporter : ");
+//     scanf("%s", name);
+//     snprintf(file_name, "%s.svg" , name);
+
+//     FILE* write_file = fopen(file_name, "w");
+
+//     if(fprintf(write_file, ""));
 
 // }
+
+
+void Export_circle(Circle* circle, Style* style) { 
+    if (!Does_circle_exist(circle)) return;
+    if (!Does_style_exist(style)) return;
+
+    int breaker = 0;
+    char name[40];
+    char file_name[70]; //La ref vers mon répertoire de génération prends envirion 27 déjà ... 
+    char command[100];
+
+    system("clear");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│     EXPORTATION EN SVG       │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    printf("Entrez le nom du fichier à exporter : ");
+    scanf("%39s", name);
+    snprintf(file_name, sizeof(file_name), "../Generated_Files/%s.svg", name); //C'est plus safe que sprintf vu qu'on peu préciser la limite directement avec la taille du char's chain à balancer. à ret'nir
+
+    Svg* svg = Create_new_svg();
+    if (!svg) { Print_in_red("SVG Not Found.\n"); return; }
+
+
+    system("clear");
+    Display_svg(svg);
+
+    Drain_buffer();
+
+    printf(BRIGHT_CYAN"\n╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│     FAIRE DES MODIFS ?       │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+    printf("Souhaitez vous utiliser les paramètres d'SVG par défaut ? \n");
+    printf(BRIGHT_GREEN"Attendez la fin du chrono pour modifier ou appuyer une touche avant pour skip :  "RESET_STYLE);
+
+    breaker = Chrono_assassin(5);
+    system("clear");
+    
+    if(breaker) {
+        Modify_svg(svg);
+    }
+
+    system("clear");
+
+    FILE* write_file = fopen(file_name, "w");
+    if (!write_file) {
+        Print_in_red("Impossible de créer le fichier.\n");
+        Destroy_svg(svg);
+        return;
+    }
+
+    fprintf(write_file,
+        //Juste l'enveloppe avec les params du svg lui même
+        "<svg xmlns=\"%s\" width=\"%u%%\" height=\"%u%%\" viewBox=\"%d %d %u %u\">\n",
+        svg->xlmns, svg->width, svg->height, svg->view_box->minx, svg->view_box->miny, svg->view_box->width, svg->view_box->height );
+
+    
+    fprintf(write_file, "  <circle cx=\"%d\" cy=\"%d\" r=\"%d\" fill=\"rgba(%d,%d,%d,%.2f)\" stroke=\"rgba(%d,%d,%d,%.2f)\" stroke-width=\"%d\"",
+        circle->cx, circle->cy, circle->rx, style->Rf, style->Gf, style->Bf, style->Af, style->Rs, style->Gs, style->Bs, style->As, style->stroke_width );
+
+
+    int transform_params = ( style->translate_x || style->translate_y || style->rotation || (style->scale_x != 1) || (style->scale_y != 1) );
+    if (transform_params){
+        fprintf(write_file, " transform=\"");
+
+        if (style->translate_x || style->translate_y)
+            fprintf(write_file, "translate(%d,%d) ", style->translate_x, style->translate_y);
+
+        if (style->rotation)
+            fprintf(write_file, "rotate(%d,%d,%d) ", style->rotation, style->rotation_cx, style->rotation_cy);
+
+        if (style->scale_x != 1 || style->scale_y != 1)
+            fprintf(write_file, "scale(%d,%d) ", style->scale_x, style->scale_y);
+
+        fprintf(write_file, "\"");
+    }
+
+    //Ah fallait fermer tout cà !
+    fprintf(write_file, " />\n</svg>\n");
+    fclose(write_file);
+
+    Progress_bar_animation(8);
+    sleep(3);
+    system("clear");
+
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│      EXPORTATION TERMINÉE    │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+    
+    printf(BRIGHT_GREEN"Le fichier '%s' a été exporté avec succès.\n"RESET_STYLE, name);
+    sleep(3);
+
+    system("clear");
+
+    printf(BRIGHT_CYAN"\n╭────────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│      OUVRIR LE FICHIER ?       │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰────────────────────────────────╯\n\n"RESET_STYLE);
+    printf("Souhaitez vous ouvrir le fichier pour visualiser votre forme ? \n");
+    printf(BRIGHT_GREEN"Attendez la fin du chrono pour l'ouvrir ou appuyer une touche avant pour skip :  "RESET_STYLE);
+
+    breaker = Chrono_assassin(5);
+    if(breaker) {
+        snprintf(command, sizeof(command) ,"explorer.exe \"..\\Generated_Files\\%s.svg\"", name); //Heureusement qu'il y'a le cractère d'échapemment !!
+        system(command);
+    }
+
+    system("clear");
+    
+    Auto_write("\n\n"BRIGHT_GREEN" Retour au menu précédent...\n\n"RESET_STYLE, 25000);
+    Destroy_svg(svg);
+}

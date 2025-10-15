@@ -74,9 +74,10 @@ int Style_menu() {
     printf(BRIGHT_CYAN"  3)"RESET_STYLE" Épaisseur du contour\n");
     printf(BRIGHT_CYAN"  4)"RESET_STYLE" Rotation\n");
     printf(BRIGHT_CYAN"  5)"RESET_STYLE" Mise à l’échelle\n");
-    printf(BRIGHT_CYAN"  6)"RESET_STYLE" Déplacement\n\n");
+    printf(BRIGHT_CYAN"  6)"RESET_STYLE" Déplacement\n");
+    printf(BRIGHT_CYAN"  7)"RESET_STYLE" Quitter\n\n");
 
-    return Int_recup_verify_with_padding("Choisissez un paramètre à modifier : ",1,6);
+    return Int_recup_verify_with_padding("Choisissez un paramètre à modifier : ",1,7);
 }
 
 
@@ -156,6 +157,8 @@ void Recup_style_data(Style* style){
                 style->translate_x = Int_recup_verify("Déplacement sur X : "RESET_STYLE);
                 style->translate_y = Int_recup_verify("Déplacement sur Y : "RESET_STYLE);
                 break;
+            case EXIT:
+               return;
             default:
                 Print_in_bright_red("Invalide !");
             break;
