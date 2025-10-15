@@ -193,7 +193,7 @@ void Export_circle(Circle* circle, Style* style) {
 
     breaker = Chrono_assassin(5);
     system("clear");
-    
+
     if(breaker) {
         Modify_svg(svg);
     }
@@ -241,14 +241,14 @@ void Export_circle(Circle* circle, Style* style) {
     sleep(3);
     system("clear");
 
-    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-    printf(BRIGHT_CYAN"│      EXPORTATION TERMINÉE    │\n"RESET_STYLE);
-    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+    // printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    // printf(BRIGHT_CYAN"│      EXPORTATION TERMINÉE    │\n"RESET_STYLE);
+    // printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
     
-    printf(BRIGHT_GREEN"Le fichier '%s' a été exporté avec succès.\n"RESET_STYLE, name);
-    sleep(3);
+    // printf(BRIGHT_GREEN"Le fichier '%s' a été exporté avec succès.\n"RESET_STYLE, name);
+    // sleep(3);
 
-    system("clear");
+    // system("clear");
 
     printf(BRIGHT_CYAN"\n╭────────────────────────────────╮\n"RESET_STYLE);
     printf(BRIGHT_CYAN"│      OUVRIR LE FICHIER ?       │\n"RESET_STYLE);
