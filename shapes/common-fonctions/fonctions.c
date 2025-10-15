@@ -405,5 +405,5 @@ void Progress_bar_animation(int duration_sec) {
         msleep(delay);
     }
 
-    Auto_write("\n\n"BRIGHT_GREEN" Exportation terminée avec succès !\n\n"RESET_STYLE, 35000);
+    Auto_write("\n\n"BRIGHT_GREEN"Exportation terminée avec succès !\n\n"RESET_STYLE, 35000);
 }

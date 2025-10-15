@@ -57,4 +57,10 @@ int Does_square_exist(Rect* square);
 */
 Rect* Create_square(int x, int y, unsigned int height, unsigned int round);
 
+int Modify_square_menu();
+
+void Modify_square(Rect* square);
+
+void Export_square(Rect* square, Style* style);
+
 #endif

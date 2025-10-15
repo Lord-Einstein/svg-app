@@ -16,7 +16,7 @@ void Infos_rect() {
     printf("  • "BOLD_WHITE_TEXT"y"RESET_STYLE" : Position Y du rectangle (entier)\n");
     printf("  • "BOLD_WHITE_TEXT"height"RESET_STYLE" : Longueur du rectangle (entier non signé)\n");
     printf("  • "BOLD_WHITE_TEXT"width"RESET_STYLE" : Largeur du rectangle (entier non signé)\n");
-    printf("Paramètre facultatif :\n");
+    printf("\nParamètre facultatif :\n");
     printf("  • "BOLD_WHITE_TEXT"round"RESET_STYLE" : Rayon de courbure pour des bords arrondis (entier non signé)\n\n");
 }
 
@@ -44,7 +44,7 @@ void Recup_rect_data(Rect* rect) {
     rect->height = Unsigned_int_recup_verify("Entrez la longueur de votre rectangle (px) : ");
     rect->width = Unsigned_int_recup_verify("Entrez la largeur de votre rectangle (px) : ");
 
-    printf("Souhaitez-vous ajouter des bords arrondis ?\n");
+    printf("\nSouhaitez-vous ajouter des bords arrondis ?\n");
     printf("Appuyez sur une touche avant la fin du chrono pour passer :  ");
     Chrono_without_clear(5);
     Delete_two_lines();
@@ -254,7 +254,7 @@ void Export_rect(Rect* rect, Style* style) {
         system(command);
     }
 
+    Auto_write("\n\n"BRIGHT_YELLOW"Retour au menu précédent...\n\n"RESET_STYLE, 25000);
     system("clear");
-    Auto_write("\n\n"BRIGHT_YELLOW" Retour au menu précédent...\n\n"RESET_STYLE, 25000);
     Destroy_svg(svg);
 }
