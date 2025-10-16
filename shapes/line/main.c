@@ -194,10 +194,11 @@ void Export_line(Line* line, Style* style) {
         svg->view_box->width, svg->view_box->height );
 
     fprintf(write_file,
-        "  <line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" stroke=\"rgba(%d,%d,%d,%.2f)\" stroke-width=\"%d\"",
+        "  <line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" stroke=\"rgba(%d,%d,%d,%.2f)\" stroke-width=\"%d\" fill=\"rgba(%d,%d,%d,%.2f)\" ",
         line->x1, line->y1, line->x2, line->y2,
-        style->Rs, style->Gs, style->Bs, style->As,
-        style->stroke_width );
+        style->Rs, style->Gs, style->Bs, style->As, style->stroke_width,
+        style->Rf, style->Gf, style->Bf, style->Af 
+    );
 
     int transform_params = ( style->translate_x || style->translate_y || style->rotation || (style->scale_x != 1) || (style->scale_y != 1) );
     if (transform_params) {
@@ -214,8 +215,8 @@ void Export_line(Line* line, Style* style) {
     fprintf(write_file, " />\n</svg>\n");
     fclose(write_file);
 
-    Progress_bar_animation(8);
-    sleep(3);
+    Progress_bar_animation(2);
+    sleep(1);
     system("clear");
 
     printf(BRIGHT_CYAN"\n╭────────────────────────────────╮\n"RESET_STYLE);

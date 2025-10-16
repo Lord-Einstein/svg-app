@@ -85,19 +85,6 @@ void Chrono_without_clear(int chrono) {
     }
 }
 
-// int Chrono_assassin(int chrono) {
-//     if(chrono > 9) chrono = 9;
-//     while(chrono >= 0 && !kbhit()){
-
-//         printf("\b%d", chrono);
-//         chrono--;
-//         sleep(1);
-
-//     }
-//     if(chrono < 0) return 1;
-//     return 0;
-// }
-
 int Chrono_assassin(int chrono) {
     if (chrono > 9) chrono = 9;
 
@@ -109,7 +96,7 @@ int Chrono_assassin(int chrono) {
         sleep(1);
 
         if (kbhit()) {
-            getchar(); // vide le reste du buffer juste au cas où....
+            getchar();
             return 0; 
         }
 
@@ -124,40 +111,10 @@ void Drain_buffer() {
 }
 
 
-
-// FONCTIONS ---------------------
-
-
-
-// int Int_recup_verify_with_padding(const char* prompt, int max_value, int min_value) { //Juste pour être sûr que mon prompt ne sera pas modifié
-//     int scanf_return = 0;
-//     int a_int = 0;
-
-//     do{
-
-//         printf("%s", prompt);
-//         Ignore_enter_until_other_key();
-//         scanf_return = scanf("%d", &a_int);
-
-//         if(scanf_return != 1){
-//             Drain_buffer();
-//             Print_in_red("Entrée invalide !");
-//             fflush(stdout);
-//             sleep(2);
-//             Delete_two_lines();
-//         }
-
-//     }while((scanf_return != 1) && ((a_int < min_value) || (a_int > max_value)));
-//     Drain_buffer();
-
-//     return a_int;   
-
-// }
-
 float Float_recup_verify_with_padding(const char *prompt, float min_value, float max_value) {
     float a_float = 0.0f;
     int scanf_return = 0;
-    char buffer[64]; // Lecture maximale de 63 caractères + '\0'
+    char buffer[64];
 
     do {
         printf("%s", prompt);
@@ -171,17 +128,14 @@ float Float_recup_verify_with_padding(const char *prompt, float min_value, float
             continue;
         }
 
-        // Si entrée vide (juste ENTER)
         if (buffer[0] == '\n' || buffer[0] == '\r') {
             Delete_two_lines();
             fflush(stdout);
             continue;
         }
 
-        // Conversion vers float
         scanf_return = sscanf(buffer, "%f", &a_float);
 
-        // Vérifie la validité et la plage
         if (scanf_return != 1) {
             Print_in_red("Entrée invalide !");
             fflush(stdout);
@@ -191,7 +145,7 @@ float Float_recup_verify_with_padding(const char *prompt, float min_value, float
         }
 
         if (a_float < min_value || a_float > max_value) {
-            Print_in_red("Valeur hors limites !");
+            Print_in_red("Hors limiteeeeeuuuuh !");
             fflush(stdout);
             sleep(2);
             Delete_two_lines();
@@ -405,5 +359,5 @@ void Progress_bar_animation(int duration_sec) {
         msleep(delay);
     }
 
-    Auto_write("\n\n"BRIGHT_GREEN"Exportation terminée avec succès !\n\n"RESET_STYLE, 35000);
+    Auto_write("\n\n"BRIGHT_GREEN"Exportation terminée avec succès !\n\n"RESET_STYLE, 30000);
 }

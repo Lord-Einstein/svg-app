@@ -2,6 +2,8 @@
 #define POLYLINE__MAIN_H
 
 #include "../common-fonctions/fonctions.h"
+#include "../shapes-style/style.h"
+#include "../../svg/main.h"
 
 //Noms de structures, d'enums, d'unions :: PascalCase
 //Noms de varaibles :: snake_case
@@ -101,5 +103,14 @@ LinkPoint* Create_new_point(int x, int y);
 */
 Head* Create_new_polyline();
 
+int Modify_polyline_menu();
+
+void Delete_point_by_index(Head* head, int index);
+
+void Modify_point(LinkPoint* point);
+
+void Modify_polyline(Head* head);
+
+void Export_polyline(Head* head, Style* style);
 
 #endif

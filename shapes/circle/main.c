@@ -217,8 +217,8 @@ void Export_circle(Circle* circle, Style* style) {
     fprintf(write_file, " />\n</svg>\n");
     fclose(write_file);
 
-    Progress_bar_animation(8);
-    sleep(3);
+    Progress_bar_animation(2);
+    sleep(1);
     system("clear");
 
 
