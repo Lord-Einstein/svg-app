@@ -342,6 +342,51 @@ void Polyline_edit_universe() {
     }
 }
 
+
+void Polygone_edit_universe() {
+    Head* head = Create_new_polyline();
+    Style* style = Create_style();
+
+    int second_choice = 0;
+    system("clear");
+    Recup_polygone_data(head);
+   
+    while (1)
+    {
+        system("clear");
+        Display_polygone(head);
+        Display_style(style);
+        second_choice = Second_menu();
+        switch (second_choice) {
+            case MODIFIER:
+                Modify_polygone(head);
+                break;
+
+            case STYLISER:
+                Recup_style_data(style);
+                break;
+
+            case EXPORTER:
+                Auto_write(BRIGHT_GREEN"\nLancement de l'exportation...\n"RESET_STYLE, 30000);
+                sleep(1);
+                Export_polygone(head, style);
+                break;
+
+            case SUPPRIMER:
+                Destroy_polyline(head);
+                Destroy_style(style);
+                Auto_write(BRIGHT_RED"\nForme supprimée."RESET_STYLE, 30000);
+                Auto_write(BRIGHT_YELLOW"\n\nRetour au menu principal...\n"RESET_STYLE, 30000);
+                sleep(1);
+                return;
+
+            default:
+                printf("INVALID ! Comment t'as fait pour atterir ici ?");
+            break;
+        }
+    }
+}
+
 void Create_bloc() {
     int shape_choice = 0;
     while (1)
@@ -367,6 +412,10 @@ void Create_bloc() {
 
             case SHAPE_LINE:
                 Line_edit_universe();
+            break;
+
+            case SHAPE_POLYGON:
+                Polygone_edit_universe();
             break;
 
             case SHAPE_POLYLINE:

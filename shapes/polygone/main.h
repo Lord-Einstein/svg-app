@@ -30,6 +30,10 @@ void Display_polygone(Head* head);
 */
 void Recup_polygone_data(Head* head);
 
+void Display_polygone(Head* head);
 
+void Modify_polygone(Head* head);
+
+void Export_polygone(Head* head, Style* style);
 
 #endif
