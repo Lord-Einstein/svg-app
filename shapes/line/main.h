@@ -2,6 +2,8 @@
 #define LINE__MAIN_H
 
 #include "../common-fonctions/fonctions.h"
+#include "../shapes-style/style.h"
+#include "../../svg/main.h"
 
 //Noms de structures, d'enums, d'unions :: PascalCase
 //Noms de varaibles :: snake_case
@@ -62,6 +64,12 @@ int Does_line_exist(Line* line);
  * @return Retourne un pointeur sur la stucture 'Line' en manipulant l'allocation mémoire. Il faut donc garder à l'esprit que le lineangle qui reçoit le retour de cette fonction doit être obligatoirement 'free' à la fin.
 */
 Line* Create_line(int x1, int y1, int x2, int y2);
+
+int Modify_line_menu();
+
+void Modify_line(Line* line);
+
+void Export_line(Line* line, Style* style);
 
 
 #endif
