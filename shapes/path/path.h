@@ -3,7 +3,8 @@
 
 
 #include "../common-fonctions/fonctions.h"
-
+#include "../shapes-style/style.h"
+#include "../../svg/main.h"
 
 //STRUCTURES & UNIONS & ENUMS
 
@@ -255,5 +256,16 @@ MoveTo* Create_new_move_to(Point* point);
 Point* Create_new_couple(int x, int y);
 HeadPath* Create_new_path();
 
+
+void Display_path_element_detailed(Node* node);
+int Modify_path_element_menu();
+void Modify_path_element(Node* node);
+void Delete_path_element_by_index(HeadPath* head, int index);
+int Modify_path_menu();
+void Modify_path(HeadPath* head);
+Node* Get_path_element_by_index(HeadPath* head, int index);
+void Export_path(HeadPath* head, Style* style);
+
+void Recup_path_data(HeadPath* head);
 
 #endif

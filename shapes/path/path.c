@@ -2,6 +2,10 @@
 
 void Infos_path() {
     system("clear");
+
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│          INFOS PATH          │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
     printf("\nLe saviez-vous ?\n");
     printf("L'élément SVG 'path' est l'un des éléments les plus puissants et flexibles du langage SVG.\n");
     printf("Il permet de décrire des formes très complexes à l'aide d'une suite de commandes et de coordonnées,\n");
@@ -35,7 +39,7 @@ void Infos_path() {
 
 void Infos_M() {
     system("clear");
-    printf("\nCommande M (moveto)\n");
+    printf(BRIGHT_CYAN"\nCommande M (moveto)\n"RESET_STYLE);
     printf("-------------------\n");
     printf("Déplace le curseur vers un point donné sans tracer de ligne.\n");
     printf("C’est généralement la première commande d’un chemin SVG.\n\n");
@@ -53,7 +57,7 @@ void Infos_M() {
 
 void Infos_L() {
     system("clear");
-    printf("\nCommande L (lineto)\n");
+    printf(BRIGHT_CYAN"\nCommande L (lineto)\n"RESET_STYLE);
     printf("-------------------\n");
     printf("Trace une ligne droite entre le point courant et un nouveau point.\n\n");
 
@@ -70,7 +74,7 @@ void Infos_L() {
 
 void Infos_H() {
     system("clear");
-    printf("\nCommande H (horizontal lineto)\n");
+    printf(BRIGHT_CYAN"\nCommande H (horizontal lineto)\n"RESET_STYLE);
     printf("------------------------------\n");
     printf("Trace une ligne horizontale à partir du point courant.\n\n");
 
@@ -86,7 +90,7 @@ void Infos_H() {
 
 void Infos_V() {
     system("clear");
-    printf("\nCommande V (vertical lineto)\n");
+    printf(BRIGHT_CYAN"\nCommande V (vertical lineto)\n"RESET_STYLE);
     printf("----------------------------\n");
     printf("Trace une ligne verticale à partir du point courant.\n\n");
 
@@ -102,7 +106,7 @@ void Infos_V() {
 
 void Infos_C() {
     system("clear");
-    printf("\nCommande C (cubic Bézier curve)\n");
+    printf(BRIGHT_CYAN"\nCommande C (cubic Bézier curve)\n"RESET_STYLE);
     printf("--------------------------------\n");
     printf("Crée une courbe de Bézier cubique entre le point courant et un point d’arrivée.\n");
     printf("Deux points de contrôle définissent la tangente de départ et d’arrivée.\n\n");
@@ -121,7 +125,7 @@ void Infos_C() {
 
 void Infos_S() {
     system("clear");
-    printf("\nCommande S (smooth cubic Bézier)\n");
+    printf(BRIGHT_CYAN"\nCommande S (smooth cubic Bézier)\n"RESET_STYLE);
     printf("--------------------------------\n");
     printf("Crée une courbe de Bézier cubique sans spécifier le premier point de contrôle.\n");
     printf("Ce point est déduit automatiquement du segment précédent.\n\n");
@@ -139,7 +143,7 @@ void Infos_S() {
 
 void Infos_Q() {
     system("clear");
-    printf("\nCommande Q (quadratic Bézier curve)\n");
+    printf(BRIGHT_CYAN"\nCommande Q (quadratic Bézier curve)\n"RESET_STYLE);
     printf("-----------------------------------\n");
     printf("Crée une courbe de Bézier quadratique entre le point courant et un point d’arrivée.\n");
     printf("Un seul point de contrôle définit la courbure.\n\n");
@@ -157,7 +161,7 @@ void Infos_Q() {
 
 void Infos_T() {
     system("clear");
-    printf("\nCommande T (smooth quadratic Bézier)\n");
+    printf(BRIGHT_CYAN"\nCommande T (smooth quadratic Bézier)\n"RESET_STYLE);
     printf("------------------------------------\n");
     printf("Crée une courbe quadratique continue sans redéfinir le point de contrôle.\n");
     printf("Le point de contrôle est calculé automatiquement selon la courbe précédente.\n\n");
@@ -174,7 +178,7 @@ void Infos_T() {
 
 void Infos_Z() {
     system("clear");
-    printf("\nCommande Z (closepath)\n");
+    printf(BRIGHT_CYAN"\nCommande Z (closepath)\n"RESET_STYLE);
     printf("----------------------\n");
     printf("Ferme le chemin en reliant le dernier point au point de départ.\n");
     printf("Aucune coordonnée n’est nécessaire.\n\n");
@@ -487,73 +491,120 @@ void Destroy_path(HeadPath* head){
     free(head);
 }
 
-void Display_path_element(Node* node){
-    if(!Does_path_element_exist(node)){
+void Display_path_element(Node* node) {
+    if(!Does_path_element_exist(node)) {
         Print_in_red("\nSub Shape not found !\n");
         return;
     }
 
-    switch (node->path_element->commands)
-    {
-    case MOVE_TO:
-        printf("  %c %d %d  ", node->type, node->path_element->current_command.move_to->p->x, node->path_element->current_command.move_to->p->y);
-    break;
-    case LINE_TO:
-        printf("   %c %d %d   ", node->type, node->path_element->current_command.line_to->p->x, node->path_element->current_command.line_to->p->y);
-    break;
-    case H_LINE_TO:
-        printf("   %c %d   ", node->type, node->path_element->current_command.h_line_to->x);
-    break;
-    case V_LINE_TO:
-        printf("   %c %d   ", node->type, node->path_element->current_command.v_line_to->x);
-    break;
-    case CUBIC_CURVE:
-        printf("   %c %d %d  %d %d  %d %d   ", node->type, node->path_element->current_command.cubic_curve->point1->x, node->path_element->current_command.cubic_curve->point1->y, node->path_element->current_command.cubic_curve->point2->x, node->path_element->current_command.cubic_curve->point2->y, node->path_element->current_command.cubic_curve->point3->x, node->path_element->current_command.cubic_curve->point3->y);
-    break;
-    case SMOOTH_CUBIC_CURVE:
-        printf("   %c %d %d  %d %d   ", node->type, node->path_element->current_command.smooth_cubic_curve->point1->x, node->path_element->current_command.smooth_cubic_curve->point1->y, node->path_element->current_command.smooth_cubic_curve->point2->x, node->path_element->current_command.smooth_cubic_curve->point2->y);
-    break;
-    case QUADRA_CURVE:
-        printf("   %c %d %d  %d %d   ", node->type, node->path_element->current_command.quadra_curve->point1->x, node->path_element->current_command.quadra_curve->point1->y, node->path_element->current_command.quadra_curve->point2->x, node->path_element->current_command.quadra_curve->point2->y);
-    break;
-    case SMOOTH_QUADRA_CURVE:
-        printf("   %c %d %d   ", node->type, node->path_element->current_command.smooth_quadra_curve->p->x, node->path_element->current_command.smooth_quadra_curve->p->y);
-    break;
-    case CLOSE:
-        printf("   %c   ", node->type);
-    break;
-    default:
-        printf("\nCommand not found\n");
-        return;
-    break;
+    switch (node->path_element->commands) {
+        case MOVE_TO:
+            printf(BRIGHT_CYAN"M"RESET_STYLE" %d,%d", 
+                node->path_element->current_command.move_to->p->x, 
+                node->path_element->current_command.move_to->p->y);
+        break;
+        case LINE_TO:
+            printf(BRIGHT_CYAN"L"RESET_STYLE" %d,%d", 
+                node->path_element->current_command.line_to->p->x, 
+                node->path_element->current_command.line_to->p->y);
+        break;
+        case H_LINE_TO:
+            printf(BRIGHT_CYAN"H"RESET_STYLE" %d", 
+                node->path_element->current_command.h_line_to->x);
+        break;
+        case V_LINE_TO:
+            printf(BRIGHT_CYAN"V"RESET_STYLE" %d", 
+                node->path_element->current_command.v_line_to->x);
+        break;
+        case CUBIC_CURVE:
+            printf(BRIGHT_CYAN"C"RESET_STYLE" %d,%d %d,%d %d,%d",
+                node->path_element->current_command.cubic_curve->point1->x,
+                node->path_element->current_command.cubic_curve->point1->y,
+                node->path_element->current_command.cubic_curve->point2->x,
+                node->path_element->current_command.cubic_curve->point2->y,
+                node->path_element->current_command.cubic_curve->point3->x,
+                node->path_element->current_command.cubic_curve->point3->y);
+        break;
+        case SMOOTH_CUBIC_CURVE:
+            printf(BRIGHT_CYAN"S"RESET_STYLE" %d,%d %d,%d",
+                node->path_element->current_command.smooth_cubic_curve->point1->x,
+                node->path_element->current_command.smooth_cubic_curve->point1->y,
+                node->path_element->current_command.smooth_cubic_curve->point2->x,
+                node->path_element->current_command.smooth_cubic_curve->point2->y);
+        break;
+        case QUADRA_CURVE:
+            printf(BRIGHT_CYAN"Q"RESET_STYLE" %d,%d %d,%d",
+                node->path_element->current_command.quadra_curve->point1->x,
+                node->path_element->current_command.quadra_curve->point1->y,
+                node->path_element->current_command.quadra_curve->point2->x,
+                node->path_element->current_command.quadra_curve->point2->y);
+        break;
+        case SMOOTH_QUADRA_CURVE:
+            printf(BRIGHT_CYAN"T"RESET_STYLE" %d,%d",
+                node->path_element->current_command.smooth_quadra_curve->p->x,
+                node->path_element->current_command.smooth_quadra_curve->p->y);
+        break;
+        case CLOSE:
+            printf(BRIGHT_CYAN"Z"RESET_STYLE);
+        break;
+        default:
+            printf("\nCommand not found\n");
+            return;
+        break;
     }
-
-
 }
 
-
-void Display_path(HeadPath* head){
-    if(!Does_path_exist(head)){
+void Display_path(HeadPath* head) {
+    if(!Does_path_exist(head)) {
         Print_in_red("\nShape not found\n");
         return;
     }
 
     Node* node = head->start;
-    printf("\n");
-    // system("clear");
-    printf(BOLD_WHITE_TEXT"\n======== "UNDERLINE_WHITE_TEXT" PATH "RESET_STYLE BOLD_WHITE_TEXT" ========\n\n"RESET_STYLE);
-    printf("D >>> ");
+    int element_counter = 0;
 
-    while(node != NULL){
+    printf("\n");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│        DONNÉES PATH          │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+    printf(BOLD_WHITE_TEXT"d >>> "RESET_STYLE);
+
+    while(node != NULL) {
+        element_counter++;
+        if (element_counter > 1) printf(" ");
         Display_path_element(node);
+        node = node->next;
+    }
+
+    printf("\n\n");
+}
+
+void Display_path_list(HeadPath* head) {
+    if(!Does_path_exist(head)) {
+        Print_in_red("\nShape not found\n");
+        return;
+    }
+
+    Node* node = head->start;
+    int element_counter = 0;
+
+    printf("\n");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│       LISTE DES ÉLÉMENTS     │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    while(node != NULL) {
+        element_counter++;
+        printf("Élément %d : ", element_counter);
+        Display_path_element(node);
+        printf("\n");
         node = node->next;
     }
 
     printf("\n");
 }
 
-void Add_path_element(HeadPath* head, Node* new_node){
-
+void Add_path_element(HeadPath* head, Node* new_node) {
     if(!Does_path_exist(head)) return;
     if(!Does_path_element_exist(new_node)) return;
 
@@ -564,204 +615,968 @@ void Add_path_element(HeadPath* head, Node* new_node){
         return;
     }
 
-    while(node->next != NULL){
+    while(node->next != NULL) {
         node = node->next;
     }
 
     node->next = new_node;
     new_node->previous = node;
-
 }
 
 int Menu_commands() {
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│    MENU DE COMMANDES         │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
-    printf("\r"BOLD_WHITE_TEXT""UNDERLINE_WHITE_TEXT" MENU DE COMMANDES "RESET_STYLE BOLD_WHITE_TEXT"\n\n"RESET_STYLE);
-    printf("1) Déplacer le curseur \n2) Tracer une ligne depuis le point courant\n3) Tracer une ligne horizontale\n4) Tracer une ligne verticale\n5) Tracer une courbe de Bézier\n6) Tracer la variante de la courbe de Bézier\n7) Tracer la Quadratique de Bézier\n8) Tracer la variante de la Quadratique de Bézier\n9) Refermez une forme\n\n");
+    printf(BRIGHT_CYAN"  1)"RESET_STYLE" Déplacer le curseur\n");
+    printf(BRIGHT_CYAN"  2)"RESET_STYLE" Tracer une ligne\n");
+    printf(BRIGHT_CYAN"  3)"RESET_STYLE" Tracer une ligne horizontale\n");
+    printf(BRIGHT_CYAN"  4)"RESET_STYLE" Tracer une ligne verticale\n");
+    printf(BRIGHT_CYAN"  5)"RESET_STYLE" Tracer une courbe cubique\n");
+    printf(BRIGHT_CYAN"  6)"RESET_STYLE" Tracer une courbe cubique lisse\n");
+    printf(BRIGHT_CYAN"  7)"RESET_STYLE" Tracer une courbe quadratique\n");
+    printf(BRIGHT_CYAN"  8)"RESET_STYLE" Tracer une courbe quadratique lisse\n");
+    printf(BRIGHT_CYAN"  9)"RESET_STYLE" Fermer le chemin\n");
+    printf(BRIGHT_CYAN"  10)"RESET_STYLE" Annuler\n\n");
 
-    return Int_recup_verify("Choisissez la commande à ajouter à votre 'Path' : ");
+    return Int_recup_verify_with_padding(BRIGHT_GREEN"Choisissez une commande : "RESET_STYLE, 1, 10);
 }
 
 void Recup_path_data(HeadPath* head) {
-    
     if(!Does_path_exist(head)) return;
 
-    int choice = 0, breaker = 0;
+    system("clear");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│  INITIALISATION PATH         │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
-    printf("Souhaitez vous lire la documentation pour concevoir un 'Path' ? \n");
+    printf("Souhaitez vous lire la documentation pour concevoir un 'Path' ?\n");
     printf("Tapez une touche avant la fin du chrono pour skip :  ");
     Chrono(5);
 
     if (kbhit()) getchar();
-    else {Infos_path();}
+    else Infos_path();
 
+    int choice = 0, breaker = 0;
     Node* node = NULL;
 
-    do{
+    do {
+        system("clear");
+        Display_path_list(head);
+
+        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"│   AJOUTER UN ÉLÉMENT         │\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
         choice = Menu_commands();
+        choice--;
 
-        switch (--choice) {
-        case MOVE_TO:
-            printf("\n\nSouhaitez vous lire la documentation sur la commande MOVE TO ? \n");
-            printf("Tapez une touche avant la fin du chrono pour skip :  ");
-            Chrono(5);
+        switch (choice) {
+            case MOVE_TO:
+                system("clear");
+                printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"│  COMMANDE MOVE TO (M)        │\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+                
+                printf("Souhaitez vous lire la documentation ?\n");
+                printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                Chrono(5);
 
-            if (kbhit()) getchar();
-            else Infos_M();
+                if (kbhit()) getchar();
+                else Infos_M();
 
-            node = Create_new_path_element(choice);
+                node = Create_new_path_element(choice);
+                if (!node) break;
+                
+                node->path_element->current_command.move_to->p->x = Int_recup_verify(BRIGHT_GREEN"Position X : "RESET_STYLE);
+                node->path_element->current_command.move_to->p->y = Int_recup_verify(BRIGHT_GREEN"Position Y : "RESET_STYLE);
+
+                Add_path_element(head, node);
+            break;
+
+            case LINE_TO:
+                system("clear");
+                printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"│  COMMANDE LINE TO (L)        │\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+                
+                printf("Souhaitez vous lire la documentation ?\n");
+                printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                Chrono(5);
+
+                if (kbhit()) getchar();
+                else Infos_L();
+
+                node = Create_new_path_element(choice);
+                if (!node) break;
+                
+                node->path_element->current_command.line_to->p->x = Int_recup_verify(BRIGHT_GREEN"Position X : "RESET_STYLE);
+                node->path_element->current_command.line_to->p->y = Int_recup_verify(BRIGHT_GREEN"Position Y : "RESET_STYLE);
+
+                Add_path_element(head, node);
+            break;
+
+            case H_LINE_TO:
+                system("clear");
+                printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"│ COMMANDE HORIZONTAL LINE (H) │\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+                
+                printf("Souhaitez vous lire la documentation ?\n");
+                printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                Chrono(5);
+
+                if (kbhit()) getchar();
+                else Infos_H();
+
+                node = Create_new_path_element(choice);
+                if (!node) break;
+                
+                node->path_element->current_command.h_line_to->x = Int_recup_verify(BRIGHT_GREEN"Position X : "RESET_STYLE);
+
+                Add_path_element(head, node);
+            break;
+
+            case V_LINE_TO:
+                system("clear");
+                printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"│  COMMANDE VERTICAL LINE (V)  │\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+                
+                printf("Souhaitez vous lire la documentation ?\n");
+                printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                Chrono(5);
+
+                if (kbhit()) getchar();
+                else Infos_V();
+
+                node = Create_new_path_element(choice);
+                if (!node) break;
+                
+                node->path_element->current_command.v_line_to->x = Int_recup_verify(BRIGHT_GREEN"Position Y : "RESET_STYLE);
+
+                Add_path_element(head, node);
+            break;
+
+            case CUBIC_CURVE:
+                system("clear");
+                printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"│  COMMANDE CUBIC CURVE (C)    │\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+                
+                printf("Souhaitez vous lire la documentation ?\n");
+                printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                Chrono(5);
+
+                if (kbhit()) getchar();
+                else Infos_C();
+
+                node = Create_new_path_element(choice);
+                if (!node) break;
+                
+                printf(BRIGHT_GREEN"Point de contrôle 1"RESET_STYLE"\n");
+                node->path_element->current_command.cubic_curve->point1->x = Int_recup_verify("  X : "RESET_STYLE);
+                node->path_element->current_command.cubic_curve->point1->y = Int_recup_verify("  Y : "RESET_STYLE);
+                
+                printf(BRIGHT_GREEN"Point de contrôle 2"RESET_STYLE"\n");
+                node->path_element->current_command.cubic_curve->point2->x = Int_recup_verify("  X : "RESET_STYLE);
+                node->path_element->current_command.cubic_curve->point2->y = Int_recup_verify("  Y : "RESET_STYLE);
+                
+                printf(BRIGHT_GREEN"Point d'arrivée"RESET_STYLE"\n");
+                node->path_element->current_command.cubic_curve->point3->x = Int_recup_verify("  X : "RESET_STYLE);
+                node->path_element->current_command.cubic_curve->point3->y = Int_recup_verify("  Y : "RESET_STYLE);
+                
+                Add_path_element(head, node);
+            break;
+
+            case SMOOTH_CUBIC_CURVE:
+                system("clear");
+                printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"│ COMMANDE SMOOTH CUBIC (S)    │\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+                
+                printf("Souhaitez vous lire la documentation ?\n");
+                printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                Chrono(5);
+
+                if (kbhit()) getchar();
+                else Infos_S();
+
+                node = Create_new_path_element(choice);
+                if (!node) break;
+                
+                printf(BRIGHT_GREEN"Point de contrôle"RESET_STYLE"\n");
+                node->path_element->current_command.smooth_cubic_curve->point1->x = Int_recup_verify("  X : "RESET_STYLE);
+                node->path_element->current_command.smooth_cubic_curve->point1->y = Int_recup_verify("  Y : "RESET_STYLE);
+                
+                printf(BRIGHT_GREEN"Point d'arrivée"RESET_STYLE"\n");
+                node->path_element->current_command.smooth_cubic_curve->point2->x = Int_recup_verify("  X : "RESET_STYLE);
+                node->path_element->current_command.smooth_cubic_curve->point2->y = Int_recup_verify("  Y : "RESET_STYLE);
+                
+                Add_path_element(head, node);
+            break;
+
+            case QUADRA_CURVE:
+                system("clear");
+                printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"│ COMMANDE QUADRATIC CURVE (Q) │\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+                
+                printf("Souhaitez vous lire la documentation ?\n");
+                printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                Chrono(5);
+
+                if (kbhit()) getchar();
+                else Infos_Q();
+
+                node = Create_new_path_element(choice);
+                if (!node) break;
+                
+                printf(BRIGHT_GREEN"Point de contrôle"RESET_STYLE"\n");
+                node->path_element->current_command.quadra_curve->point1->x = Int_recup_verify("  X : "RESET_STYLE);
+                node->path_element->current_command.quadra_curve->point1->y = Int_recup_verify("  Y : "RESET_STYLE);
+                
+                printf(BRIGHT_GREEN"Point d'arrivée"RESET_STYLE"\n");
+                node->path_element->current_command.quadra_curve->point2->x = Int_recup_verify("  X : "RESET_STYLE);
+                node->path_element->current_command.quadra_curve->point2->y = Int_recup_verify("  Y : "RESET_STYLE);
+                
+                Add_path_element(head, node);
+            break;
+
+            case SMOOTH_QUADRA_CURVE:
+                system("clear");
+                printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"│ COMMANDE SMOOTH QUADRATIC (T)│\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+                
+                printf("Souhaitez vous lire la documentation ?\n");
+                printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                Chrono(5);
+
+                if (kbhit()) getchar();
+                else Infos_T();
+
+                node = Create_new_path_element(choice);
+                if (!node) break;
+                
+                printf(BRIGHT_GREEN"Point d'arrivée"RESET_STYLE"\n");
+                node->path_element->current_command.smooth_quadra_curve->p->x = Int_recup_verify("  X : "RESET_STYLE);
+                node->path_element->current_command.smooth_quadra_curve->p->y = Int_recup_verify("  Y : "RESET_STYLE);
+                
+                Add_path_element(head, node);
+            break;
+
+            case CLOSE:
+                system("clear");
+                printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"│    COMMANDE CLOSE (Z)        │\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+                
+                printf("Souhaitez vous lire la documentation ?\n");
+                printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                Chrono(5);
+
+                if (kbhit()) getchar();
+                else Infos_Z();
+
+                node = Create_new_path_element(choice);
+                if (!node) break;
+                
+                Add_path_element(head, node);
+            break;
+
+            case 9:
+            return;
             
-            node->path_element->current_command.move_to->p->x = Int_recup_verify("Entrez la valeur du point X : ");
-            node->path_element->current_command.move_to->p->y = Int_recup_verify("Entrez la valeur du point Y : ");
-
-            Add_path_element(head, node);
-
-        break;
-        case LINE_TO:
-            printf("Souhaitez vous lire la documentation sur la commande LINE TO ? \n");
-            printf("Tapez une touche avant la fin du chrono pour skip :  ");
-            Chrono(5);
-
-            if (kbhit()) getchar();
-            else Infos_L();
-
-            node = Create_new_path_element(choice);
-            
-            node->path_element->current_command.line_to->p->x = Int_recup_verify("Entrez la valeur du point X : ");
-            node->path_element->current_command.line_to->p->y = Int_recup_verify("Entrez la valeur du point Y : ");
-
-            Add_path_element(head, node);
-
-        break;
-        case H_LINE_TO:
-            printf("Souhaitez vous lire la documentation sur la commande HORIZONTAL LINE TO ? \n");
-            printf("Tapez une touche avant la fin du chrono pour skip :  ");
-            Chrono(5);
-
-            if (kbhit()) getchar();
-            else Infos_H();
-
-            node = Create_new_path_element(choice);
-            
-            node->path_element->current_command.h_line_to->x = Int_recup_verify("Entrez la valeur du point sur X : ");
-
-            Add_path_element(head, node);
-
-        break;
-        case V_LINE_TO:
-            printf("Souhaitez vous lire la documentation sur la commande VERTICAL LINE TO ? \n");
-            printf("Tapez une touche avant la fin du chrono pour skip :  ");
-            Chrono(5);
-
-            if (kbhit()) getchar();
-            else Infos_V();
-
-            node = Create_new_path_element(choice);
-            
-            node->path_element->current_command.v_line_to->x = Int_recup_verify("Entrez la valeur du point sur Y : ");
-            
-            Add_path_element(head, node);
-
-        break;
-        case CUBIC_CURVE:
-            printf("Souhaitez vous lire la documentation sur la commande CUBIC CURVE ? \n");
-            printf("Tapez une touche avant la fin du chrono pour skip :  ");
-            Chrono(5);
-
-            if (kbhit()) getchar();
-            else Infos_C();
-
-            node = Create_new_path_element(choice);
-            
-            node->path_element->current_command.cubic_curve->point1->x = Int_recup_verify("Entrez la valeur du premier point de contrôle sur X : ");
-            node->path_element->current_command.cubic_curve->point1->y = Int_recup_verify("Entrez la valeur du premier point de contrôle sur Y : ");
-            node->path_element->current_command.cubic_curve->point2->x = Int_recup_verify("Entrez la valeur du second point de contrôle sur X : ");
-            node->path_element->current_command.cubic_curve->point2->y = Int_recup_verify("Entrez la valeur du second point de contrôle sur Y : ");
-            node->path_element->current_command.cubic_curve->point3->x = Int_recup_verify("Entrez la valeur du point d'arrivée sur X : ");
-            node->path_element->current_command.cubic_curve->point3->y = Int_recup_verify("Entrez la valeur du point d'arrivée sur Y : ");
-            
-            Add_path_element(head, node);
-
-        break;
-        case SMOOTH_CUBIC_CURVE:
-            printf("Souhaitez vous lire la documentation sur la commande SMOOTH CUBIC CURVE ? \n");
-            printf("Tapez une touche avant la fin du chrono pour skip :  ");
-            Chrono(5);
-
-            if (kbhit()) getchar();
-            else Infos_S();
-
-            node = Create_new_path_element(choice);
-            
-            node->path_element->current_command.smooth_cubic_curve->point1->x = Int_recup_verify("Entrez la valeur du second point de contrôle sur X : ");
-            node->path_element->current_command.smooth_cubic_curve->point1->y = Int_recup_verify("Entrez la valeur du second point de contrôle sur Y : ");
-            node->path_element->current_command.smooth_cubic_curve->point2->x = Int_recup_verify("Entrez la valeur du point d'arrivée sur X : ");
-            node->path_element->current_command.smooth_cubic_curve->point2->y = Int_recup_verify("Entrez la valeur du point d'arrivée sur Y : ");
-            
-            Add_path_element(head, node);
-
-        break;
-        case QUADRA_CURVE:
-            printf("Souhaitez vous lire la documentation sur la commande QUADRATIC CURVE ? \n");
-            printf("Tapez une touche avant la fin du chrono pour skip :  ");
-            Chrono(5);
-
-            if (kbhit()) getchar();
-            else Infos_Q();
-
-            node = Create_new_path_element(choice);
-            
-            node->path_element->current_command.quadra_curve->point1->x = Int_recup_verify("Entrez la valeur du point de contrôle sur X : ");
-            node->path_element->current_command.quadra_curve->point1->y = Int_recup_verify("Entrez la valeur du point de contrôle sur Y : ");
-            node->path_element->current_command.quadra_curve->point2->x = Int_recup_verify("Entrez la valeur du point d'arrivée sur X : ");
-            node->path_element->current_command.quadra_curve->point2->y = Int_recup_verify("Entrez la valeur du point d'arrivée sur Y : ");
-            
-            Add_path_element(head, node);
-
-        break;
-        case SMOOTH_QUADRA_CURVE:
-            printf("Souhaitez vous lire la documentation sur la commande SMOOTH QUADRATIC CURVE ? \n");
-            printf("Tapez une touche avant la fin du chrono pour skip :  ");
-            Chrono(5);
-
-            if (kbhit()) getchar();
-            else Infos_T();
-
-            node = Create_new_path_element(choice);
-            
-            node->path_element->current_command.smooth_quadra_curve->p->x = Int_recup_verify("Entrez la valeur du point d'arrivée sur X : ");
-            node->path_element->current_command.smooth_quadra_curve->p->y = Int_recup_verify("Entrez la valeur du point d'arrivée sur Y : ");
-            
-            Add_path_element(head, node);
-
-        break;
-        case CLOSE:
-            printf("Souhaitez vous lire la documentation sur la commande CLOSE ? \n");
-            printf("Tapez une touche avant la fin du chrono pour skip :  ");
-            Chrono(5);
-
-            if (kbhit()) getchar();
-            else Infos_Z();
-
-            node = Create_new_path_element(choice);
-            
-            Add_path_element(head, node);
-
-        break;
-        
-        default:
-            Print_in_red("Command not found !");
-        break;
+            default:
+                Print_in_red("Commande invalide !");
+                sleep(2);
+            break;
         }
 
-        // system("clear");
-        printf("\n\nSouhaitez vous insérer une autre commande à votre path ?");
-        printf("\nTapez une touche avant la fin du chrono pour skip :  ");
+        system("clear");
+        Display_path(head);
+
+        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"│  AJOUTER UN AUTRE ÉLÉMENT ?  │\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
+        printf(BRIGHT_GREEN"Appuyez sur une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
         breaker = Chrono_assassin(5);
         system("clear");
 
-    }while(breaker);
+    } while(!breaker);
+}
 
+
+
+void Display_path_element_detailed(Node* node) {
+    if(!Does_path_element_exist(node)) return;
+
+    printf("\n");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│    ÉLÉMENT DE PATH           │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    switch (node->path_element->commands) {
+        case MOVE_TO:
+            printf("Type : "BOLD_WHITE_TEXT"MOVE TO (M)"RESET_STYLE"\n");
+            printf("Point : [ X = %d, Y = %d ]\n\n", 
+                node->path_element->current_command.move_to->p->x,
+                node->path_element->current_command.move_to->p->y);
+        break;
+        case LINE_TO:
+            printf("Type : "BOLD_WHITE_TEXT"LINE TO (L)"RESET_STYLE"\n");
+            printf("Point : [ X = %d, Y = %d ]\n\n",
+                node->path_element->current_command.line_to->p->x,
+                node->path_element->current_command.line_to->p->y);
+        break;
+        case H_LINE_TO:
+            printf("Type : "BOLD_WHITE_TEXT"HORIZONTAL LINE TO (H)"RESET_STYLE"\n");
+            printf("Position X : %d\n\n",
+                node->path_element->current_command.h_line_to->x);
+        break;
+        case V_LINE_TO:
+            printf("Type : "BOLD_WHITE_TEXT"VERTICAL LINE TO (V)"RESET_STYLE"\n");
+            printf("Position Y : %d\n\n",
+                node->path_element->current_command.v_line_to->x);
+        break;
+        case CUBIC_CURVE:
+            printf("Type : "BOLD_WHITE_TEXT"CUBIC CURVE (C)"RESET_STYLE"\n");
+            printf("Point de contrôle 1 : [ X = %d, Y = %d ]\n",
+                node->path_element->current_command.cubic_curve->point1->x,
+                node->path_element->current_command.cubic_curve->point1->y);
+            printf("Point de contrôle 2 : [ X = %d, Y = %d ]\n",
+                node->path_element->current_command.cubic_curve->point2->x,
+                node->path_element->current_command.cubic_curve->point2->y);
+            printf("Point d'arrivée : [ X = %d, Y = %d ]\n\n",
+                node->path_element->current_command.cubic_curve->point3->x,
+                node->path_element->current_command.cubic_curve->point3->y);
+        break;
+        case SMOOTH_CUBIC_CURVE:
+            printf("Type : "BOLD_WHITE_TEXT"SMOOTH CUBIC CURVE (S)"RESET_STYLE"\n");
+            printf("Point de contrôle 2 : [ X = %d, Y = %d ]\n",
+                node->path_element->current_command.smooth_cubic_curve->point1->x,
+                node->path_element->current_command.smooth_cubic_curve->point1->y);
+            printf("Point d'arrivée : [ X = %d, Y = %d ]\n\n",
+                node->path_element->current_command.smooth_cubic_curve->point2->x,
+                node->path_element->current_command.smooth_cubic_curve->point2->y);
+        break;
+        case QUADRA_CURVE:
+            printf("Type : "BOLD_WHITE_TEXT"QUADRATIC CURVE (Q)"RESET_STYLE"\n");
+            printf("Point de contrôle : [ X = %d, Y = %d ]\n",
+                node->path_element->current_command.quadra_curve->point1->x,
+                node->path_element->current_command.quadra_curve->point1->y);
+            printf("Point d'arrivée : [ X = %d, Y = %d ]\n\n",
+                node->path_element->current_command.quadra_curve->point2->x,
+                node->path_element->current_command.quadra_curve->point2->y);
+        break;
+        case SMOOTH_QUADRA_CURVE:
+            printf("Type : "BOLD_WHITE_TEXT"SMOOTH QUADRATIC CURVE (T)"RESET_STYLE"\n");
+            printf("Point d'arrivée : [ X = %d, Y = %d ]\n\n",
+                node->path_element->current_command.smooth_quadra_curve->p->x,
+                node->path_element->current_command.smooth_quadra_curve->p->y);
+        break;
+        case CLOSE:
+            printf("Type : "BOLD_WHITE_TEXT"CLOSE (Z)"RESET_STYLE"\n");
+            printf("Fermeture du chemin.\n\n");
+        break;
+    }
+}
+
+int Modify_path_element_menu() {
+    int choice = 0;
+
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│   MODIFIER L'ÉLÉMENT         │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    switch (choice) {
+        case MOVE_TO:
+        case LINE_TO:
+            printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier X\n");
+            printf(BRIGHT_CYAN"  2)"RESET_STYLE" Modifier Y\n");
+            printf(BRIGHT_CYAN"  3)"RESET_STYLE" Quitter\n\n");
+        break;
+        case H_LINE_TO:
+            printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier X\n");
+            printf(BRIGHT_CYAN"  2)"RESET_STYLE" Quitter\n\n");
+        break;
+        case V_LINE_TO:
+            printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier Y\n");
+            printf(BRIGHT_CYAN"  2)"RESET_STYLE" Quitter\n\n");
+        break;
+        case CUBIC_CURVE:
+            printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier point de contrôle 1\n");
+            printf(BRIGHT_CYAN"  2)"RESET_STYLE" Modifier point de contrôle 2\n");
+            printf(BRIGHT_CYAN"  3)"RESET_STYLE" Modifier point d'arrivée\n");
+            printf(BRIGHT_CYAN"  4)"RESET_STYLE" Quitter\n\n");
+        break;
+        case SMOOTH_CUBIC_CURVE:
+        case QUADRA_CURVE:
+            printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier point de contrôle\n");
+            printf(BRIGHT_CYAN"  2)"RESET_STYLE" Modifier point d'arrivée\n");
+            printf(BRIGHT_CYAN"  3)"RESET_STYLE" Quitter\n\n");
+        break;
+        case SMOOTH_QUADRA_CURVE:
+            printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier point d'arrivée\n");
+            printf(BRIGHT_CYAN"  2)"RESET_STYLE" Quitter\n\n");
+        break;
+        case CLOSE:
+            printf(BRIGHT_CYAN"  1)"RESET_STYLE" Quitter\n\n");
+        break;
+    }
+
+    return Int_recup_verify_with_padding(BRIGHT_GREEN"Choisissez une option : "RESET_STYLE, 1, 4);
+}
+
+void Modify_path_element(Node* node) {
+    if(!Does_path_element_exist(node)) return;
+    int choice = 0, breaker = 0;
+
+    do {
+        system("clear");
+        Display_path_element_detailed(node);
+
+        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"│   MODIFIER L'ÉLÉMENT         │\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+        switch (node->path_element->commands) {
+            case MOVE_TO:
+            case LINE_TO: {
+                Point** p = (node->path_element->commands == MOVE_TO) ?
+                    &(node->path_element->current_command.move_to->p) :
+                    &(node->path_element->current_command.line_to->p);
+                
+                printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier X\n");
+                printf(BRIGHT_CYAN"  2)"RESET_STYLE" Modifier Y\n");
+                printf(BRIGHT_CYAN"  3)"RESET_STYLE" Quitter\n\n");
+
+                choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 3);
+                Delete_two_lines();
+
+                if (choice == 1) (*p)->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                else if (choice == 2) (*p)->y = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                else return;
+                break;
+            }
+            case H_LINE_TO:
+                printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier X\n");
+                printf(BRIGHT_CYAN"  2)"RESET_STYLE" Quitter\n\n");
+
+                choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 2);
+                Delete_two_lines();
+
+                if (choice == 1) node->path_element->current_command.h_line_to->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                else return;
+                break;
+
+            case V_LINE_TO:
+                printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier Y\n");
+                printf(BRIGHT_CYAN"  2)"RESET_STYLE" Quitter\n\n");
+
+                choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 2);
+                Delete_two_lines();
+
+                if (choice == 1) node->path_element->current_command.v_line_to->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                else return;
+                break;
+
+            case CUBIC_CURVE:
+                printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier point de contrôle 1\n");
+                printf(BRIGHT_CYAN"  2)"RESET_STYLE" Modifier point de contrôle 2\n");
+                printf(BRIGHT_CYAN"  3)"RESET_STYLE" Modifier point d'arrivée\n");
+                printf(BRIGHT_CYAN"  4)"RESET_STYLE" Quitter\n\n");
+
+                choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 4);
+                Delete_two_lines();
+
+                if (choice == 1) {
+                    node->path_element->current_command.cubic_curve->point1->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                    node->path_element->current_command.cubic_curve->point1->y = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                } else if (choice == 2) {
+                    node->path_element->current_command.cubic_curve->point2->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                    node->path_element->current_command.cubic_curve->point2->y = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                } else if (choice == 3) {
+                    node->path_element->current_command.cubic_curve->point3->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                    node->path_element->current_command.cubic_curve->point3->y = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                } else return;
+                break;
+
+            case SMOOTH_CUBIC_CURVE:
+                printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier point de contrôle\n");
+                printf(BRIGHT_CYAN"  2)"RESET_STYLE" Modifier point d'arrivée\n");
+                printf(BRIGHT_CYAN"  3)"RESET_STYLE" Quitter\n\n");
+
+                choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 3);
+                Delete_two_lines();
+
+                if (choice == 1) {
+                    node->path_element->current_command.smooth_cubic_curve->point1->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                    node->path_element->current_command.smooth_cubic_curve->point1->y = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                } else if (choice == 2) {
+                    node->path_element->current_command.smooth_cubic_curve->point2->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                    node->path_element->current_command.smooth_cubic_curve->point2->y = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                } else return;
+                break;
+
+            case QUADRA_CURVE:
+                printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier point de contrôle\n");
+                printf(BRIGHT_CYAN"  2)"RESET_STYLE" Modifier point d'arrivée\n");
+                printf(BRIGHT_CYAN"  3)"RESET_STYLE" Quitter\n\n");
+
+                choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 3);
+                Delete_two_lines();
+
+                if (choice == 1) {
+                    node->path_element->current_command.quadra_curve->point1->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                    node->path_element->current_command.quadra_curve->point1->y = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                } else if (choice == 2) {
+                    node->path_element->current_command.quadra_curve->point2->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                    node->path_element->current_command.quadra_curve->point2->y = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                } else return;
+                break;
+
+            case SMOOTH_QUADRA_CURVE:
+                printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier point d'arrivée\n");
+                printf(BRIGHT_CYAN"  2)"RESET_STYLE" Quitter\n\n");
+
+                choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 2);
+                Delete_two_lines();
+
+                if (choice == 1) {
+                    node->path_element->current_command.smooth_quadra_curve->p->x = Int_recup_verify(BRIGHT_GREEN"Nouvelle position X : "RESET_STYLE);
+                    node->path_element->current_command.smooth_quadra_curve->p->y = Int_recup_verify(BRIGHT_GREEN"Nouvelle position Y : "RESET_STYLE);
+                } else return;
+                break;
+
+            case CLOSE:
+                printf(BRIGHT_CYAN"  1)"RESET_STYLE" Quitter\n\n");
+                choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 1);
+                return;
+                break;
+        }
+
+        system("clear");
+        printf("\n");
+        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"│ CONTINUER LES MODIFICATIONS ?│\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
+        printf(BRIGHT_GREEN"Appuyez sur une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
+        breaker = Chrono_assassin(5);
+        system("clear");
+
+    } while(!breaker);
+}
+
+void Delete_path_element_by_index(HeadPath* head, int index) {
+    if (!Does_path_exist(head)) {
+        Print_in_red("Shape not found.\n");
+        return;
+    }
+
+    if (index <= 0) {
+        Auto_write(BRIGHT_RED"\nIndex invalide ..."RESET_STYLE, 30000);
+        sleep(2);
+        system("clear");
+        return;
+    }
+
+    Node* node = head->start;
+    int current_index = 1;
+
+    while (node != NULL && current_index < index) {
+        node = node->next;
+        current_index++;
+    }
+
+    if (!Does_path_element_exist(node)) {
+        Auto_write(BRIGHT_RED"\nÉlément inexistant ..."RESET_STYLE, 30000);
+        sleep(2);
+        system("clear");
+        return;
+    }
+
+    printf(BRIGHT_CYAN"\n╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"  SUPPRESSION DE L'ÉLÉMENT N°%d \n"RESET_STYLE, index);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    printf("Élément à supprimer : ");
+    Display_path_element(node);
+    printf("\n\nConfirmez-vous la suppression ?\n");
+    printf(BRIGHT_GREEN"Attendez la fin du chrono pour confirmer ou appuyez sur une touche avant pour annuler :  "RESET_STYLE);
+
+    int breaker = Chrono_assassin(5);
+
+    if (!breaker) {
+        Auto_write(BRIGHT_RED"\nSuppression annulée...\n"RESET_STYLE, 30000);
+        sleep(2);
+        system("clear");
+        return;
+    }
+
+    if (node->previous == NULL && node->next == NULL) {
+        head->start = NULL;
+    } else if (node->previous == NULL) {
+        head->start = node->next;
+        node->next->previous = NULL;
+    } else if (node->next == NULL) {
+        node->previous->next = NULL;
+    } else {
+        node->previous->next = node->next;
+        node->next->previous = node->previous;
+    }
+
+    Destroy_path_element(node);
+
+    Auto_write(BRIGHT_RED"\n\nÉlément supprimé."RESET_STYLE, 30000);
+    Auto_write(BRIGHT_YELLOW"\n\nRetour ...\n"RESET_STYLE, 30000);
+    sleep(1);
+}
+
+int Modify_path_menu() {
+    int choice = 0;
+
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│    MODIFIER LE PATH          │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    printf(BRIGHT_CYAN"  1)"RESET_STYLE" Agir sur un élément existant\n");
+    printf(BRIGHT_CYAN"  2)"RESET_STYLE" Ajouter un élément\n");
+    printf(BRIGHT_CYAN"  3)"RESET_STYLE" Supprimer un élément\n");
+    printf(BRIGHT_CYAN"  4)"RESET_STYLE" Quitter\n\n");
+
+    choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Choisissez une option : "RESET_STYLE, 1, 4);
+    Delete_two_lines();
+    return choice;
+}
+
+void Modify_path(HeadPath* head) {
+    if(!Does_path_exist(head)) return;
+
+    int choice = 0, breaker = 0;
+
+    do {
+        system("clear");
+        Display_path(head);
+        choice = Modify_path_menu();
+
+        switch(choice) {
+            case 1: {
+                system("clear");
+                Display_path(head);
+                int index = Int_recup_verify(BRIGHT_GREEN"Sur quel élément souhaitez-vous agir ? : "RESET_STYLE);
+                Node* current = head->start;
+                int counter = 1;
+                while(current && counter < index) {
+                    current = current->next;
+                    counter++;
+                }
+                if(!current) {
+                    Print_in_red("Élément inexistant.\n");
+                    sleep(2);
+                } else Modify_path_element(current);
+                break;
+            }
+            case 2: {
+                int cont = 0;
+                do {
+                    system("clear");
+                    int cmd = Menu_commands() - 1;
+                    Node* new_node = Create_new_path_element(cmd);
+                    
+                    if(!new_node) {
+                        Print_in_red("Erreur lors de la création.\n");
+                        sleep(2);
+                        break;
+                    }
+
+                    printf("Souhaitez vous lire la documentation ?\n");
+                    printf("Tapez une touche avant la fin du chrono pour skip :  ");
+                    Chrono(5);
+
+                    if (kbhit()) getchar();
+                    else {
+                        switch(cmd) {
+                            case MOVE_TO: Infos_M(); break;
+                            case LINE_TO: Infos_L(); break;
+                            case H_LINE_TO: Infos_H(); break;
+                            case V_LINE_TO: Infos_V(); break;
+                            case CUBIC_CURVE: Infos_C(); break;
+                            case SMOOTH_CUBIC_CURVE: Infos_S(); break;
+                            case QUADRA_CURVE: Infos_Q(); break;
+                            case SMOOTH_QUADRA_CURVE: Infos_T(); break;
+                            case CLOSE: Infos_Z(); break;
+                        }
+                    }
+
+                    system("clear");
+                    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                    printf(BRIGHT_CYAN"│      AJOUTER UN ÉLÉMENT ?    │\n"RESET_STYLE);
+                    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
+
+                    switch(cmd) {
+                        case MOVE_TO:
+                            new_node->path_element->current_command.move_to->p->x = Int_recup_verify(BRIGHT_GREEN"Entrez la valeur du point X : "RESET_STYLE);
+                            new_node->path_element->current_command.move_to->p->y = Int_recup_verify(BRIGHT_GREEN"Entrez la valeur du point Y : "RESET_STYLE);
+                            break;
+                        case LINE_TO:
+                            new_node->path_element->current_command.line_to->p->x = Int_recup_verify(BRIGHT_GREEN"Entrez la valeur du point X : "RESET_STYLE);
+                            new_node->path_element->current_command.line_to->p->y = Int_recup_verify(BRIGHT_GREEN"Entrez la valeur du point Y : "RESET_STYLE);
+                            break;
+                        case H_LINE_TO:
+                            new_node->path_element->current_command.h_line_to->x = Int_recup_verify(BRIGHT_GREEN"Entrez la valeur du point sur X : "RESET_STYLE);
+                            break;
+                        case V_LINE_TO:
+                            new_node->path_element->current_command.v_line_to->x = Int_recup_verify(BRIGHT_GREEN"Entrez la valeur du point sur Y : "RESET_STYLE);
+                            break;
+                        case CUBIC_CURVE:
+                            new_node->path_element->current_command.cubic_curve->point1->x = Int_recup_verify(BRIGHT_GREEN"Point de contrôle 1 - X : "RESET_STYLE);
+                            new_node->path_element->current_command.cubic_curve->point1->y = Int_recup_verify(BRIGHT_GREEN"Point de contrôle 1 - Y : "RESET_STYLE);
+                            new_node->path_element->current_command.cubic_curve->point2->x = Int_recup_verify(BRIGHT_GREEN"Point de contrôle 2 - X : "RESET_STYLE);
+                            new_node->path_element->current_command.cubic_curve->point2->y = Int_recup_verify(BRIGHT_GREEN"Point de contrôle 2 - Y : "RESET_STYLE);
+                            new_node->path_element->current_command.cubic_curve->point3->x = Int_recup_verify(BRIGHT_GREEN"Point d'arrivée - X : "RESET_STYLE);
+                            new_node->path_element->current_command.cubic_curve->point3->y = Int_recup_verify(BRIGHT_GREEN"Point d'arrivée - Y : "RESET_STYLE);
+                            break;
+                        case SMOOTH_CUBIC_CURVE:
+                            new_node->path_element->current_command.smooth_cubic_curve->point1->x = Int_recup_verify(BRIGHT_GREEN"Point de contrôle - X : "RESET_STYLE);
+                            new_node->path_element->current_command.smooth_cubic_curve->point1->y = Int_recup_verify(BRIGHT_GREEN"Point de contrôle - Y : "RESET_STYLE);
+                            new_node->path_element->current_command.smooth_cubic_curve->point2->x = Int_recup_verify(BRIGHT_GREEN"Point d'arrivée - X : "RESET_STYLE);
+                            new_node->path_element->current_command.smooth_cubic_curve->point2->y = Int_recup_verify(BRIGHT_GREEN"Point d'arrivée - Y : "RESET_STYLE);
+                            break;
+                        case QUADRA_CURVE:
+                            new_node->path_element->current_command.quadra_curve->point1->x = Int_recup_verify(BRIGHT_GREEN"Point de contrôle - X : "RESET_STYLE);
+                            new_node->path_element->current_command.quadra_curve->point1->y = Int_recup_verify(BRIGHT_GREEN"Point de contrôle - Y : "RESET_STYLE);
+                            new_node->path_element->current_command.quadra_curve->point2->x = Int_recup_verify(BRIGHT_GREEN"Point d'arrivée - X : "RESET_STYLE);
+                            new_node->path_element->current_command.quadra_curve->point2->y = Int_recup_verify(BRIGHT_GREEN"Point d'arrivée - Y : "RESET_STYLE);
+                            break;
+                        case SMOOTH_QUADRA_CURVE:
+                            new_node->path_element->current_command.smooth_quadra_curve->p->x = Int_recup_verify(BRIGHT_GREEN"Point d'arrivée - X : "RESET_STYLE);
+                            new_node->path_element->current_command.smooth_quadra_curve->p->y = Int_recup_verify(BRIGHT_GREEN"Point d'arrivée - Y : "RESET_STYLE);
+                            break;
+                        case CLOSE:
+                            break;
+                    }
+
+                    Add_path_element(head, new_node);
+                    system("clear");
+                    Display_path(head);
+                    printf("\n");
+                    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+                    printf(BRIGHT_CYAN"│  AJOUTER UN AUTRE ÉLÉMENT ?  │\n"RESET_STYLE);
+                    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
+                    printf(BRIGHT_GREEN"Appuyez sur une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
+                    cont = Chrono_assassin(5);
+                    system("clear");
+                } while(!cont);
+                break;
+            }
+            case 3:
+                system("clear");
+                Display_path(head);
+                int index = Int_recup_verify(BRIGHT_GREEN"Quel élément souhaitez-vous supprimer ? : "RESET_STYLE);
+                Node* current = head->start;
+                int counter = 1;
+                while(current && counter < index) {
+                    current = current->next;
+                    counter++;
+                }
+                if(!current) {
+                    Print_in_red("Élément inexistant.\n");
+                    sleep(2);
+                } else Delete_path_element_by_index(head, index);
+                break;
+
+            case 4:
+                return;
+
+            default:
+                Print_in_red("INVALID ! ");
+            break;
+        }
+
+        system("clear");
+        printf("\n");
+        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"│  CONTINUER LES MODIFS ?      │\n"RESET_STYLE);
+        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
+        printf(BRIGHT_GREEN"Appuyez sur une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
+        breaker = Chrono_assassin(5);
+        system("clear");
+
+    } while(!breaker);
+}
+
+Node* Get_path_element_by_index(HeadPath* head, int index) {
+    if (!Does_path_exist(head)) return NULL;
+    if (index <= 0) return NULL;
+
+    Node* node = head->start;
+    int counter = 1;
+
+    while (node != NULL && counter < index) {
+        node = node->next;
+        counter++;
+    }
+
+    return node;
+}
+
+void Export_path(HeadPath* head, Style* style) {
+    if (!Does_path_exist(head)) return;
+    if (!Does_style_exist(style)) return;
+
+    int breaker = 0;
+    char name[40];
+    char file_name[70];
+    char command[100];
+
+    system("clear");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│     EXPORTATION EN SVG       │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    printf("Entrez le nom du fichier à exporter : ");
+    scanf("%39s", name);
+    snprintf(file_name, sizeof(file_name), "../Generated_Files/%s.svg", name);
+
+    Svg* svg = Create_new_svg();
+    if (!svg) {
+        Print_in_red("SVG Not Found.\n");
+        return;
+    }
+
+    system("clear");
+    Display_svg(svg);
+    Drain_buffer();
+
+    printf(BRIGHT_CYAN"\n╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│     FAIRE DES MODIFICATIONS ?│\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+    printf("Souhaitez-vous utiliser les paramètres d'SVG par défaut ?\n");
+    printf(BRIGHT_GREEN"Attendez la fin du chrono pour modifier ou appuyez sur une touche avant pour skip :  "RESET_STYLE);
+
+    breaker = Chrono_assassin(5);
+    system("clear");
+
+    if (breaker) Modify_svg(svg);
+
+    FILE* write_file = fopen(file_name, "w");
+    if (!write_file) {
+        Print_in_red("Impossible de créer le fichier.\n");
+        Destroy_svg(svg);
+        return;
+    }
+
+    fprintf(write_file,
+        "<svg xmlns=\"%s\" width=\"%u%%\" height=\"%u%%\" viewBox=\"%d %d %u %u\">\n",
+        svg->xlmns, svg->width, svg->height,
+        svg->view_box->minx, svg->view_box->miny,
+        svg->view_box->width, svg->view_box->height );
+
+    fprintf(write_file, "  <path d=\"");
+
+    Node* node = head->start;
+    int first = 1;
+
+    while(node != NULL) {
+        if (!first) fprintf(write_file, " ");
+        first = 0;
+
+        switch (node->path_element->commands) {
+            case MOVE_TO:
+                fprintf(write_file, "M%d %d",
+                    node->path_element->current_command.move_to->p->x,
+                    node->path_element->current_command.move_to->p->y);
+            break;
+            case LINE_TO:
+                fprintf(write_file, "L%d %d",
+                    node->path_element->current_command.line_to->p->x,
+                    node->path_element->current_command.line_to->p->y);
+            break;
+            case H_LINE_TO:
+                fprintf(write_file, "H%d",
+                    node->path_element->current_command.h_line_to->x);
+            break;
+            case V_LINE_TO:
+                fprintf(write_file, "V%d",
+                    node->path_element->current_command.v_line_to->x);
+            break;
+            case CUBIC_CURVE:
+                fprintf(write_file, "C%d %d %d %d %d %d",
+                    node->path_element->current_command.cubic_curve->point1->x,
+                    node->path_element->current_command.cubic_curve->point1->y,
+                    node->path_element->current_command.cubic_curve->point2->x,
+                    node->path_element->current_command.cubic_curve->point2->y,
+                    node->path_element->current_command.cubic_curve->point3->x,
+                    node->path_element->current_command.cubic_curve->point3->y);
+            break;
+            case SMOOTH_CUBIC_CURVE:
+                fprintf(write_file, "S%d %d %d %d",
+                    node->path_element->current_command.smooth_cubic_curve->point1->x,
+                    node->path_element->current_command.smooth_cubic_curve->point1->y,
+                    node->path_element->current_command.smooth_cubic_curve->point2->x,
+                    node->path_element->current_command.smooth_cubic_curve->point2->y);
+            break;
+            case QUADRA_CURVE:
+                fprintf(write_file, "Q%d %d %d %d",
+                    node->path_element->current_command.quadra_curve->point1->x,
+                    node->path_element->current_command.quadra_curve->point1->y,
+                    node->path_element->current_command.quadra_curve->point2->x,
+                    node->path_element->current_command.quadra_curve->point2->y);
+            break;
+            case SMOOTH_QUADRA_CURVE:
+                fprintf(write_file, "T%d %d",
+                    node->path_element->current_command.smooth_quadra_curve->p->x,
+                    node->path_element->current_command.smooth_quadra_curve->p->y);
+            break;
+            case CLOSE:
+                fprintf(write_file, "Z");
+            break;
+        }
+
+        node = node->next;
+    }
+
+    fprintf(write_file,
+        "\" fill=\"rgba(%d,%d,%d,%.2f)\" stroke=\"rgba(%d,%d,%d,%.2f)\" stroke-width=\"%d\"",
+        style->Rf, style->Gf, style->Bf, style->Af, style->Rs, style->Gs, style->Bs, style->As,
+        style->stroke_width);
+
+    int transform_params = ( style->translate_x || style->translate_y || style->rotation || (style->scale_x != 1) || (style->scale_y != 1) );
+    if (transform_params) {
+        fprintf(write_file, " transform=\"");
+        if (style->translate_x || style->translate_y)
+            fprintf(write_file, "translate(%d,%d) ", style->translate_x, style->translate_y);
+        if (style->rotation)
+            fprintf(write_file, "rotate(%d,%d,%d) ", style->rotation, style->rotation_cx, style->rotation_cy);
+        if (style->scale_x != 1 || style->scale_y != 1)
+            fprintf(write_file, "scale(%d,%d) ", style->scale_x, style->scale_y);
+        fprintf(write_file, "\"");
+    }
+
+    fprintf(write_file, " />\n</svg>\n");
+    fclose(write_file);
+
+    Progress_bar_animation(2);
+    sleep(1);
+    system("clear");
+
+    printf(BRIGHT_CYAN"\n╭────────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│      OUVRIR LE FICHIER ?       │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰────────────────────────────────╯\n\n"RESET_STYLE);
+    printf("Souhaitez-vous ouvrir le fichier pour visualiser votre path ? \n");
+    printf(BRIGHT_GREEN"Attendez la fin du chrono pour l'ouvrir ou appuyez sur une touche avant pour skip :  "RESET_STYLE);
+
+    breaker = Chrono_assassin(5);
+    if (breaker) {
+        snprintf(command, sizeof(command), "explorer.exe \"..\\Generated_Files\\%s.svg\"", name);
+        system(command);
+    }
+
+    Auto_write("\n\n"BRIGHT_YELLOW"Retour au menu précédent...\n\n"RESET_STYLE, 25000);
+    system("clear");
+    Destroy_svg(svg);
 }
 
 
