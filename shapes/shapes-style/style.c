@@ -185,8 +185,8 @@ void Display_style(Style* style) {
     printf(BRIGHT_CYAN"│         STYLE ACTUEL         │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
-    printf("  Couleur de fond : "BOLD_WHITE_TEXT"RGBA (%d, %d, %d, %.2f)"RESET_STYLE"\n", style->Rf, style->Gf, style->Bf, style->Af);
-    printf("  Couleur de contour : "BOLD_WHITE_TEXT"RGBA (%d, %d, %d, %.2f)"RESET_STYLE"\n", style->Rs, style->Gs, style->Bs, style->As);
+    printf("  Couleur de fond : "BOLD_WHITE_TEXT"RGBA (%d, %d, %d, %g)"RESET_STYLE"\n", style->Rf, style->Gf, style->Bf, style->Af);
+    printf("  Couleur de contour : "BOLD_WHITE_TEXT"RGBA (%d, %d, %d, %g)"RESET_STYLE"\n", style->Rs, style->Gs, style->Bs, style->As);
     printf("  Épaisseur du contour : "BOLD_WHITE_TEXT"%d"RESET_STYLE"\n\n", style->stroke_width);
 
     printf("  Angle de rotation : "BOLD_WHITE_TEXT"%d ° "RESET_STYLE"\n", style->rotation);

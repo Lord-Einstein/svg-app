@@ -466,7 +466,7 @@ void Destroy_path_element(Node* node){
         free(node);
     break;
 
-    default: return; break;
+    default: Print_in_red("\nNode not found !\n"); return; break;
     }
 }
 
@@ -488,6 +488,7 @@ void Destroy_path(HeadPath* head){
         }
         Destroy_path_element(node);
     }
+    head->start = NULL;
     free(head);
 }
 
@@ -590,7 +591,7 @@ void Display_path_list(HeadPath* head) {
 
     printf("\n");
     printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-    printf(BRIGHT_CYAN"│       LISTE DES ÉLÉMENTS     │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│  LISTE DE COMMANDES DU PATH  │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
     while(node != NULL) {
@@ -636,10 +637,10 @@ int Menu_commands() {
     printf(BRIGHT_CYAN"  6)"RESET_STYLE" Tracer une courbe cubique lisse\n");
     printf(BRIGHT_CYAN"  7)"RESET_STYLE" Tracer une courbe quadratique\n");
     printf(BRIGHT_CYAN"  8)"RESET_STYLE" Tracer une courbe quadratique lisse\n");
-    printf(BRIGHT_CYAN"  9)"RESET_STYLE" Fermer le chemin\n");
-    printf(BRIGHT_CYAN"  10)"RESET_STYLE" Annuler\n\n");
+    printf(BRIGHT_CYAN"  9)"RESET_STYLE" Fermer le chemin\n\n");
+    // printf(BRIGHT_CYAN"  10)"RESET_STYLE" Annuler\n\n");
 
-    return Int_recup_verify_with_padding(BRIGHT_GREEN"Choisissez une commande : "RESET_STYLE, 1, 10);
+    return Int_recup_verify_with_padding(BRIGHT_GREEN"Choisissez une commande : "RESET_STYLE, 1, 9);
 }
 
 void Recup_path_data(HeadPath* head) {
@@ -647,14 +648,14 @@ void Recup_path_data(HeadPath* head) {
 
     system("clear");
     printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-    printf(BRIGHT_CYAN"│  INITIALISATION PATH         │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│   INITIALISATION DU PATH     │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
     printf("Souhaitez vous lire la documentation pour concevoir un 'Path' ?\n");
     printf("Tapez une touche avant la fin du chrono pour skip :  ");
     Chrono(5);
 
-    if (kbhit()) getchar();
+    if (kbhit()) while(kbhit()) getchar();
     else Infos_path();
 
     int choice = 0, breaker = 0;
@@ -664,9 +665,9 @@ void Recup_path_data(HeadPath* head) {
         system("clear");
         Display_path_list(head);
 
-        printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-        printf(BRIGHT_CYAN"│   AJOUTER UN ÉLÉMENT         │\n"RESET_STYLE);
-        printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+        // printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+        // printf(BRIGHT_CYAN"│   AJOUTER UN ÉLÉMENT         │\n"RESET_STYLE);
+        // printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
         choice = Menu_commands();
         choice--;
@@ -680,9 +681,14 @@ void Recup_path_data(HeadPath* head) {
                 
                 printf("Souhaitez vous lire la documentation ?\n");
                 printf("Tapez une touche avant la fin du chrono pour skip :  ");
-                Chrono(5);
+                Chrono_without_clear(5);
 
-                if (kbhit()) getchar();
+
+                if (kbhit())
+                {
+                    while(kbhit()) getchar();
+                    Delete_two_lines();
+                } 
                 else Infos_M();
 
                 node = Create_new_path_element(choice);
@@ -702,9 +708,13 @@ void Recup_path_data(HeadPath* head) {
                 
                 printf("Souhaitez vous lire la documentation ?\n");
                 printf("Tapez une touche avant la fin du chrono pour skip :  ");
-                Chrono(5);
+                Chrono_without_clear(5);
 
-                if (kbhit()) getchar();
+                if (kbhit())
+                {
+                    while(kbhit()) getchar();
+                    Delete_two_lines();
+                } 
                 else Infos_L();
 
                 node = Create_new_path_element(choice);
@@ -724,9 +734,13 @@ void Recup_path_data(HeadPath* head) {
                 
                 printf("Souhaitez vous lire la documentation ?\n");
                 printf("Tapez une touche avant la fin du chrono pour skip :  ");
-                Chrono(5);
+                Chrono_without_clear(5);
 
-                if (kbhit()) getchar();
+                 if (kbhit())
+                {
+                    while(kbhit()) getchar();
+                    Delete_two_lines();
+                } 
                 else Infos_H();
 
                 node = Create_new_path_element(choice);
@@ -745,9 +759,13 @@ void Recup_path_data(HeadPath* head) {
                 
                 printf("Souhaitez vous lire la documentation ?\n");
                 printf("Tapez une touche avant la fin du chrono pour skip :  ");
-                Chrono(5);
+                Chrono_without_clear(5);
 
-                if (kbhit()) getchar();
+                 if (kbhit())
+                {
+                    while(kbhit()) getchar();
+                    Delete_two_lines();
+                } 
                 else Infos_V();
 
                 node = Create_new_path_element(choice);
@@ -766,9 +784,13 @@ void Recup_path_data(HeadPath* head) {
                 
                 printf("Souhaitez vous lire la documentation ?\n");
                 printf("Tapez une touche avant la fin du chrono pour skip :  ");
-                Chrono(5);
+                Chrono_without_clear(5);
 
-                if (kbhit()) getchar();
+                 if (kbhit())
+                {
+                    while(kbhit()) getchar();
+                    Delete_two_lines();
+                } 
                 else Infos_C();
 
                 node = Create_new_path_element(choice);
@@ -797,9 +819,13 @@ void Recup_path_data(HeadPath* head) {
                 
                 printf("Souhaitez vous lire la documentation ?\n");
                 printf("Tapez une touche avant la fin du chrono pour skip :  ");
-                Chrono(5);
+                Chrono_without_clear(5);
 
-                if (kbhit()) getchar();
+                 if (kbhit())
+                {
+                    while(kbhit()) getchar();
+                    Delete_two_lines();
+                } 
                 else Infos_S();
 
                 node = Create_new_path_element(choice);
@@ -824,9 +850,13 @@ void Recup_path_data(HeadPath* head) {
                 
                 printf("Souhaitez vous lire la documentation ?\n");
                 printf("Tapez une touche avant la fin du chrono pour skip :  ");
-                Chrono(5);
+                Chrono_without_clear(5);
 
-                if (kbhit()) getchar();
+                 if (kbhit())
+                {
+                    while(kbhit()) getchar();
+                    Delete_two_lines();
+                } 
                 else Infos_Q();
 
                 node = Create_new_path_element(choice);
@@ -851,9 +881,13 @@ void Recup_path_data(HeadPath* head) {
                 
                 printf("Souhaitez vous lire la documentation ?\n");
                 printf("Tapez une touche avant la fin du chrono pour skip :  ");
-                Chrono(5);
+                Chrono_without_clear(5);
 
-                if (kbhit()) getchar();
+                if (kbhit())
+                {
+                    while(kbhit()) getchar();
+                    Delete_two_lines();
+                } 
                 else Infos_T();
 
                 node = Create_new_path_element(choice);
@@ -874,9 +908,13 @@ void Recup_path_data(HeadPath* head) {
                 
                 printf("Souhaitez vous lire la documentation ?\n");
                 printf("Tapez une touche avant la fin du chrono pour skip :  ");
-                Chrono(5);
+                Chrono_without_clear(5);
 
-                if (kbhit()) getchar();
+                 if (kbhit())
+                {
+                    while(kbhit()) getchar();
+                    Delete_two_lines();
+                } 
                 else Infos_Z();
 
                 node = Create_new_path_element(choice);
@@ -884,13 +922,11 @@ void Recup_path_data(HeadPath* head) {
                 
                 Add_path_element(head, node);
             break;
-
-            case 9:
-            return;
             
+            // case 9: return; break;
+
             default:
-                Print_in_red("Commande invalide !");
-                sleep(2);
+                return;
             break;
         }
 
@@ -902,9 +938,14 @@ void Recup_path_data(HeadPath* head) {
         printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
         printf(BRIGHT_GREEN"Appuyez sur une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
         breaker = Chrono_assassin(5);
+
+        if (kbhit())
+        { while(kbhit()) getchar(); } 
+
         system("clear");
 
     } while(!breaker);
+    // if (node) Destroy_path_element(node);
 }
 
 
@@ -987,7 +1028,7 @@ int Modify_path_element_menu() {
     int choice = 0;
 
     printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-    printf(BRIGHT_CYAN"│   MODIFIER L'ÉLÉMENT         │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│     MODIFIER L'ÉLÉMENT       │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
     switch (choice) {
@@ -1155,6 +1196,8 @@ void Modify_path_element(Node* node) {
                 choice = Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 1);
                 return;
                 break;
+            
+            // default: return; break;
         }
 
         system("clear");
@@ -1164,6 +1207,12 @@ void Modify_path_element(Node* node) {
         printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
         printf(BRIGHT_GREEN"Appuyez sur une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
         breaker = Chrono_assassin(5);
+
+         if (kbhit())
+        {
+            while(kbhit()) getchar();
+        } 
+
         system("clear");
 
     } while(!breaker);
@@ -1207,6 +1256,11 @@ void Delete_path_element_by_index(HeadPath* head, int index) {
     printf(BRIGHT_GREEN"Attendez la fin du chrono pour confirmer ou appuyez sur une touche avant pour annuler :  "RESET_STYLE);
 
     int breaker = Chrono_assassin(5);
+    if (kbhit())
+    {
+        while(kbhit()) getchar();
+        Delete_two_lines();
+    } 
 
     if (!breaker) {
         Auto_write(BRIGHT_RED"\nSuppression annulée...\n"RESET_STYLE, 30000);
@@ -1237,6 +1291,7 @@ void Delete_path_element_by_index(HeadPath* head, int index) {
 int Modify_path_menu() {
     int choice = 0;
 
+
     printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
     printf(BRIGHT_CYAN"│    MODIFIER LE PATH          │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
@@ -1258,13 +1313,13 @@ void Modify_path(HeadPath* head) {
 
     do {
         system("clear");
-        Display_path(head);
+        Display_path_list(head);
         choice = Modify_path_menu();
 
         switch(choice) {
             case 1: {
                 system("clear");
-                Display_path(head);
+                Display_path_list(head);
                 int index = Int_recup_verify(BRIGHT_GREEN"Sur quel élément souhaitez-vous agir ? : "RESET_STYLE);
                 Node* current = head->start;
                 int counter = 1;
@@ -1295,7 +1350,11 @@ void Modify_path(HeadPath* head) {
                     printf("Tapez une touche avant la fin du chrono pour skip :  ");
                     Chrono(5);
 
-                    if (kbhit()) getchar();
+                    if (kbhit())
+                    {
+                        while(kbhit()) getchar();
+                        Delete_two_lines();
+                    } 
                     else {
                         switch(cmd) {
                             case MOVE_TO: Infos_M(); break;
@@ -1312,8 +1371,8 @@ void Modify_path(HeadPath* head) {
 
                     system("clear");
                     printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
-                    printf(BRIGHT_CYAN"│      AJOUTER UN ÉLÉMENT ?    │\n"RESET_STYLE);
-                    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
+                    printf(BRIGHT_CYAN"│      AJOUTER UN ÉLÉMENT      │\n"RESET_STYLE);
+                    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n\n"RESET_STYLE);
 
                     switch(cmd) {
                         case MOVE_TO:
@@ -1356,24 +1415,31 @@ void Modify_path(HeadPath* head) {
                             break;
                         case CLOSE:
                             break;
+                        // case 9: if (new_node) Destroy_path_element(new_node); return; break;
+                        default: if (new_node) Destroy_path_element(new_node); return; break;
                     }
 
                     Add_path_element(head, new_node);
                     system("clear");
-                    Display_path(head);
+                    Display_path_list(head);
                     printf("\n");
                     printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
                     printf(BRIGHT_CYAN"│  AJOUTER UN AUTRE ÉLÉMENT ?  │\n"RESET_STYLE);
                     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
                     printf(BRIGHT_GREEN"Appuyez sur une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
                     cont = Chrono_assassin(5);
+                    if (kbhit())
+                    {
+                        while(kbhit()) getchar();
+                        Delete_two_lines();
+                    } 
                     system("clear");
                 } while(!cont);
                 break;
             }
             case 3:
                 system("clear");
-                Display_path(head);
+                Display_path_list(head);
                 int index = Int_recup_verify(BRIGHT_GREEN"Quel élément souhaitez-vous supprimer ? : "RESET_STYLE);
                 Node* current = head->start;
                 int counter = 1;
@@ -1402,6 +1468,13 @@ void Modify_path(HeadPath* head) {
         printf(BRIGHT_CYAN"╰──────────────────────────────╯\n"RESET_STYLE);
         printf(BRIGHT_GREEN"Appuyez sur une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
         breaker = Chrono_assassin(5);
+
+        if (kbhit())
+        {
+            while(kbhit()) getchar();
+            Delete_two_lines();
+        } 
+
         system("clear");
 
     } while(!breaker);
@@ -1533,6 +1606,7 @@ void Export_path(HeadPath* head, Style* style) {
             case CLOSE:
                 fprintf(write_file, "Z");
             break;
+            
         }
 
         node = node->next;
@@ -1587,5 +1661,5 @@ void Export_path(HeadPath* head, Style* style) {
 //     Display_path(head);
 //     Destroy_path(head);
 
-//     return EXIT_SUCCESS;
+//     return EXITE_SUCCESS;
 // }

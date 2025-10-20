@@ -6,6 +6,8 @@
 #include <time.h>
 #include <unistd.h>
 
+
+
 #include "../../other/kbhit.h"
 #include "../../common-h.h"
 //DEFINE DE MISE EN FORME
@@ -249,6 +251,13 @@ float Float_recup_verify_with_padding(const char *prompt, float min_value, float
 void Progress_bar_animation(int duration_sec);
 
 void msleep(int ms);
+
+void enable_input(void);
+
+void disable_input(void);
+
+void clear_screen(void);
+
 
 
 #endif

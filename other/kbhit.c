@@ -1,7 +1,8 @@
 #include "./kbhit.h"
 
 //Et voilà que je dois me coller les configs du terminal Linux juste pour lire dans le buffer !
-//Heureusement qu'y a un chat juste là ... MDR
+//Heureusement qu'y a mon chat juste là ... MDR
+
 int kbhit(void) {
     struct termios oldt, newt;
     int ch;

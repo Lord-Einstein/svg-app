@@ -4,6 +4,7 @@
 int First_menu() {
     system("clear");
     printf("\n");
+    if (kbhit()) while(kbhit()) getchar();
     printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
     printf(BRIGHT_CYAN"│        MENU PRINCIPAL        │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
@@ -355,7 +356,7 @@ void Path_edit_universe() {
     while (1)
     {
         system("clear");
-        Display_path(head);
+        Display_path_list(head);
         Display_style(style);
         second_choice = Second_menu();
         switch (second_choice) {
@@ -486,8 +487,9 @@ void Create_bloc() {
 }
 
 int main(void) {
+
     system("clear");
-    Auto_write(BRIGHT_CYAN"\nBienvenue dans l'éditeur en CLI NOAH-SVG.\n"RESET_STYLE, 35000);
+    Auto_write(BRIGHT_CYAN"Bienvenue dans l'éditeur en CLI NOAH-SVG.\n"RESET_STYLE, 35000);
     Auto_write("Chargement de l’environnement...", 40000);
     sleep(1);
     system("clear");

@@ -57,17 +57,59 @@ void Delete_a_consol_line(){
 }
 
 
+// Sauvegarde l'état du terminal
+static struct termios oldt, newt;
+
+void disable_input(void) {
+    tcgetattr(STDIN_FILENO, &oldt);      // lire les paramètres actuels
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);    // désactive mode canonique et écho
+    newt.c_cc[VMIN] = 0;                 // pas d'attente de caractère
+    newt.c_cc[VTIME] = 0;                // pas de temporisation
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+}
+
+void enable_input(void) {
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restaure le terminal
+}
+
+void clear_screen(void) {
+    printf("\033[2J\033[H");
+    fflush(stdout);
+}
+
+
 // FIN DES PROCEDURES DE MISE EN FORME
 
-
-
 void Chrono(int chrono) {
+    if (chrono > 9) chrono = 9;
+
+    while (chrono >= 0) {
+
+        printf("\b%d", chrono);
+        fflush(stdout);
+
+        sleep(1);
+        
+        if (kbhit()) {
+            system("clear");
+            return; 
+        }
+
+        chrono--;
+    }
+    system("clear");
+    return;
+}
+
+
+void Chronop(int chrono) {
     if(chrono > 9) chrono = 9;
     while(chrono >= 0 && !kbhit()){
 
         printf("\b%d", chrono); //À noter que %2d oblige un aff sur deux car avec un space devant sinon %02d le fait rn remplaçant space par 0
-        chrono--;
         sleep(1);
+        chrono--;
 
     }
     system("clear");
@@ -75,14 +117,22 @@ void Chrono(int chrono) {
 }
 
 void Chrono_without_clear(int chrono) {
-    if(chrono >= 9) chrono = 9;
-    while(chrono > 0 && !kbhit()){
+    if (chrono > 9) chrono = 9;
 
-        printf("\b%d", chrono); //À noter que %2d oblige un aff sur deux car avec un space devant sinon %02d le fait rn remplaçant space par 0
-        chrono--;
+    while (chrono >= 0) {
+
+        printf("\b%d", chrono);
+        fflush(stdout);
+
         sleep(1);
+        
+        if (kbhit()) {
+            return; 
+        }
 
+        chrono--;
     }
+    return;
 }
 
 int Chrono_assassin(int chrono) {
@@ -91,17 +141,17 @@ int Chrono_assassin(int chrono) {
     while (chrono >= 0) {
 
         printf("\b%d", chrono);
+        fflush(stdout);
 
-        chrono--;
         sleep(1);
-
+        
         if (kbhit()) {
-            getchar();
+            // while (kbhit()) getchar();
             return 0; 
         }
 
+        chrono--;
     }
-
     return 1;
 }
 
@@ -303,6 +353,11 @@ void Auto_write(const char *text, unsigned int delay_microseconds) {
 
     // Réactive la saisie clavier
     system("stty echo icanon");
+
+    if (kbhit())
+    {
+        while(kbhit()) getchar();
+    } 
 }
 
 

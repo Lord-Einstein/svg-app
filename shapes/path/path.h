@@ -6,6 +6,9 @@
 #include "../shapes-style/style.h"
 #include "../../svg/main.h"
 
+#define scanf(...) (Drain_buffer(), scanf(__VA_ARGS__))
+
+
 //STRUCTURES & UNIONS & ENUMS
 
 /**
@@ -258,6 +261,7 @@ HeadPath* Create_new_path();
 
 
 void Display_path_element_detailed(Node* node);
+void Display_path_list(HeadPath* head);
 int Modify_path_element_menu();
 void Modify_path_element(Node* node);
 void Delete_path_element_by_index(HeadPath* head, int index);
