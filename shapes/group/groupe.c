@@ -48,10 +48,10 @@ void Display_group_indent(Group* group, int indent_level) {
     GroupNode* node = group->start;
     int index = 1;
 
-    // indentation
+    // l'indentation
     for (int i = 0; i < indent_level; i++) printf("   ");
 
-    printf(BRIGHT_CYAN"📁 Groupe : "RESET_STYLE BOLD_WHITE_TEXT"%s\n"RESET_STYLE, group->name);
+    printf(BRIGHT_CYAN"• Groupe : "RESET_STYLE BOLD_WHITE_TEXT"%s\n"RESET_STYLE, group->name);
 
     if (!node) {
         for (int i = 0; i <= indent_level; i++) printf("   ");
@@ -65,35 +65,35 @@ void Display_group_indent(Group* group, int indent_level) {
 
         switch (node->node->shapes) {
             case CIRCLE:
-                printf(BRIGHT_MAGENTA"● Cercle\n"RESET_STYLE);
+                printf(BRIGHT_MAGENTA"Cercle\n"RESET_STYLE);
                 break;
             case ELLIPSE:
-                printf(BRIGHT_MAGENTA"⬭ Ellipse\n"RESET_STYLE);
+                printf(BRIGHT_MAGENTA"Ellipse\n"RESET_STYLE);
                 break;
             case RECTANGLE:
-                printf(BRIGHT_MAGENTA"▭ Rectangle\n"RESET_STYLE);
+                printf(BRIGHT_MAGENTA"Rectangle\n"RESET_STYLE);
                 break;
             case SQUARE:
-                printf(BRIGHT_MAGENTA"■ Carré\n"RESET_STYLE);
+                printf(BRIGHT_MAGENTA"Carré\n"RESET_STYLE);
                 break;
             case LINE:
-                printf(BRIGHT_MAGENTA"─ Ligne\n"RESET_STYLE);
+                printf(BRIGHT_MAGENTA"Ligne\n"RESET_STYLE);
                 break;
             case PATH:
-                printf(BRIGHT_MAGENTA"⚙ Path\n"RESET_STYLE);
+                printf(BRIGHT_MAGENTA"Path\n"RESET_STYLE);
                 break;
             case POLYGON:
-                printf(BRIGHT_MAGENTA"⬡ Polygone\n"RESET_STYLE);
+                printf(BRIGHT_MAGENTA"Polygone\n"RESET_STYLE);
                 break;
             case POLYLINE:
-                printf(BRIGHT_MAGENTA"〰 Polyligne\n"RESET_STYLE);
+                printf(BRIGHT_MAGENTA"Polyligne\n"RESET_STYLE);
                 break;
             case GROUP:
-                printf(BRIGHT_CYAN"📂 Sous-groupe :\n"RESET_STYLE);
+                printf(BRIGHT_CYAN"° Sous-groupe :\n"RESET_STYLE);
                 Display_group_indent(node->node->current_shapes.group, indent_level + 1);
                 break;
             default:
-                printf(RED"❓ Forme inconnue\n"RESET_STYLE);
+                printf(RED"Forme inconnue\n"RESET_STYLE);
                 break;
         }
         node = node->next;
