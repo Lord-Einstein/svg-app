@@ -240,16 +240,50 @@ unsigned int Unsigned_int_recup_verify(const char* prompt);
 */
 int Chrono_assassin(int chrono);
 
+
+/**
+ * Ignore tous les retours à la ligne supplémentaires dans le buffer d'entrée standard.
+ */
 void Ignore_extra_enters(void);
 
+/**
+ * Affiche du texte caractère par caractère avec un délai spécifié.
+ * 
+ * @param text Chaîne de caractères à afficher.
+ * @param delay_microseconds Délai entre chaque caractère en microsecondes.
+ */
 void Auto_write(const char *text, unsigned int delay_microseconds);
 
+/**
+ * Récupère un nombre flottant de l'utilisateur avec vérification de limites et ajout de padding si nécessaire.
+ * 
+ * @param prompt Message à afficher pour inviter l'utilisateur à saisir.
+ * @param min_value Valeur minimale acceptée.
+ * @param max_value Valeur maximale acceptée.
+ * @return Valeur flottante saisie et vérifiée.
+ */
 float Float_recup_verify_with_padding(const char *prompt, float min_value, float max_value);
 
+/**
+ * Affiche une barre de progression animée pendant une durée spécifiée.
+ * 
+ * @param duration_sec Durée totale de l'animation en secondes.
+ */
 void Progress_bar_animation(int duration_sec);
 
+/**
+ * Met en pause l'exécution du programme pendant un nombre de millisecondes spécifié.
+ * 
+ * @param ms Durée de la pause en millisecondes.
+ */
 void msleep(int ms);
 
+/**
+ * Analyse et affiche une barre de progression animée pendant une durée spécifiée.
+ * 
+ * @param duration_sec Durée totale de l'animation en secondes.
+ */
 void Parser_progress_bar_animation(int duration_sec);
+
 
 #endif

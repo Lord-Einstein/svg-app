@@ -103,14 +103,46 @@ LinkPoint* Create_new_point(int x, int y);
 */
 Head* Create_new_polyline();
 
+
+
+// PROCEDURES --------------
+
+/**
+ * Affiche et gère le menu de modification d'une polyline.
+ * 
+ * @return Code de retour selon le choix effectué.
+ */
 int Modify_polyline_menu();
 
+/**
+ * Supprime un maillon LinkPoint selon son index dans la chaîne.
+ * 
+ * @param head Pointeur sur le début de la liste.
+ * @param index Index du maillon à supprimer.
+ */
 void Delete_point_by_index(Head* head, int index);
 
+/**
+ * Modifie les coordonnées d'un point existant.
+ * 
+ * @param point Pointeur sur le LinkPoint à modifier.
+ */
 void Modify_point(LinkPoint* point);
 
+/**
+ * Modifie une polyline existante.
+ * 
+ * @param head Pointeur sur la structure Head représentant la polyline.
+ */
 void Modify_polyline(Head* head);
 
+/**
+ * Exporte une polyline en SVG avec son style.
+ * 
+ * @param head Pointeur sur la polyline à exporter.
+ * @param style Pointeur sur le style à appliquer.
+ */
 void Export_polyline(Head* head, Style* style);
+
 
 #endif

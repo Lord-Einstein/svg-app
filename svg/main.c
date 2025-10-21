@@ -15,10 +15,10 @@ Svg* Create_new_svg() {
     svg->height = 100;
     svg->xlmns = "http://www.w3.org/2000/svg";
 
-    svg->view_box->minx = -50;
-    svg->view_box->miny = -50;
-    svg->view_box->width = 200;
-    svg->view_box->height = 200;
+    svg->view_box->minx = 0;
+    svg->view_box->miny = 0;
+    svg->view_box->width = 500;
+    svg->view_box->height = 500;
 
     return svg;
 }
@@ -26,7 +26,7 @@ Svg* Create_new_svg() {
 
 int Does_svg_exist(Svg* svg) {
     if (!svg || !svg->view_box) {
-        Print_in_red("\nSVG Not Found !\n");
+        Print_in_red("\nSVG Not Founnnnnnnnnnnd !\n");
         return 0;
     }
     return 1;
@@ -145,13 +145,13 @@ void Export_svg(Svg* svg) {
 
     FILE* write_file = fopen(file_name, "w");
     if (!write_file) {
-        Print_in_red("Erreur lors de la création du fichier.\n");
+        Print_in_red("Erreur de création du fichier.\n");
         return;
     }
 
     fprintf(write_file,
         "<svg xmlns=\"%s\" width=\"%u%%\" height=\"%u%%\" viewBox=\"%d %d %u %u\">\n"
-        "  <!-- SVG vide prêt à recevoir des formes -->\n"
+        "  <!-- SVG -->\n"
         "</svg>\n",
         svg->xlmns,
         svg->width, svg->height,

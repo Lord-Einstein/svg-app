@@ -30,9 +30,23 @@ void Display_polygone(Head* head);
 */
 void Recup_polygone_data(Head* head);
 
-void Display_polygone(Head* head);
+
+
+/**
+ * Modifie un polygone existant.
+ * 
+ * @param head Pointeur sur la structure Head représentant le polygone à modifier.
+ */
 
 void Modify_polygone(Head* head);
+
+
+/**
+ * Exporte un polygone en SVG avec son style associé.
+ * 
+ * @param head Pointeur sur la structure Head représentant le polygone à exporter.
+ * @param style Pointeur sur la structure Style à appliquer.
+ */
 
 void Export_polygone(Head* head, Style* style);
 

@@ -5,73 +5,88 @@
 #include "../shapes-style/style.h"
 #include "../../svg/main.h"
 
-//Noms de structures, d'enums, d'unions :: PascalCase
-//Noms de varaibles :: snake_case
-//Noms de fontions ou de procédures :: Big_snake_case
-
+// Noms de structures, d'enums, d'unions :: PascalCase
+// Noms de variables :: snake_case
+// Noms de fonctions ou de procédures :: Big_snake_case
 
 // STRUCTURE --------------
 typedef struct {
     int x, y;
     unsigned int height, width, round;
-}Rect;
-
-
+} Rect;
 
 // PROCEDURES --------------
 
 /**
- * @brief Cette procédure affiche à l'utilisateur les informations sur la création d'un rectangle en format SVG
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/circle"> En savoir plus sur les cercles SVG.</a>
-*/
+ * @brief Cette procédure affiche les informations sur la création d'un rectangle en SVG.
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/circle">En savoir plus sur les cercles SVG.</a>
+ */
 void Infos_rect();
 
 /**
- * Cette procédure récupère les informations entrées par l'utilisateur pour créer un rectangle.
- * (Elle vérifie toujours si le pointeur n'est pas nul).
- * @param rect Prend en paramètre un pointeur sur le rectangle à créer, puis procède par un remplissage par adressse.
-*/
+ * Récupère les informations saisies pour créer un rectangle.
+ * Vérifie que le pointeur n'est pas nul avant de remplir.
+ * 
+ * @param rect Pointeur sur le rectangle à remplir.
+ */
 void Recup_rect_data(Rect* rect);
 
 /**
- * Cette procédure libère l'allocation mémoire faite à la création d'une instance de type 'Rect'.
- * @param rect Prend en paramètre un pointeur sur l'instance de Rectangle à détruire et le libère grâce au free.
-*/
+ * Libère la mémoire allouée à un rectangle.
+ * 
+ * @param rect Pointeur sur l'instance à détruire.
+ */
 void Destroy_rect(Rect* rect);
 
 /**
- * Cette procédure affiche les informations contenues dans une instance 'Rect' passée en paramètre.
- * @param rect Prends en paramètre un pointeur sur l'instance de Rectangle dont on souhaite afficher les informations.
-*/
+ * Affiche les informations d'un rectangle.
+ * 
+ * @param rect Pointeur sur l'instance à afficher.
+ */
 void Display_rect(Rect* rect);
-
-
 
 // FONCTIONS ------------
 
 /**
- * Cette fonction vérifie si le pointeur qui contient l'allocation sur un Rectangle existe (!=NULL)
- * @param rect Prend un pointeur sur 'Rect' et vérifie si il existe bien.
- * @return Retourne un True si le pointeur a bien reçu l'allocation et un False dans le cas contraire.
-*/
+ * Vérifie si un rectangle existe (pointeur non nul).
+ * 
+ * @param rect Pointeur sur le rectangle à tester.
+ * @return 1 si le rectangle existe, 0 sinon.
+ */
 int Does_rect_exist(Rect* rect);
 
 /**
- * Cette fonction crée un rectangle en attribuant les valeurs qui lui sont passées aux attributs respectifs d'un 'rect' SVG.
- * @param x Valeur entière de la position du centre sur l'axe des abscisses (X).
- * @param y Valeur entière de la position du centre sur l'axe des ordonnées(Y).
- * @param height Valeur entière non signée de la hauteur du rectangle en pixels.
- * @param width Valeur entière non signée de la largeur du rectangle en pixels.
- * @param round Valeur entière non signée du rayon d'arrondi en pixels.
- * @return Retourne un pointeur sur la stucture 'Rect'
- en manipulant l'allocation mémoire. Il faut donc garder à l'esprit que le rectangle qui reçoit le retour de cette fonction doit être obligatoirement 'free' à la fin.
-*/
+ * Crée un rectangle avec les paramètres donnés.
+ * 
+ * @param x Position X du centre.
+ * @param y Position Y du centre.
+ * @param height Hauteur du rectangle en pixels.
+ * @param width Largeur du rectangle en pixels.
+ * @param round Rayon d’arrondi.
+ * @return Pointeur sur la structure Rect créée (à libérer avec free()).
+ */
 Rect* Create_rect(int x, int y, unsigned int height, unsigned int width, unsigned int round);
 
+/**
+ * Affiche et gère le menu de modification du rectangle.
+ * 
+ * @return Code de retour selon le choix effectué.
+ */
 int Modify_rect_menu();
 
+/**
+ * Modifie un rectangle existant.
+ * 
+ * @param rect Pointeur sur le rectangle à modifier.
+ */
 void Modify_rect(Rect* rect);
 
+/**
+ * Exporte un rectangle en SVG avec son style.
+ * 
+ * @param rect Pointeur sur le rectangle à exporter.
+ * @param style Style à appliquer.
+ */
 void Export_rect(Rect* rect, Style* style);
 
 #endif

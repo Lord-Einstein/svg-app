@@ -3,64 +3,85 @@
 
 #include "../rectangle/main.h"
 
-//Noms de structures, d'enums, d'unions :: PascalCase
-//Noms de varaibles :: snake_case
-//Noms de fontions ou de procédures :: Big_snake_case
-
+// Noms de structures, d'enums, d'unions :: PascalCase
+// Noms de variables :: snake_case
+// Noms de fonctions ou de procédures :: Big_snake_case
 
 // PROCEDURES --------------
 
 /**
- * @brief Cette procédure affiche à l'utilisateur les informations sur la création d'un carré en format SVG
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/circle"> En savoir plus sur les SVG.</a>
-*/
+ * Affiche à l'utilisateur les informations sur la création d'un carré au format SVG.
+ * 
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/rect">En savoir plus sur les éléments SVG.</a>
+ */
 void Infos_square();
 
 /**
- * Cette procédure récupère les informations entrées par l'utilisateur pour créer un carré.
- * (Elle vérifie toujours si le pointeur n'est pas nul).
- * @param square Prend en paramètre un pointeur sur le carré à créer, puis procède par un remplissage par adressse.
-*/
+ * Récupère les informations saisies par l'utilisateur pour créer un carré.
+ * 
+ * Vérifie que le pointeur n'est pas nul avant d'effectuer le remplissage.
+ * 
+ * @param square Pointeur sur le carré à créer, rempli par adresse.
+ */
 void Recup_square_data(Rect* square);
 
 /**
- * Cette procédure libère l'allocation mémoire faite à la création d'une instance de type 'Rect'.
- * @param square Prend en paramètre un pointeur sur l'instance de Square à détruire et le libère grâce au free.
-*/
+ * Libère la mémoire allouée à une instance de type Rect.
+ * 
+ * @param square Pointeur sur l'instance de carré à détruire.
+ */
 void Destroy_square(Rect* square);
 
 /**
- * Cette procédure affiche les informations contenues dans une instance 'Rect' passée en paramètre.
- * @param square Prends en paramètre un pointeur sur l'instance de Square dont on souhaite afficher les informations.
-*/
+ * Affiche les informations d'une instance Rect passée en paramètre.
+ * 
+ * @param square Pointeur sur l'instance de carré à afficher.
+ */
 void Display_square(Rect* square);
-
 
 
 // FONCTIONS ------------
 
 /**
- * Cette fonction vérifie si le pointeur qui contient l'allocation sur un Carré existe (!=NULL)
- * @param square Prend un pointeur sur 'Rect' et vérifie si il existe bien.
- * @return Retourne un True si le pointeur a bien reçu l'allocation et un False dans le cas contraire.
-*/
+ * Vérifie si un carré existe (pointeur non nul).
+ * 
+ * @param square Pointeur sur une structure Rect.
+ * @return 1 si le carré existe, 0 sinon.
+ */
 int Does_square_exist(Rect* square);
 
 /**
- * Cette fonction crée un rectangle en attribuant les valeurs qui lui sont passées aux attributs respectifs d'un 'rect' SVG.
- * @param x Valeur entière de la position du centre sur l'axe des abscisses (X).
- * @param y Valeur entière de la position du centre sur l'axe des ordonnées(Y).
- * @param height Valeur entière non signée de la hauteur du rectangle en pixels.
- * @param round Valeur entière non signée du rayon d'arrondi en pixels.
- * @return Retourne un pointeur sur la stucture 'Rect'
- en manipulant l'allocation mémoire. Il faut donc garder à l'esprit que le rectangle qui reçoit le retour de cette fonction doit être obligatoirement 'free' à la fin.
-*/
+ * Crée un carré en initialisant ses attributs.
+ * 
+ * @param x Position du centre sur l’axe X.
+ * @param y Position du centre sur l’axe Y.
+ * @param height Hauteur du carré en pixels.
+ * @param round Rayon d’arrondi en pixels.
+ * @return Pointeur sur la structure Rect créée. 
+ *         Doit être libéré avec free() après utilisation.
+ */
 Rect* Create_square(int x, int y, unsigned int height, unsigned int round);
 
+/**
+ * Affiche et gère le menu de modification d’un carré.
+ * 
+ * @return Code de retour selon le choix effectué.
+ */
 int Modify_square_menu();
 
+/**
+ * Modifie les propriétés d’un carré existant.
+ * 
+ * @param square Pointeur sur la structure Rect à modifier.
+ */
 void Modify_square(Rect* square);
 
+/**
+ * Exporte un carré en format SVG avec son style.
+ * 
+ * @param square Pointeur sur la structure Rect à exporter.
+ * @param style Pointeur sur la structure Style à appliquer.
+ */
 void Export_square(Rect* square, Style* style);
 
 #endif
