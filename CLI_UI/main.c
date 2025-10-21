@@ -51,41 +51,8 @@ int Menu_shapes() {
     return Int_recup_verify_with_padding(BRIGHT_GREEN"Choisissez la forme à créer : "RESET_STYLE, 1, 10);
 }
 
-typedef enum AllShapesEnum_E {
-    SHAPE_CIRCLE = 1,
-    SHAPE_ELLIPSE,
-    SHAPE_RECTANGLE,
-    SHAPE_SQUARE,
-    SHAPE_LINE,
-    SHAPE_POLYGON,
-    SHAPE_POLYLINE,
-    SHAPE_PATH,
-    SHAPE_GROUP,
-    OUT
-} AllShapesEnum;
-
-typedef enum FirstMenu_E {
-    CREER = 1,
-    CHARGER,
-    QUITTER_FIRST
-} FirstMenu;
-
-typedef enum SecondMenu_E {
-    MODIFIER = 1,
-    STYLISER,
-    EXPORTER,
-    SUPPRIMER
-} SecondMenu;
-
-
-void Circle_edit_universe() {
-    Circle* circle = Create_circle(0, 0, 0);
-    Style* style = Create_style();
-
+void Circle_loop(Circle* circle, Style* style) {
     int second_choice = 0;
-    system("clear");
-    Recup_circle_data(circle);
-   
     while (1)
     {
         system("clear");
@@ -121,15 +88,20 @@ void Circle_edit_universe() {
         }
     }
 }
-
-void Ellipse_edit_universe() {
-    Ellipse* ellipse = Create_ellipse(0, 0, 0, 0);
+void Circle_edit_universe() {
+    Circle* circle = Create_circle(0, 0, 0);
     Style* style = Create_style();
 
-    int second_choice = 0;
     system("clear");
-    Recup_ellipse_data(ellipse);
+    Recup_circle_data(circle);
    
+    Circle_loop(circle, style);
+    
+}
+
+
+void Ellipse_loop(Ellipse* ellipse, Style* style) {
+    int second_choice = 0;
     while (1)
     {
         system("clear");
@@ -165,15 +137,19 @@ void Ellipse_edit_universe() {
         }
     }
 }
-
-void Rect_edit_universe() {
-    Rect* rect = Create_rect(0, 0, 0, 0, 0);
+void Ellipse_edit_universe() {
+    Ellipse* ellipse = Create_ellipse(0, 0, 0, 0);
     Style* style = Create_style();
 
-    int second_choice = 0;
     system("clear");
-    Recup_rect_data(rect);
+    Recup_ellipse_data(ellipse);
    
+    Ellipse_loop(ellipse, style);
+}
+
+
+void Rect_loop(Rect* rect, Style* style) {
+    int second_choice = 0;
     while (1)
     {
         system("clear");
@@ -209,6 +185,16 @@ void Rect_edit_universe() {
         }
     }
 }
+void Rect_edit_universe() {
+    Rect* rect = Create_rect(0, 0, 0, 0, 0);
+    Style* style = Create_style();
+
+    system("clear");
+    Recup_rect_data(rect);
+   
+    Rect_loop(rect, style);
+}
+
 
 void Square_edit_universe() {
     Rect* square = Create_square(0, 0, 0, 0);
@@ -254,14 +240,10 @@ void Square_edit_universe() {
     }
 }
 
-void Line_edit_universe() {
-    Line* line = Create_line(0, 0, 0, 0);
-    Style* style = Create_style();
 
+void Line_loop(Line* line, Style* style) {
     int second_choice = 0;
-    system("clear");
-    Recup_line_data(line);
-   
+
     while (1)
     {
         system("clear");
@@ -297,16 +279,19 @@ void Line_edit_universe() {
         }
     }
 }
-
-
-void Polyline_edit_universe() {
-    Head* head = Create_new_polyline();
+void Line_edit_universe() {
+    Line* line = Create_line(0, 0, 0, 0);
     Style* style = Create_style();
 
-    int second_choice = 0;
     system("clear");
-    Recup_polyline_data(head);
+    Recup_line_data(line);
    
+    Line_loop(line, style);
+}
+
+
+void Polyline_loop(Head* head, Style* style) {
+    int second_choice = 0;
     while (1)
     {
         system("clear");
@@ -342,17 +327,19 @@ void Polyline_edit_universe() {
         }
     }
 }
-
-
-void Path_edit_universe() {
-    HeadPath* head = Create_new_path();
+void Polyline_edit_universe() {
+    Head* head = Create_new_polyline();
     Style* style = Create_style();
 
-    int second_choice = 0;
     system("clear");
-    
-    Recup_path_data(head);
+    Recup_polyline_data(head);
    
+    Polyline_loop(head, style);
+}
+
+
+void Path_loop(HeadPath* head, Style* style) {
+    int second_choice = 0;
     while (1)
     {
         system("clear");
@@ -388,16 +375,19 @@ void Path_edit_universe() {
         }
     }
 }
-
-
-void Polygone_edit_universe() {
-    Head* head = Create_new_polyline();
+void Path_edit_universe() {
+    HeadPath* head = Create_new_path();
     Style* style = Create_style();
 
-    int second_choice = 0;
     system("clear");
-    Recup_polygone_data(head);
+    
+    Recup_path_data(head);
    
+    Path_loop(head, style);
+}
+
+void Polygone_loop(Head* head, Style* style) {
+    int second_choice = 0;
     while (1)
     {
         system("clear");
@@ -433,6 +423,18 @@ void Polygone_edit_universe() {
         }
     }
 }
+void Polygone_edit_universe() {
+    Head* head = Create_new_polyline();
+    Style* style = Create_style();
+
+    system("clear");
+    Recup_polygone_data(head);
+   
+    Polygone_loop(head, style);
+}
+
+
+
 
 void Create_bloc() {
     int shape_choice = 0;
@@ -494,31 +496,32 @@ int main(void) {
     sleep(1);
     system("clear");
 
-    int first_menu_choice = 0;
-    while (1) {
-        first_menu_choice = First_menu();
+   int first_menu_choice = 0;
+   while (1) {
+       first_menu_choice = First_menu();
 
-        switch (first_menu_choice) {
-            case CREER:
-                Create_bloc();
-                break;
+       switch (first_menu_choice) {
+           case CREER:
+               Create_bloc();
+               break;
 
-            case CHARGER:
-                Auto_write(BRIGHT_YELLOW"\nFonction de chargement en développement...\n"RESET_STYLE, 35000);
-                sleep(1);
-                break;
+           case CHARGER:
+                Parser();
+            //    Auto_write(BRIGHT_YELLOW"\nFonction de chargement en développement...\n"RESET_STYLE, 35000);
+               sleep(1);
+               break;
 
-            case QUITTER_FIRST:
-                Auto_write(BRIGHT_RED"\nFermeture du programme...\n\n"RESET_STYLE, 30000);
-                sleep(1);
-                return 0;
+           case QUITTER_FIRST:
+               Auto_write(BRIGHT_RED"\nFermeture du programme...\n\n"RESET_STYLE, 30000);
+               sleep(1);
+               return 0;
 
-            default:
-                Print_in_red("Choix invalide. Réessayez.\n");
-                sleep(1);
-                break;
-        }
-    }
+           default:
+               Print_in_red("Choix invalide. Réessayez.\n");
+               sleep(1);
+               break;
+       }
+   }
 
     return EXIT_SUCCESS;
 }

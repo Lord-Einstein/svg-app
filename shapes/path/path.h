@@ -6,7 +6,7 @@
 #include "../shapes-style/style.h"
 #include "../../svg/main.h"
 
-#define scanf(...) (Drain_buffer(), scanf(__VA_ARGS__))
+// #define scanf(...) (Drain_buffer(), scanf(__VA_ARGS__))
 
 
 //STRUCTURES & UNIONS & ENUMS

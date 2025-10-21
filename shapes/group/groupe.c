@@ -268,12 +268,12 @@ void Recup_group_data(Group* group) {
 }
 
 
-// int main(void) {
+//  int main(void) {
 
-//     Group* group = Create_new_group();
-//     Recup_group_data(group);
-//     Display_group(group);
-//     Destroy_group(group);
+//      Group* group = Create_new_group();
+//      Recup_group_data(group);
+//      Display_group(group);
+//      Destroy_group(group);
 
-//     return EXIT_SUCCESS;
-//  }
+//      return EXIT_SUCCESS;
+//   }

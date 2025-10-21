@@ -258,6 +258,6 @@ void disable_input(void);
 
 void clear_screen(void);
 
-
+void Parser_progress_bar_animation(int duration_sec);
 
 #endif
