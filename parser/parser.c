@@ -575,7 +575,7 @@ void Parser() {
     char name[50];
     char access[100];
 
-    printf(BRIGHT_GREEN"\nEntrez le nom du fichier : ");
+    printf(BRIGHT_GREEN"\nEntrez le nom du fichier : "RESET_STYLE);
     scanf("%49s", name);
 
     snprintf(access, sizeof(access), "../Generated_Files/%s.svg", name);
@@ -585,7 +585,6 @@ void Parser() {
     if (svg) {
         // printf("\nParsing réussi!\n");
         Destroy_svg(svg);
-        
     } else {
        return;
     }

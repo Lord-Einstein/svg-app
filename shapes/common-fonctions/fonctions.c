@@ -3,8 +3,6 @@
 
 // PROCEDURES -------------------
 
-
-
 //PROCEDURES DE MISE EN FORME
 
 // Couleurs normales
@@ -26,9 +24,6 @@ void Print_in_bright_blue(const char* prompt)    { printf(BRIGHT_BLUE"%s"RESET_S
 void Print_in_bright_magenta(const char* prompt) { printf(BRIGHT_MAGENTA"%s"RESET_STYLE, prompt); }
 void Print_in_bright_cyan(const char* prompt)    { printf(BRIGHT_CYAN"%s"RESET_STYLE, prompt); }
 void Print_in_bright_white(const char* prompt)   { printf(BRIGHT_WHITE"%s"RESET_STYLE, prompt); }
-
-
-
 
 
 
@@ -54,28 +49,6 @@ void Delete_six_lines(){
 
 void Delete_a_consol_line(){
     printf("\r                                                                                            \r");
-}
-
-
-// Sauvegarde l'état du terminal
-static struct termios oldt, newt;
-
-void disable_input(void) {
-    tcgetattr(STDIN_FILENO, &oldt);      // lire les paramètres actuels
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);    // désactive mode canonique et écho
-    newt.c_cc[VMIN] = 0;                 // pas d'attente de caractère
-    newt.c_cc[VTIME] = 0;                // pas de temporisation
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-}
-
-void enable_input(void) {
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restaure le terminal
-}
-
-void clear_screen(void) {
-    printf("\033[2J\033[H");
-    fflush(stdout);
 }
 
 
@@ -146,7 +119,6 @@ int Chrono_assassin(int chrono) {
         sleep(1);
         
         if (kbhit()) {
-            // while (kbhit()) getchar();
             return 0; 
         }
 
@@ -199,7 +171,7 @@ float Float_recup_verify_with_padding(const char *prompt, float min_value, float
             fflush(stdout);
             sleep(2);
             Delete_two_lines();
-            scanf_return = 0; // force la boucle à recommencer
+            scanf_return = 0;
         }
 
     } while (scanf_return != 1);
@@ -240,14 +212,12 @@ int Int_recup_verify_with_padding(const char *prompt, int min_value, int max_val
             Delete_two_lines();
             continue;
         }
-
-        // Vérification de la plage
         if (a_int < min_value || a_int > max_value) {
             Print_in_red("Entrée Invalide !");
             fflush(stdout);
             sleep(1);
             Delete_two_lines();
-            scanf_return = 0; // force la répétition
+            scanf_return = 0;
         }
 
     } while (scanf_return != 1);
@@ -307,7 +277,6 @@ unsigned int Unsigned_int_recup_verify(const char *prompt) {
         printf("%s", prompt);
         fflush(stdout);
 
-        // Lecture complète de la ligne
         if (!fgets(buffer, sizeof(buffer), stdin)) {
             Print_in_red("Erreur de lecture !");
             fflush(stdout);
@@ -363,17 +332,10 @@ void Auto_write(const char *text, unsigned int delay_microseconds) {
 
 void Ignore_extra_enters(void) {
     int c;
-
-    // Tant qu'il y a des '\n' ou '\r' dans le buffer, on les consomme
     while ((c = getchar()) == '\n' || c == '\r');
-    
-    // Si on a lu un autre caractère (ex: 'D'), on le remet dans le flux
     if (c != EOF) ungetc(c, stdin);
 }
 
-
-
-// Petite pause (millisecondes)
 void msleep(int ms) {
     struct timespec ts;
     ts.tv_sec = ms / 1000;
@@ -389,7 +351,7 @@ void Progress_bar_animation(int duration_sec) {
     printf(BRIGHT_CYAN"│      EXPORTATION EN COURS    │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
-    int total_steps = 30;            // largeur de la barre
+    int total_steps = 30;// largeur de ma barre
     int total_ms = duration_sec * 1000;
     int delay = total_ms / total_steps;
     int i, j;
@@ -424,7 +386,7 @@ void Parser_progress_bar_animation(int duration_sec) {
     printf(BRIGHT_CYAN"│    I M P O R T A T I O N.    │\n"RESET_STYLE);
     printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
 
-    int total_steps = 30;            // largeur de la barre
+    int total_steps = 30;
     int total_ms = duration_sec * 1000;
     int delay = total_ms / total_steps;
     int i, j;

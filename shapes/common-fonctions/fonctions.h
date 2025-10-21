@@ -240,8 +240,6 @@ unsigned int Unsigned_int_recup_verify(const char* prompt);
 */
 int Chrono_assassin(int chrono);
 
-// int Chrono_assassine(int chrono);
-
 void Ignore_extra_enters(void);
 
 void Auto_write(const char *text, unsigned int delay_microseconds);
@@ -251,12 +249,6 @@ float Float_recup_verify_with_padding(const char *prompt, float min_value, float
 void Progress_bar_animation(int duration_sec);
 
 void msleep(int ms);
-
-void enable_input(void);
-
-void disable_input(void);
-
-void clear_screen(void);
 
 void Parser_progress_bar_animation(int duration_sec);
 

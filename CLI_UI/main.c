@@ -29,6 +29,19 @@ int Second_menu() {
 
     return Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 4);
 }
+int Second_menu_incomplete() {
+    printf("\n\n");
+    printf(BRIGHT_CYAN"╭──────────────────────────────╮\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"│        MENU DE FORMES        │\n"RESET_STYLE);
+    printf(BRIGHT_CYAN"╰──────────────────────────────╯\n\n"RESET_STYLE);
+
+    // printf(BRIGHT_CYAN"  1)"RESET_STYLE" Modifier la forme\n");
+    printf(BRIGHT_CYAN"  1)"RESET_STYLE" Styliser la forme\n");
+    // printf(BRIGHT_CYAN"  3)"RESET_STYLE" Exporter la forme\n");
+    printf(BRIGHT_CYAN"  2)"RESET_STYLE" Supprimer la forme\n\n");
+
+    return Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 2);
+}
 
 int Menu_shapes() {
     system("clear");
@@ -434,6 +447,44 @@ void Polygone_edit_universe() {
 }
 
 
+void Group_loop(Group* group, Style* style) {
+    int second_choice = 0;
+    while (1)
+    {
+        system("clear");
+        Display_group(group);
+        Display_style(style);
+        second_choice = Second_menu_incomplete();
+        switch (second_choice) {
+
+            case 1:
+                Recup_style_data(style);
+                break;
+
+            case 2:
+                Destroy_group(group);
+                Destroy_style(style);
+                Auto_write(BRIGHT_RED"\nForme supprimée."RESET_STYLE, 30000);
+                Auto_write(BRIGHT_YELLOW"\n\nRetour au menu principal...\n"RESET_STYLE, 30000);
+                sleep(1);
+                return;
+
+            default:
+                printf("INVALID ! Comment t'as fait pour atterir ici ?");
+            break;
+        }
+    }
+}
+void Group_edit_universe() {
+    Group* group = Create_new_group();
+    Style* style = Create_style();
+
+    system("clear");
+    
+    Recup_group_data(group);
+   
+    Group_loop(group, style);
+}
 
 
 void Create_bloc() {
@@ -473,6 +524,10 @@ void Create_bloc() {
 
             case SHAPE_PATH:
                 Path_edit_universe();
+            break;
+
+            case SHAPE_GROUP:
+                Group_edit_universe();
             break;
 
             case OUT:

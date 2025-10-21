@@ -1,22 +1,126 @@
 #include "./groupe.h"
 
-
 void Infos_group() {
     system("clear");
-    printf("\nL'élément 'Group' permet de regrouper plusieurs formes SVG en une seule entité logique.\n");
+    printf(CYAN BOLD_WHITE_TEXT"\n╭─────────────────────────────╮\n");
+    printf("│        INFOS : GROUPE       │\n");
+    printf("╰─────────────────────────────╯\n\n"RESET_STYLE);
+    printf("L'élément "BOLD_WHITE_TEXT"'Group'"RESET_STYLE" permet de regrouper plusieurs formes SVG en une seule entité logique.\n");
     printf("Cela vous permet de manipuler plusieurs formes ensemble : déplacement, suppression, etc.\n\n");
-    printf("Chaque groupe peut contenir : cercles, rectangles, ellipses, lignes, chemins, polygones, polylignes ou même d'autres groupes.\n\n");
-    printf("Exemple d'équivalent SVG :\n");
+    printf("Chaque groupe peut contenir : cercles, rectangles, ellipses, lignes, chemins,\n");
+    printf("polygones, polylignes ou même d'autres groupes.\n\n");
+    printf(BRIGHT_BLACK"Exemple SVG :\n");
     printf("  <g>\n");
     printf("     <circle cx=\"50\" cy=\"50\" r=\"40\" />\n");
     printf("     <rect x=\"100\" y=\"100\" width=\"80\" height=\"40\" />\n");
-    printf("  </g>\n\n");
+    printf("  </g>\n\n"RESET_STYLE);
 }
 
 void Infos_group_usage() {
+    printf(CYAN"\n╭────────────────────────────╮\n");
+    printf("│     UTILISATION DU GROUPE  │\n");
+    printf("╰────────────────────────────╯\n\n"RESET_STYLE);
     printf("Un groupe vous permet de créer des ensembles de plusieurs formes.\n");
     printf("Vous pouvez les afficher, les parcourir ou les supprimer facilement.\n\n");
 }
+
+int Menu_group_shapes() {
+    system("clear");
+    printf(CYAN BOLD_WHITE_TEXT"\n╭──────────────────────────╭\n");
+    printf("│     MENU DES FORMES      │\n");
+    printf("╰──────────────────────────╯\n\n"RESET_STYLE);
+    printf(" "CYAN"1)"RESET_STYLE" Cercle\n");
+    printf(" "CYAN"2)"RESET_STYLE" Ellipse\n");
+    printf(" "CYAN"3)"RESET_STYLE" Rectangle\n");
+    printf(" "CYAN"4)"RESET_STYLE" Carré\n");
+    printf(" "CYAN"5)"RESET_STYLE" Ligne\n");
+    printf(" "CYAN"6)"RESET_STYLE" Polygone\n");
+    printf(" "CYAN"7)"RESET_STYLE" Polyligne\n");
+    printf(" "CYAN"8)"RESET_STYLE" Path\n");
+    printf(" "CYAN"9)"RESET_STYLE" Groupe imbriqué\n\n");
+
+    return Int_recup_verify_with_padding(BRIGHT_GREEN"Votre choix : "RESET_STYLE, 1, 9);
+}
+
+void Display_group_indent(Group* group, int indent_level) {
+    if (!Does_group_exist(group)) return;
+
+    GroupNode* node = group->start;
+    int index = 1;
+
+    // indentation
+    for (int i = 0; i < indent_level; i++) printf("   ");
+
+    printf(BRIGHT_CYAN"📁 Groupe : "RESET_STYLE BOLD_WHITE_TEXT"%s\n"RESET_STYLE, group->name);
+
+    if (!node) {
+        for (int i = 0; i <= indent_level; i++) printf("   ");
+        printf(BRIGHT_BLACK"(vide)\n"RESET_STYLE);
+        return;
+    }
+
+    while (node != NULL) {
+        for (int i = 0; i <= indent_level; i++) printf("   ");
+        printf(GREEN"├── "RESET_STYLE);
+
+        switch (node->node->shapes) {
+            case CIRCLE:
+                printf(BRIGHT_MAGENTA"● Cercle\n"RESET_STYLE);
+                break;
+            case ELLIPSE:
+                printf(BRIGHT_MAGENTA"⬭ Ellipse\n"RESET_STYLE);
+                break;
+            case RECTANGLE:
+                printf(BRIGHT_MAGENTA"▭ Rectangle\n"RESET_STYLE);
+                break;
+            case SQUARE:
+                printf(BRIGHT_MAGENTA"■ Carré\n"RESET_STYLE);
+                break;
+            case LINE:
+                printf(BRIGHT_MAGENTA"─ Ligne\n"RESET_STYLE);
+                break;
+            case PATH:
+                printf(BRIGHT_MAGENTA"⚙ Path\n"RESET_STYLE);
+                break;
+            case POLYGON:
+                printf(BRIGHT_MAGENTA"⬡ Polygone\n"RESET_STYLE);
+                break;
+            case POLYLINE:
+                printf(BRIGHT_MAGENTA"〰 Polyligne\n"RESET_STYLE);
+                break;
+            case GROUP:
+                printf(BRIGHT_CYAN"📂 Sous-groupe :\n"RESET_STYLE);
+                Display_group_indent(node->node->current_shapes.group, indent_level + 1);
+                break;
+            default:
+                printf(RED"❓ Forme inconnue\n"RESET_STYLE);
+                break;
+        }
+        node = node->next;
+        index++;
+    }
+
+    for (int i = 0; i < indent_level; i++) printf("   ");
+    printf(BRIGHT_BLACK"╰───────────────\n"RESET_STYLE);
+}
+
+void Display_group(Group* group) {
+    if(!Does_group_exist(group)) {
+        Print_in_red("\nErreur : groupe inexistant.\n");
+        return;
+    }
+
+    system("clear");
+    printf("\n"CYAN BOLD_WHITE_TEXT"╭────────────────────────────────────────────╮\n"RESET_STYLE);
+    printf(CYAN"│   "RESET_STYLE"Affichage du groupe : "BOLD_WHITE_TEXT"%s\n"RESET_STYLE, group->name);
+    printf(CYAN BOLD_WHITE_TEXT"╰────────────────────────────────────────────╯\n\n"RESET_STYLE);
+
+    Display_group_indent(group, 0);
+
+    printf("\n"CYAN"─────────────── "RESET_STYLE BOLD_WHITE_TEXT"[ FIN DU GROUPE ]"RESET_STYLE CYAN" ───────────────\n\n"RESET_STYLE);
+}
+
+
 
 Group* Create_new_group() {
     Group* group = malloc(sizeof(Group));
@@ -146,42 +250,6 @@ void Display_group_element(GroupElement* element) {
     }
 }
 
-void Display_group(Group* group) {
-    if(!Does_group_exist(group)) {
-        Print_in_red("\nErreur : groupe inexistant.\n");
-        return;
-    }
-
-    printf("\n");
-    printf(CYAN BOLD_WHITE_TEXT"╭────────────────────────────────────────────╮\n"RESET_STYLE);
-    printf("   Affichage du groupe : "RESET_STYLE BOLD_WHITE_TEXT CYAN"%s\n"RESET_STYLE, group->name);
-    printf(CYAN BOLD_WHITE_TEXT"╰────────────────────────────────────────────╯\n"RESET_STYLE);
-
-    GroupNode* node = group->start;
-    int index = 1;
-
-    if (!node) {
-        printf(RED"\nLe groupe \"%s\" est vide.\n\n"RESET_STYLE, group->name);
-        return;
-    }
-
-    while(node != NULL) {
-        printf(GREEN"\n--- Forme n°%d ---\n"RESET_STYLE, index++);
-        Display_group_element(node->node);
-        node = node->next;
-    }
-
-    printf("\n────────────────"BOLD_WHITE_TEXT CYAN" END [ %s ] "RESET_STYLE"───────────────\n\n", group->name);
-}
-
-
-int Menu_group_shapes() {
-    system("clear");
-    printf("\n\r"BOLD_WHITE_TEXT""UNDERLINE_WHITE_TEXT" MENU DE TOUTES LES FORMES DU GROUPE "RESET_STYLE BOLD_WHITE_TEXT"\n\n"RESET_STYLE);
-    printf("1) Cercle\n2) Ellipse\n3) Rectangle\n4) Carré\n5) Ligne\n6) Polygone\n7) Polyligne\n8) Path\n9) Groupe imbriqué\n\n");
-
-    return Int_recup_verify("Choisissez la forme à ajouter dans le groupe : ");
-}
 
 void Recup_group_name(Group* group) {
     if(!Does_group_exist(group)) return;
@@ -198,7 +266,7 @@ void Recup_group_name(Group* group) {
     group->name[i] = '\0';
 
     if (group->name[0] == '\0') {
-        // Nom par défau
+        // Un nom par defaut.
         group->name[0] = 'G';
         group->name[1] = 'r';
         group->name[2] = 'o';
@@ -215,7 +283,7 @@ void Recup_group_name(Group* group) {
 void Recup_group_data(Group* group) {
     if(!Does_group_exist(group)) return;
 
-    // 🔹 Demander le nom du groupe
+    
     Recup_group_name(group);
 
     int choice = 0;
@@ -225,13 +293,10 @@ void Recup_group_data(Group* group) {
     printf("Tapez une touche avant la fin du chrono pour skip :  ");
     Chrono(5);
     if (kbhit()) getchar(); else Infos_group();
-
+    
     do {
         choice = Menu_group_shapes();
-
-        //Marge en dur.
-        if(choice > 9) choice = 9;
-        if(choice < 1) choice = 1;
+        system("clear");
 
         choice--;
 
@@ -258,13 +323,13 @@ void Recup_group_data(Group* group) {
         GroupNode* new_node = Create_new_group_node(element);
         Add_shape_to_group(group, new_node);
 
-        printf("\nSouhaitez-vous ajouter une autre forme au groupe ?\n");
-        printf("Tapez une touche avant la fin du chrono pour skip :  ");
+        printf("\nSouhaitez-vous ajouter une autre forme au groupe "BRIGHT_CYAN" %s "RESET_STYLE" ?\n", group->name);
+        printf(BRIGHT_GREEN"Tapez une touche avant la fin du chrono pour continuer :  "RESET_STYLE);
         continuer = Chrono_assassin(5);
 
         system("clear");
 
-    } while(continuer);
+    } while(!continuer);
 }
 
 

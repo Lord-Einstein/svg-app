@@ -47,6 +47,7 @@ typedef enum SecondMenu_E {
 int First_menu();
 
 int Second_menu();
+int Second_menu_incomplete();
 
 int Menu_shapes();
 
